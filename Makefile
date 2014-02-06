@@ -2,4 +2,4 @@ CFLAGS= -I./include
 LDFLAGS= -lSFML
 
 all:
-	echo 
+	echo je pourris le foifjvfdikbnlj sljhgqdfbdsq

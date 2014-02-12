@@ -1,15 +1,24 @@
 CXX = g++
-CFLAGS= -I./include -I./SFML-2.1/include 
+TARGET=CandySaga
+OBJDIR=obj
+SRCDIR=src
+INCDIR=include
+CFLAGS= -I$(INCDIR) -I./SFML-2.1/include 
 LDFLAGS= -L./SFML-2.1/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
-TARGET=C.A.N.D.Y.S.A.G.A.
-OBJS=./src/
+DEPS=
+OBJFILES=a.o
+OBJ=$(patsubst %,$(OBJDIR)/%,$(OBJFILES))
 
-all: ${OBJS}
-	${CXX} $^ -o ${TARGET} 
+all: $(TARGET)
 
-%.o,%.cpp:
-	${CXX} -c ${CFLAGS} -o $@
+$(TARGET): $(OBJ)
+		$(CXX) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
+		$(CXX) -c -o $@ $< $(CFLAGS) 
+
+
+.PHONY: clean
 
 clean:
-	rm src/*.o
-	rm bin/${TARGET}
+		rm -f $(OBJDIR)/*.o *~ 

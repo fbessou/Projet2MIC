@@ -1,9 +1,11 @@
 #ifndef _CANDY_COLLISION_H_
 #define _CANDY_COLLISION_H_
+
 #include "CandyCollision.h"
+
 namespace Candy
 {
-	class CollisionManager
+	class World
 	{
 		private:
 
@@ -12,14 +14,15 @@ namespace Candy
 
 		public:
 
-			CollisionManager();
-			~CollisionManager();
+			World();
+			~World();
 
 			void update();
 			void addActor(Actor* actor);
-			void removeActor(Actor* actor); // TODO raise an exception
+			void removeActor(Actor* actor); 
 
 	};
 
 }; // namespace Candy
+
 #endif

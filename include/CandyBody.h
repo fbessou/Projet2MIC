@@ -6,7 +6,7 @@
 
 class Body
 {	
-	protected:
+protected:
 	void * mShape; //pointeur sur la structure appropriee
 	Vector mCenter;
 
@@ -21,7 +21,7 @@ public:
 	void getCenter(const Vector & center) const;
 
 	const Type & getType() const;
-	void setType();
+	// void setType(Type);
 
 	// acces direct aux formes
 	Rectangle & getRectangle();

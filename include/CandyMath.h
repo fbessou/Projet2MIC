@@ -8,11 +8,10 @@ namespace Candy
 	class Vector
 	{
 		public:
-			Real x,y,z;
+			Real x,y;
 		public:
 			Vector(const Real & ,const Real & , const Real & );
 			~Vector();
-			Real getLength() const;
 
 			bool isNormalized() const;
 			void normalize(); 

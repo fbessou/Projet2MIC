@@ -1,6 +1,7 @@
 #ifndef _CANDY_COLLISION_H_
 #define _CANDY_COLLISION_H_
 
+#include "CandyCommon.h"
 #include "CandyCollision.h"
 
 namespace Candy
@@ -20,7 +21,7 @@ namespace Candy
 			void update();
 			void addActor(Actor* actor);
 			void removeActor(Actor* actor); 
-
+			void step(unsigned int );
 	};
 
 }; // namespace Candy

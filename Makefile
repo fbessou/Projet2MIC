@@ -11,6 +11,8 @@ OBJ=$(patsubst %,$(OBJDIR)/%,$(OBJFILES))
 
 all: $(TARGET)
 
+test:
+	make -C tests
 $(TARGET): $(OBJ)
 		$(CXX) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 

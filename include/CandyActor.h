@@ -1,6 +1,9 @@
 #ifndef _CANDY_ACTOR_H_
 #define _CANDY_ACTOR_H_
+
+#include "CandyCommon.h"
 #include "CandyCollision.h"
+
 namespace Candy
 {
 	class Actor{

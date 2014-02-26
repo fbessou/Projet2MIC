@@ -1,6 +1,9 @@
 #ifndef _CANDY_GAME_H_
 #define _CANDY_GAME_H_
+
+#include "CandyCommon.h"
 #include "CandyWorld.h"
+
 namespace Candy
 {
 	class Game()

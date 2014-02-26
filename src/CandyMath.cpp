@@ -26,5 +26,5 @@ Vector Vector::operator-(const Vector & v) const {
 }
 
 Vector Vector::operator*(const Real & r) const {
-
+  return {r*x, r*y};
 }

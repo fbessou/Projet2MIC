@@ -1,5 +1,6 @@
 Projet2MIC
 =========================
+
 Authors:
  * Renaud Gautier
  * Frank Bessou

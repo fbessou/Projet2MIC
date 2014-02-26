@@ -2,7 +2,7 @@
 #define _CANDY_ACTOR_H_
 
 #include "CandyCommon.h"
-#include "CandyCollision.h"
+#include "CandyWorld.h"
 
 namespace Candy
 {

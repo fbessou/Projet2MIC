@@ -1,8 +1,8 @@
-#ifndef _CANDY_COLLISION_H_
-#define _CANDY_COLLISION_H_
+#ifndef _CANDY_WORLD_H_
+#define _CANDY_WORLD_H_
 
 #include "CandyCommon.h"
-#include "CandyCollision.h"
+#include "CandyActor.h"
 
 namespace Candy
 {

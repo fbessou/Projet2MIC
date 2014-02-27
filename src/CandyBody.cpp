@@ -1,7 +1,7 @@
 #include "CandyBody.h"
 using namespace Candy;
 
-Body::Body(const Rectangle & rect, const Vector & center ):mRectangle(rect),mCenter(0,5)
+Body::Body(const Rectangle & rect, const Vector & center ):mCenter(center),mRectangle(rect)
 {
 	mType = RECTANGLE;
 	
@@ -23,7 +23,7 @@ Body::~Body(){
 
 }
 
-Type Body::getType() const
+const Body::Type & Body::getType() const
 {
 	return mType;
 }

@@ -29,10 +29,7 @@ namespace Candy
 			const Vector & operator-=(const Vector &);
 			const Vector & operator*=(const Real &);
 			const Vector & operator/=(const Real &);
-<<<<<<< HEAD
-=======
 			//Real angleBetween(Vec)
->>>>>>> ddf55e8726ac44e51348511077b8e10320340e8e
 			Real length() const; // return the magnitude of the vector
 			Real squaredLength() const; // return the squared magnitude of the vector (much faster)
 		public:

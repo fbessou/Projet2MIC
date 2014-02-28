@@ -1,4 +1,4 @@
-CXX = g++ -std=c++0x
+CXX = g++ -std=c++0x -Wall
 TARGET=CandySaga
 OBJDIR=obj
 SRCDIR=src
@@ -10,7 +10,6 @@ OBJFILES=CandyBody.o CandyMath.o
 OBJ=$(patsubst %,$(OBJDIR)/%,$(OBJFILES))
 
 all: $(TARGET)
-
 test:
 	make -C tests
 $(TARGET): $(OBJ)

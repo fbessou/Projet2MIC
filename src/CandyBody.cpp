@@ -1,13 +1,14 @@
 #include "CandyBody.h"
+
 using namespace Candy;
 
-Body::Body(const Rectangle & rect, const Vector & center ):mCenter(center),mRectangle(rect)
+Body::Body(const Rectangle & rect, const Vector & center ):mRectangle(rect),mCenter(center)
 {
 	mType = RECTANGLE;
 	
 }
 
-Body::Body(const Circle & circle,const Vector & center ):mCenter(center),mCircle(circle)
+Body::Body(const Circle & circle,const Vector & center ):mCircle(circle),mCenter(center)
 {
 	mType = CIRCLE;
 	mCircle = circle;

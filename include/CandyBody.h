@@ -7,8 +7,15 @@
 class Body
 {	
 protected:
-	void * mShape; //pointeur sur la structure appropriee
+	union
+	{
+		Rectangle rectangle;
+		Circle circle;
+		ConvexHull hull;
+	}; //pointeur sur la structure appropriee
+
 	Vector mCenter;
+	Type mType;
 
 public:
 	Body(Rectangle);

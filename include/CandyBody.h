@@ -3,65 +3,65 @@
 #include "CandyCommon.h"
 
 #include "CandyMath.h"
+#include <vector>
+namespace Candy
+{
+	class Body
+	{	
+		public:
+			//public types
+			struct Rectangle
+			{
+				bool axisAligned;
+				Real width;
+				Real height;
+			};
 
-class Body
-{	
-protected:
-	union
-	{
-		Rectangle rectangle;
-		Circle circle;
-		ConvexHull hull;
-	}; //pointeur sur la structure appropriee
+			struct Circle
+			{
+				Real radius;
+			};
 
-	Vector mCenter;
-	Type mType;
+			struct ConvexHull
+			{
+				std::vector<Vector> pointList;
+			};
 
-public:
-	Body(Rectangle);
-	Body(Circle);
-	Body(ConvexHull);
-	
-	~Body();
+			enum Type
+			{
+				RECTANGLE,
+				CIRCLE,
+				CONVEX_HULL
+			};
+		protected:
+			union
+			{
+				Rectangle mRectangle;
+				Circle mCircle;
+				ConvexHull mHull;
+			};
 
-	void setCenter(const Vector & center);
-	void getCenter(const Vector & center) const;
+			Vector mCenter;
+			Type mType;
+		public:
+			Body( const Rectangle & rectangle , const Vector & center =Vector(0,0));
+			Body( const Circle & circle, const Vector &);
+			Body( const ConvexHull & hull, const Vector &);
 
-	const Type & getType() const;
-	// void setType(Type);
+			~Body();
 
-	// acces direct aux formes
-	Rectangle & getRectangle();
-	Circle & getCircle();
-	ConvexHull & getConvexHull();
-	
-	//public types
-	struct Rectangle
-	{
-		bool axisAligned;
-		Real width;
-		Real height;
-	};
+			void setCenter(const Vector & center);
+			const Vector & getCenter() const;
 
-	struct Circle
-	{
-		Real radius;
-	};
+			const Type & getType() const;
+			// void setType(Type);
 
-	struct ConvexHull
-	{
-		std::vector<Vector> hull;
-	}
+			// acces direct aux formes
+			Rectangle & getRectangle();
+			Circle & getCircle();
+			ConvexHull & getConvexHull();
 
-	enum Type
-	{
-		RECTANGLE,
-		CIRCLE,
-		CONVEX_HULL
-	};
 
-	
-	
 
-};
-#endif
+
+

@@ -1,4 +1,4 @@
-CXX = g++
+CXX = g++ -std=c++0x
 TARGET=CandySaga
 OBJDIR=obj
 SRCDIR=src
@@ -6,7 +6,7 @@ INCDIR=include
 CFLAGS= -I$(INCDIR) -I./SFML-2.1/include 
 LDFLAGS= -L./SFML-2.1/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
 DEPS=
-OBJFILES=a.o
+OBJFILES=CandyBody.o CandyMath.o
 OBJ=$(patsubst %,$(OBJDIR)/%,$(OBJFILES))
 
 all: $(TARGET)

@@ -45,8 +45,8 @@ namespace Candy
 			Type mType;
 		public:
 			Body( const Rectangle & rectangle , const Vector & center =Vector(0,0));
-			Body( const Circle & circle, const Vector &);
-			Body( const ConvexHull & hull, const Vector &);
+			Body( const Circle & circle, const Vector & center = Vector(0,0));
+			Body( const ConvexHull & hull, const Vector & center = Vector(0,0));
 
 			~Body();
 
@@ -60,8 +60,7 @@ namespace Candy
 			Rectangle & getRectangle();
 			Circle & getCircle();
 			ConvexHull & getConvexHull();
+	};
+};
 
-
-
-
-
+#endif 

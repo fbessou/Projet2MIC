@@ -80,7 +80,7 @@ const Vector & Vector::operator/=(const Real & k)
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& stream, const Vector& v){
+std::ostream& Candy::operator<<(std::ostream& stream, const Vector& v){
   stream<<"Vector("<<v.x<<","<<v.y<<")";
   return stream;
 }

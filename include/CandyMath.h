@@ -31,6 +31,7 @@ namespace Candy
 			//Real angleBetween(Vec)
 			Real length() const; // return the magnitude of the vector
 			Real squaredLength() const; // return the squared magnitude of the vector (much faster)
+			operator std::string() const;
 		public:
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;

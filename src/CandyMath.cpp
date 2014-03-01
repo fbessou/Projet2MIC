@@ -1,7 +1,7 @@
 #include "CandyMath.h"
 #include <cmath>
 #include <ostream>
-
+#include <sstream>
 using namespace Candy;
 
 const Vector Vector::UNIT_X(1.0, 0.0);
@@ -27,6 +27,13 @@ Real Vector::length() const {
 
 Real Vector::squaredLength() const {
   return x*x+y*y;
+}
+
+Vector::operator std::string() const
+{
+	std::stringstream ss;
+	ss<<"( "<<x<<", "<<y<<" )";
+	return ss.str();
 }
 
 Vector Vector::operator+(const Vector & v) const {
@@ -89,6 +96,6 @@ const Vector & Vector::operator/=(const Real & k)
 }
 
 std::ostream& Candy::operator<<(std::ostream& stream, const Vector& v){
-  stream<<"Vector("<<v.x<<","<<v.y<<")";
+  stream<<(std::string)v;
   return stream;
 }

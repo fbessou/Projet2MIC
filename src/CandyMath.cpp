@@ -37,10 +37,18 @@ Vector Vector::operator-(const Vector & v) const {
   return {x-v.x, y-v.y};
 }
 
-Vector Vector::operator*(const Real & r) const {
-  return {r*x, r*y};
+Vector Candy::operator*(const Vector & v,const Real & r)
+{
+  return {r*v.x, r*v.y};
 }
-Vector Vector::operator/(const Real & r) const {
+
+Vector Candy::operator*(const Real & r, const Vector & v)
+{
+  return {r*v.x, r*v.y};
+}
+
+Vector Vector::operator/(const Real & r) const
+{
   return {x/r, y/r};
 }
 

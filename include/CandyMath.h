@@ -22,7 +22,6 @@ namespace Candy
 			Real dotProduct(const Vector & ) const;
 			Vector operator+(const Vector & ) const;
 			Vector operator-(const Vector &) const;
-			Vector operator*(const Real &) const;
 			Vector operator/(const Real &) const;
 			const Vector & operator=(const Vector &);
 			const Vector & operator+=(const Vector &);
@@ -36,6 +35,9 @@ namespace Candy
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;
 	};
+	//pour la commutativité, on place les opérateur
+	Vector operator*(const Real &,const Vector &);
+	Vector operator*(const Vector & , const Real &);
 
 	std::ostream& operator<<(std::ostream& stream, const Vector& v);
 

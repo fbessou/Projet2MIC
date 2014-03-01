@@ -2,18 +2,18 @@
 #define _CANDY_GAME_H_
 
 #include "CandyCommon.h"
-#include "CandyWorld.h"
+//#include "CandyWorld.h"
 
 namespace Candy
 {
-	class Game()
+	class Game
 	{
 		private:
-			World * mWorld;
+//			World * mWorld;
 		public:
 			Game();
 			~Game();
-			World * getWorld();
+//			World * getWorld();
 	};//class Game
 
 }; // namespace Candy

@@ -16,4 +16,5 @@ int main()
 	cout<<"vect2 + vect3 : "<<(vect2+vect3)<<endl;
 	cout<<"vect2 /= 2 : "<<(vect2/=2)<<endl;
 	cout<<"vect2 /2: "<<(vect2/2)<<endl;
+	cout<<"vect2 - vect3"<<(vect2 - vect3)<<endl;
 }

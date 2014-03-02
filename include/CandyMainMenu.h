@@ -1,5 +1,6 @@
 #ifndef _CANDY_MENU_H_
 #define _CANDY_MENU_H_
+#include <string>
 #include "CandyGameState.h"
 
 namespace Candy
@@ -16,7 +17,7 @@ namespace Candy
 		MainMenu();
 		~MainMenu();
 		void enter();
-		void update();
+		bool update();
 		void leave();
 	};
 };

@@ -1,4 +1,4 @@
-Projet2MIC
+CANDY
 =========================
 
 Authors:

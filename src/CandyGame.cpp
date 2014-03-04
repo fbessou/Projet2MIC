@@ -4,7 +4,6 @@ using namespace Candy;
 
 Game::Game()
 {
-	mCurrentState=new MainMenu();
 }
 
 Game::~Game()
@@ -15,6 +14,8 @@ Game::~Game()
 
 void Game::start()
 {
+	mWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "CandySaga");
+	mCurrentState=new MainMenu(mWindow);
 	//some init
 	while(!hasExited)
 	{

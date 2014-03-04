@@ -2,7 +2,7 @@
 #include "CandyMainMenu.h"
 using namespace Candy;
 
-Game::Game()
+Game::Game():hasExited(false)
 {
 	mCurrentState=new MainMenu();
 }

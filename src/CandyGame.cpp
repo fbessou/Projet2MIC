@@ -43,3 +43,14 @@ sf::Font& Game::getFont()
 	return mFont;
 }
 
+void Game::quit()
+{
+	hasExited = true;
+}
+
+void Game::changeState(GameState * state)
+{
+	mCurrentState->leave();
+	mCurrentState=state;
+	mCurrentState->enter();
+}

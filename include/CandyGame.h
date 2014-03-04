@@ -26,6 +26,8 @@ namespace Candy
 			~Game();
 			void update();
 			void start();
+			void changeState(GameState * state);
+			void quit();
 			sf::Font& getFont();
 //			World * getWorld();
 	};//class Game

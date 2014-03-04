@@ -1,6 +1,11 @@
 #ifndef _CANDY_GAME_H_
 #define _CANDY_GAME_H_
 
+namespace Candy
+{
+	class Game;
+};
+
 #include "CandyCommon.h"
 #include "CandyGameState.h"
 #include <SFML/Graphics.hpp>
@@ -15,11 +20,13 @@ namespace Candy
 //			World * mWorld;
 			sf::RenderWindow * mWindow;
 			bool hasExited;
+			sf::Font mFont;
 		public:
 			Game();
 			~Game();
 			void update();
 			void start();
+			sf::Font& getFont();
 //			World * getWorld();
 	};//class Game
 	

@@ -1,9 +1,11 @@
 #include "CandyGame.h"
 #include "CandyMainMenu.h"
+#include <cassert>
 using namespace Candy;
 
 Game::Game():hasExited(false)
 {
+	assert(mFont.loadFromFile("./font/Transformers_Movie.ttf") && "pad'font");
 }
 
 Game::~Game()
@@ -17,7 +19,7 @@ void Game::start()
 	mWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "CandySaga");
 	mWindow->setFramerateLimit(60);
 
-	mCurrentState=new MainMenu(mWindow);
+	mCurrentState=new MainMenu(this, mWindow);
 	//some init
 
 	while(!hasExited)
@@ -34,5 +36,10 @@ void Game::start()
 		mCurrentState->update();
 	}
 	mWindow->close();
+}
+
+sf::Font& Game::getFont()
+{
+	return mFont;
 }
 

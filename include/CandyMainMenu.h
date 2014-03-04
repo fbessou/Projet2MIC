@@ -16,11 +16,15 @@ namespace Candy
 		enum Button	{ START, QUIT, SETTINGS };
 
 		public:
-		MainMenu(sf::RenderWindow * window);
+		MainMenu(Game * game, sf::RenderWindow * window);
 		~MainMenu();
 		void enter();
 		bool update();
 		void leave();
+		private:
+		sf::Text playTxt;
+		sf::Text paramTxt;
+		sf::Text quitTxt;
 	};
 };
 #endif

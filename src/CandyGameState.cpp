@@ -3,7 +3,7 @@
 using namespace Candy;
 using namespace sf;
 
-GameState::GameState(RenderWindow * window):mWindow(window)
+GameState::GameState(Game * game, RenderWindow * window):mWindow(window),mGame(game)
 {
 	
 }

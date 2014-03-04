@@ -2,8 +2,9 @@
 #include <iostream>
 
 using namespace Candy;
+using namespace sf;
 
-MainMenu::MainMenu()
+MainMenu::MainMenu(RenderWindow * window):GameState(window)
 {
 	
 }

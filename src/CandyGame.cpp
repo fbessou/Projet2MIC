@@ -36,3 +36,14 @@ void Game::start()
 	mWindow->close();
 }
 
+void Game::quit()
+{
+	hasExited = true;
+}
+
+void Game::changeState(GameState * state)
+{
+	mCurrentState->leave();
+	mCurrentState=state;
+	mCurrentState->enter();
+}

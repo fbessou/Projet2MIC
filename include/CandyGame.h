@@ -20,6 +20,8 @@ namespace Candy
 			~Game();
 			void update();
 			void start();
+			void changeState(GameState * state);
+			void quit();
 //			World * getWorld();
 	};//class Game
 	

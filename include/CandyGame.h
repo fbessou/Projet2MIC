@@ -3,7 +3,8 @@
 
 #include "CandyCommon.h"
 #include "CandyGameState.h"
-//#include "CandyWorld.h"
+#include <SFML/Graphics.hpp>
+
 
 namespace Candy
 {
@@ -12,6 +13,7 @@ namespace Candy
 		private:
 			GameState * mCurrentState;
 //			World * mWorld;
+			sf::RenderWindow * mWindow;
 			bool hasExited;
 		public:
 			Game();

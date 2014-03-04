@@ -3,6 +3,8 @@
 #include <string>
 #include "CandyGameState.h"
 
+#include <SFML/Graphics.hpp>
+
 namespace Candy
 {
 	class MainMenu: public GameState
@@ -14,7 +16,7 @@ namespace Candy
 		enum Button	{ START, QUIT, SETTINGS };
 
 		public:
-		MainMenu();
+		MainMenu(sf::RenderWindow * window);
 		~MainMenu();
 		void enter();
 		bool update();

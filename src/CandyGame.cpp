@@ -16,7 +16,12 @@ Game::~Game()
 
 void Game::start()
 {
-	mWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "CandySaga");
+	sf::Uint32 windowStyle = (sf::Style::Titlebar | sf::Style::Close) ; //TODO enable fullscreen
+	mWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "CandySaga",windowStyle);
+	sf::VideoMode screen = sf::VideoMode::getDesktopMode();
+	//center the window
+	mWindow->setPosition(sf::Vector2i(screen.width/2-mWindow->getSize().x/2, screen.height/2-mWindow->getSize().y/2));
+	//fix maximum framerate
 	mWindow->setFramerateLimit(60);
 
 	mCurrentState=new MainMenu(this, mWindow);

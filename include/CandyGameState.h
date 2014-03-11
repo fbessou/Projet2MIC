@@ -25,6 +25,5 @@ namespace Candy
 			sf::RenderWindow * mWindow;
 			Game * mGame;
 	};
-inline GameState::~GameState(){}
 };
 #endif 

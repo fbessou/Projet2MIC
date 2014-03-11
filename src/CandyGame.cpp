@@ -2,8 +2,7 @@
 #include "CandyMainMenu.h"
 #include <cassert>
 using namespace Candy;
-
-Game::Game():hasExited(false)
+Game::Game():mCurrentState(nullptr),hasExited(false)
 {
 	assert(mFont.loadFromFile("./font/Transformers_Movie.ttf") && "pad'font");
 }
@@ -12,6 +11,7 @@ Game::~Game()
 {
 	if(mCurrentState != nullptr)
 		delete mCurrentState;
+	delete mWindow;
 }
 
 void Game::start()
@@ -31,16 +31,16 @@ void Game::start()
 	{
 
 		sf::Event event;
+		//update inputs
+		mCurrentState->update();
 		while (mWindow->isOpen() && mWindow->pollEvent(event)){
 			if(event.type == sf::Event::Closed)
 			{
 				hasExited=true;
 			}
 		}
-		//update inputs
-		mCurrentState->update();
 	}
-	mWindow->close();
+	//mWindow->close();
 }
 
 sf::Font& Game::getFont()

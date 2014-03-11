@@ -7,3 +7,5 @@ GameState::GameState(Game * game, RenderWindow * window):mWindow(window),mGame(g
 {
 	
 }
+GameState::~GameState(){
+}

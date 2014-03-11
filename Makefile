@@ -22,4 +22,4 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 .PHONY: clean
 
 clean:
-		rm -f $(OBJDIR)/*.o *~ 
+		rm -f $(OBJDIR)/*.o *~

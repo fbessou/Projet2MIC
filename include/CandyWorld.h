@@ -3,6 +3,7 @@
 
 #include "CandyCommon.h"
 #include "CandyActor.h"
+#include <set>
 
 namespace Candy
 {
@@ -10,8 +11,7 @@ namespace Candy
 	{
 		private:
 
-			typedef std::list<Actor*> ActorList;
-			std::map<CollisionMask, ActorList >;
+			std::set<Actor*> mActors;
 
 		public:
 
@@ -20,7 +20,7 @@ namespace Candy
 
 			void update();
 			void addActor(Actor* actor);
-			void removeActor(Actor* actor); 
+			bool removeActor(Actor* actor); 
 			void step(unsigned int );
 	};
 

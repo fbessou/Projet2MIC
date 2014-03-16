@@ -46,7 +46,7 @@ void Game::start()
 	
 	//Enter the MainMenu state
 	mCurrentState=new MainMenu(this, mWindow);
-	mCurrentState->enter,
+	mCurrentState->enter();
 
 	while(!hasExited)
 	{

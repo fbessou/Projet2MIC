@@ -9,7 +9,7 @@ namespace Candy
 #include "CandyCommon.h"
 #include "CandyGameState.h"
 #include <SFML/Graphics.hpp>
-
+#include <SFML/System.hpp>
 
 namespace Candy
 {
@@ -17,10 +17,15 @@ namespace Candy
 	{
 		private:
 			GameState * mCurrentState;
-//			World * mWorld;
 			sf::RenderWindow * mWindow;
 			bool hasExited;
 			sf::Font mFont;
+
+			sf::Clock mClock;
+			unsigned int mFrameCount;
+			float mSPF;
+			sf::Text mFPSText;
+			void updateDebug();
 		public:
 			Game();
 			~Game();

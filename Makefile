@@ -22,8 +22,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 		@tput setaf 2
 		@echo "[ Compiling $^ ]"
 		@tput sgr 0
-		@tput setaf 1
-		@$(CXX) -c -o $@ $< $(CFLAGS)  || tput sgr 0
+		@$(CXX) -c -o $@ $< $(CFLAGS)
 
 
 .PHONY: clean

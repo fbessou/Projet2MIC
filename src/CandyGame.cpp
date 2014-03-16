@@ -9,31 +9,44 @@ using namespace Candy;
 Game::Game():mCurrentState(nullptr),hasExited(false),mFPSText()
 {
 	assert(mFont.loadFromFile("./font/Transformers_Movie.ttf") && "pad'font");
+	
+	//make a sf::text showing the current frame per seconds
 	mFPSText.setFont(mFont);
 	mFPSText.setColor(sf::Color::White);
 	mFPSText.setPosition(10,0.5);
 	mFPSText.setCharacterSize(15);
+	//We hope the framerate will be 60fps
+	//as the computed fps is smoothed with the previous one at each frame
+	//we set the first value of fps to 60fps
 	mSPF=1.0/60.0;
 }
 
 Game::~Game()
 {
+	//destroy the state the game is in before
+	//quitting
 	if(mCurrentState != nullptr)
 		delete mCurrentState;
+
 	delete mWindow;
 }
+
 void Game::start()
 {
+	//Create a window to display the game
 	sf::Uint32 windowStyle = (sf::Style::Titlebar | sf::Style::Close) ; //TODO enable fullscreen
 	mWindow = new sf::RenderWindow(sf::VideoMode(800, 600), "CandySaga",windowStyle);
-	sf::VideoMode screen = sf::VideoMode::getDesktopMode();
-	//center the window
-	mWindow->setPosition(sf::Vector2i(screen.width/2-mWindow->getSize().x/2, screen.height/2-mWindow->getSize().y/2));
-	//set maximum framerate
-	mWindow->setFramerateLimit(60);
 
+	//center the window
+	sf::VideoMode screen = sf::VideoMode::getDesktopMode();
+	mWindow->setPosition(sf::Vector2i(screen.width/2-mWindow->getSize().x/2, screen.height/2-mWindow->getSize().y/2));
+
+	//Limit the framerate
+	mWindow->setFramerateLimit(60);
+	
+	//Enter the MainMenu state
 	mCurrentState=new MainMenu(this, mWindow);
-	//some init
+	mCurrentState->enter,
 
 	while(!hasExited)
 	{

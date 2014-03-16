@@ -34,6 +34,5 @@ bool MainMenu::update(){
 	mWindow->draw(playTxt);
 	mWindow->draw(paramTxt);
 	mWindow->draw(quitTxt);
-	mWindow->display();
 	return true;
 }

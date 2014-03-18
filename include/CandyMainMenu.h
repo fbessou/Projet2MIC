@@ -12,9 +12,7 @@ namespace Candy
     const std::string startButton;
     const std::string exitButton;
     const std::string highscoreButton;
-
-    enum Choice	{ PLAY, SETTINGS ,QUIT};
-
+ 
   public:
     MainMenu(Game * game, sf::RenderWindow * window);
     ~MainMenu();
@@ -22,12 +20,12 @@ namespace Candy
     bool update();
     void leave();
   private:
+    int keySelection;
+    sf::Clock clock;
+
     sf::Text playTxt;
     sf::Text paramTxt;
     sf::Text quitTxt;
-    Choice Selection;
-    //I use this variable to change Selection's value
-    int keyValue;
   };
 };
 #endif

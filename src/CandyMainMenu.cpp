@@ -4,8 +4,9 @@
 using namespace Candy;
 using namespace sf;
 double a = 0.0;
+
 MainMenu::MainMenu(Game * game, RenderWindow * window):
-  GameState(game,window), playTxt("Play the Game",game->getFont(),mWindow->getSize().y*0.1), paramTxt("Parameters",game->getFont(),mWindow->getSize().y*0.1),quitTxt("Allez voir le dentiste",game->getFont(),mWindow->getSize().y*0.1)
+  GameState(game,window), playTxt("Play the Game",game->getFont(),30), paramTxt("Parameters",game->getFont(),30),quitTxt("Allez voir le dentiste",game->getFont(),30)
 {
 	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
 
@@ -62,9 +63,11 @@ bool MainMenu::update(){
 	  break;
 	}
     }
+
   mWindow->clear();
   mWindow->draw(playTxt);
   mWindow->draw(paramTxt);
   mWindow->draw(quitTxt);
+  mWindow->display();
   return true;
 }

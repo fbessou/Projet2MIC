@@ -20,7 +20,11 @@ namespace Candy
     bool update();
     void leave();
   private:
+    GameState * newState;
+
+    enum Choice {PLAY, SETTINGS, QUIT};
     int keySelection;
+    Choice Selected;
     sf::Clock clock;
 
     sf::Text playTxt;

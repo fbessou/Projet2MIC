@@ -3,7 +3,7 @@
 
 namespace Candy
 {
-	class Game;
+  class Game;
 };
 
 #include "CandyCommon.h"
@@ -13,29 +13,29 @@ namespace Candy
 
 namespace Candy
 {
-	class Game
-	{
-		private:
-			GameState * mCurrentState;
-			sf::RenderWindow * mWindow;
-			bool hasExited;
-			sf::Font mFont;
+  class Game
+  {
+  private:
+    GameState * mCurrentState;
+    sf::RenderWindow * mWindow;
+    bool hasExited;
+    sf::Font mFont;
 
-			sf::Clock mClock;
-			unsigned int mFrameCount;
-			float mSPF;
-			sf::Text mFPSText;
-			void updateDebug();
-		public:
-			Game();
-			~Game();
-			void update();
-			void start();
-			void changeState(GameState * state);
-			void quit();
-			sf::Font& getFont();
-//			World * getWorld();
-	};//class Game
+    sf::Clock mClock;
+    unsigned int mFrameCount;
+    float mSPF;
+    sf::Text mFPSText;
+    void updateDebug();
+  public:
+    Game();
+    ~Game();
+    void update();
+    void start();
+    void changeState(GameState * state);
+    void quit();
+    sf::Font& getFont();
+    //			World * getWorld();
+  };//class Game
 	
 }; // namespace Candy
 

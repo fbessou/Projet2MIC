@@ -1,5 +1,4 @@
 #include "CandyMainMenu.h"
-#include <iostream>
 
 using namespace Candy;
 using namespace sf;
@@ -19,6 +18,9 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	clock.restart();
 
 	keySelection = 0;
+	Selected = PLAY;
+
+	newState = nullptr;
 }
 
 MainMenu::~MainMenu()
@@ -35,6 +37,20 @@ bool MainMenu::update(){
 	keySelection--;
       if (Keyboard::isKeyPressed(Keyboard::Down))
 	keySelection++;
+      if (Keyboard::isKeyPressed(Keyboard::Home))
+	{
+	  switch (Selected)
+	    {
+	    case PLAY:
+	      break;
+	    case SETTINGS:
+	      // newState = new SettingsMenu(game, window);
+	      break;
+	    case QUIT:
+	      break;
+
+	    }
+	}
     }
 
   keySelection = keySelection>=0 ? keySelection%3 : 2;
@@ -47,18 +63,21 @@ bool MainMenu::update(){
 	  playTxt.setColor(Color::Yellow);
 	  paramTxt.setColor(Color::White);
 	  quitTxt.setColor(Color::White);
+	  Selected = PLAY;
 	  clock.restart();
 	  break;
 	case 1:
 	  playTxt.setColor(Color::White);
 	  paramTxt.setColor(Color::Yellow);
 	  quitTxt.setColor(Color::White);
+	  Selected = SETTINGS;
 	  clock.restart();
 	  break;
 	case 2:
 	  playTxt.setColor(sf::Color::White);
 	  paramTxt.setColor(sf::Color::White);
 	  quitTxt.setColor(sf::Color::Yellow);
+	  Selected = QUIT;
 	  clock.restart();
 	  break;
 	}
@@ -68,4 +87,5 @@ bool MainMenu::update(){
   mWindow->draw(playTxt);
   mWindow->draw(paramTxt);
   mWindow->draw(quitTxt);
+  return true;
 }

@@ -1,4 +1,5 @@
 #include "CandyMainMenu.h"
+#include "CandySettings.h"
 
 using namespace Candy;
 using namespace sf;
@@ -37,14 +38,15 @@ bool MainMenu::update(){
 	keySelection--;
       if (Keyboard::isKeyPressed(Keyboard::Down))
 	keySelection++;
-      if (Keyboard::isKeyPressed(Keyboard::Home))
+      if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
 	  switch (Selected)
 	    {
 	    case PLAY:
 	      break;
 	    case SETTINGS:
-	      // newState = new SettingsMenu(game, window);
+	      //newState = new Settings(mGame, mWindow);
+	      mGame->changeState(new Settings(mGame, mWindow));
 	      break;
 	    case QUIT:
 	      break;

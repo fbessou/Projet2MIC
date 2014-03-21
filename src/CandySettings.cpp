@@ -1,13 +1,13 @@
-#include "CandyMainMenu.h"
+#include "CandySettings.h"
 
 using namespace Candy;
 using namespace sf;
-double a = 0.0;
 
-Settings::SettingsMenu(Game * game, RenderWindow * window):
+
+Settings::Settings(Game * game, RenderWindow * window):
   GameState(game,window), playTxt("Play the Game",game->getFont(),30), paramTxt("Parameters",game->getFont(),30),quitTxt("Allez voir le dentiste",game->getFont(),30)
 {
-	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
+	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Lala~");
 
 	playTxt.setPosition(Vector2f(0,mWindow->getSize().y/2.0f));
 	paramTxt.setPosition(Vector2f(0,mWindow->getSize().y/5.0*3.0));
@@ -21,7 +21,7 @@ Settings::SettingsMenu(Game * game, RenderWindow * window):
 	Selected = PLAY;
 }
 
-Settings::~SettingsMenu()
+Settings::~Settings()
 {
 }
 
@@ -35,13 +35,6 @@ bool Settings::update(){
 	keySelection--;
       if (Keyboard::isKeyPressed(Keyboard::Down))
 	keySelection++;
-      if (Keyboard::isKeyPressed(Keyboard::Enter))
-	{
-	  switch (Selected)
-	    {
-	    case PLAY:
-	      game->changeState()
-	}
     }
 
   keySelection = keySelection>=0 ? keySelection%3 : 2;

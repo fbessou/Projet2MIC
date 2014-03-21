@@ -14,8 +14,8 @@ namespace Candy
     const std::string highscoreButton;
  
   public:
-    SettingsMenu(Game * game, sf::RenderWindow * window);
-    ~SettingsMenu();
+    Settings(Game * game, sf::RenderWindow * window);
+    ~Settings();
     void enter();
     bool update();
     void leave();

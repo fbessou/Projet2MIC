@@ -3,16 +3,23 @@
 
 using namespace Candy;
 using namespace sf;
-double a = 0.0;
 
 MainMenu::MainMenu(Game * game, RenderWindow * window):
-  GameState(game,window), playTxt("Play the Game",game->getFont(),30), paramTxt("Parameters",game->getFont(),30),quitTxt("Allez voir le dentiste",game->getFont(),30)
+  GameState(game,window), playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40)
 {
 	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
 
-	playTxt.setPosition(Vector2f(0,mWindow->getSize().y/2.0f));
-	paramTxt.setPosition(Vector2f(0,mWindow->getSize().y/5.0*3.0));
-	quitTxt.setPosition(Vector2f(0,mWindow->getSize().y/5.0*4.0));
+	sf::FloatRect textRect = playTxt.getLocalBounds();
+	playTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+	playTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f));
+
+	textRect = paramTxt.getLocalBounds();
+	paramTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+	paramTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*4.0/3.0));
+
+	textRect = quitTxt.getLocalBounds();
+	quitTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+	quitTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*5.0/3.0));
 	
 	playTxt.setColor(Color::Yellow);
 
@@ -29,7 +36,8 @@ MainMenu::~MainMenu()
 }
 
 void MainMenu::enter(){}
-void MainMenu::leave(){}
+void MainMenu::leave(){
+}
 
 bool MainMenu::update(){
   if (!(clock.getElapsedTime().asSeconds() < 0.12))
@@ -38,17 +46,17 @@ bool MainMenu::update(){
 	keySelection--;
       if (Keyboard::isKeyPressed(Keyboard::Down))
 	keySelection++;
-      if (Keyboard::isKeyPressed(Keyboard::Space))
+      if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
 	{
 	  switch (Selected)
 	    {
 	    case PLAY:
 	      break;
 	    case SETTINGS:
-	      //newState = new Settings(mGame, mWindow);
 	      mGame->changeState(new Settings(mGame, mWindow));
 	      break;
 	    case QUIT:
+	      mGame->quit();
 	      break;
 
 	    }

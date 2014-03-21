@@ -26,6 +26,8 @@ namespace Candy
     float mSPF;
     sf::Text mFPSText;
     void updateDebug();
+
+    sf::Clock clock;
   public:
     Game();
     ~Game();
@@ -34,6 +36,7 @@ namespace Candy
     void changeState(GameState * state);
     void quit();
     sf::Font& getFont();
+
     //			World * getWorld();
   };//class Game
 	

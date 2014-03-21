@@ -20,14 +20,12 @@ namespace Candy
     bool update();
     void leave();
   private:
-    enum Choice {PLAY, SETTINGS, QUIT};
+    enum Choice {RETURN};
     int keySelection;
     Choice Selected;
     sf::Clock clock;
 
-    sf::Text playTxt;
-    sf::Text paramTxt;
-    sf::Text quitTxt;
+    sf::Text returnTxt;
   };
 };
 #endif

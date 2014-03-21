@@ -97,7 +97,9 @@ void Game::quit()
 void Game::changeState(GameState * state)
 {
 	mCurrentState->leave();
+	clock.restart();
+	// to avoid instant transition, because prgm will behave as if user is holding key
+	while (clock.getElapsedTime().asSeconds()<0.1){}
 	mCurrentState=state;
 	mCurrentState->enter();
 }
-

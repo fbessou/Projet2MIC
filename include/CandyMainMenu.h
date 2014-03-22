@@ -27,6 +27,7 @@ namespace Candy
     Choice Selected;
     sf::Clock clock;
 
+    sf::Text titleTxt;
     sf::Text playTxt;
     sf::Text paramTxt;
     sf::Text quitTxt;

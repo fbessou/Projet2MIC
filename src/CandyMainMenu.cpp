@@ -5,7 +5,7 @@ using namespace Candy;
 using namespace sf;
 
 MainMenu::MainMenu(Game * game, RenderWindow * window):
-  GameState(game,window), playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40)
+  GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40)
 {
 	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
 
@@ -20,7 +20,12 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	textRect = quitTxt.getLocalBounds();
 	quitTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	quitTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*5.0/3.0));
+
+	textRect = titleTxt.getLocalBounds();
+	titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+	titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
 	
+	titleTxt.setColor(Color::Red);
 	playTxt.setColor(Color::Yellow);
 
 	clock.restart();
@@ -94,6 +99,7 @@ bool MainMenu::update(){
     }
 
   mWindow->clear();
+  mWindow->draw(titleTxt);
   mWindow->draw(playTxt);
   mWindow->draw(paramTxt);
   mWindow->draw(quitTxt);

@@ -38,3 +38,19 @@ const Vector & Body::getCenter() const
 {
 	return mCenter;
 }
+
+const Body::Circle & Body::getCircle() const
+{
+	return mCircle;
+}
+
+const Body::Rectangle & Body::getRectangle() const
+{
+	return mRectangle;
+}
+
+const Body::ConvexHull & Body::getConvexHull() const
+{
+	return mHull;
+}
+

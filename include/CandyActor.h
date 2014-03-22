@@ -24,6 +24,9 @@ namespace Candy
 			void update(unsigned int);
 			void draw();
 			
+			const Body * getBody() const;
+			void setBody(Body * mBody);
+
 			std::string getType() const;
 			
 			const bool& isVisible() const ;
@@ -37,6 +40,8 @@ namespace Candy
 
 			const Vector& getVelocity() const;
 			void setVelocity(const Vector&);
+
+			virtual void onCollision(Actor * actor);
 			
 	}; // class Actor
 

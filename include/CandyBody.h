@@ -57,9 +57,9 @@ namespace Candy
 			// void setType(Type);
 
 			// acces direct aux formes
-			Rectangle & getRectangle();
-			Circle & getCircle();
-			ConvexHull & getConvexHull();
+			const Rectangle & getRectangle() const ;
+			const Circle & getCircle() const;
+			const ConvexHull & getConvexHull() const;
 	};
 };
 

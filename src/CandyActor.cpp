@@ -22,7 +22,12 @@ void Actor::draw()
 {
 	if(isVisible())
 		return;
-		//mShape->draw();
+		//mShape->draw();//TODO implement
+}
+
+const Body * Actor::getBody() const
+{
+	return mBody;
 }
 
 string Actor::getType() const
@@ -70,4 +75,9 @@ void Actor::setVelocity(const Vector& velocity)
 {
 	mVelocity = velocity;
 	//mShape.velocity = velocity;
+}
+
+void Actor::onCollision(Actor* actor)
+{
+
 }

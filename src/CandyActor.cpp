@@ -13,6 +13,10 @@ Actor::Actor(const string type, const Vector & position, const Vector & velocity
 	
 }
 
+Actor::~Actor()
+{
+}
+
 void Actor::update(unsigned int step)
 {
 	setPosition(getPosition()+getVelocity()*step);

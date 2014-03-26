@@ -99,3 +99,33 @@ std::ostream& Candy::operator<<(std::ostream& stream, const Vector& v){
   stream<<(std::string)v;
   return stream;
 }
+
+Real Math::min(Real val1, Real val2)
+{
+  return val1<val2 ? val1 : val2;
+}
+
+Real Math::max(Real val1, Real val2)
+{
+  return val1>val2 ? val1 : val2;
+}
+
+Real Math::clamp(Real val, Real min, Real max)
+{
+  return Math::max(Math::min(val,max),min);
+}
+
+int Math::min(int val1,int val2)
+{
+  return val1<val2 ? val1 : val2;
+}
+
+int Math::max(int val1, int val2)
+{
+  return val1>val2 ? val1 : val2;
+}
+
+int Math::clamp(int val, int min, int max)
+{
+  return Math::max(Math::min(val,max),min);
+}

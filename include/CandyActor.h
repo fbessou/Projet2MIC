@@ -17,10 +17,10 @@ namespace Candy
 			bool mGhost;
 			bool mVisible;
 			//bool mSameTypeCollision;
-			virtual ~Actor()=0;
+			virtual ~Actor();
 
 		public:
-			Actor(const string type, const Vector & position, const Vector & velocity,const bool & ghost,const bool & visible);
+			Actor(const string type, const Vector & position, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
 			void update(unsigned int);
 			void draw();
 			

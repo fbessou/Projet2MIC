@@ -8,6 +8,9 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
   GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40)
 {
 	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
+	mActiveColor=Color::White;
+	mInactiveColor=Color(150,150,150);
+	mDisabledColor=Color(90,90,90);
 
 	sf::FloatRect textRect = playTxt.getLocalBounds();
 	playTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
@@ -26,7 +29,7 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
 	
 	titleTxt.setColor(Color::Red);
-	playTxt.setColor(Color::Yellow);
+	playTxt.setColor(mActiveColor);
 
 	clock.restart();
 
@@ -75,23 +78,23 @@ bool MainMenu::update(){
       switch (keySelection)
 	{
 	case 0:
-	  playTxt.setColor(Color::Yellow);
-	  paramTxt.setColor(Color::White);
-	  quitTxt.setColor(Color::White);
+	  playTxt.setColor(mActiveColor);
+	  paramTxt.setColor(mInactiveColor);
+	  quitTxt.setColor(mInactiveColor);
 	  Selected = PLAY;
 	  clock.restart();
 	  break;
 	case 1:
-	  playTxt.setColor(Color::White);
-	  paramTxt.setColor(Color::Yellow);
-	  quitTxt.setColor(Color::White);
+	  playTxt.setColor(mInactiveColor);
+	  paramTxt.setColor(mActiveColor);
+	  quitTxt.setColor(mInactiveColor);
 	  Selected = SETTINGS;
 	  clock.restart();
 	  break;
 	case 2:
-	  playTxt.setColor(sf::Color::White);
-	  paramTxt.setColor(sf::Color::White);
-	  quitTxt.setColor(sf::Color::Yellow);
+	  playTxt.setColor(mInactiveColor);
+	  paramTxt.setColor(mInactiveColor);
+	  quitTxt.setColor(mActiveColor);
 	  Selected = QUIT;
 	  clock.restart();
 	  break;

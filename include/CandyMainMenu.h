@@ -23,14 +23,21 @@ namespace Candy
     GameState * newState;
 
     enum Choice {PLAY, SETTINGS, QUIT};
-    int keySelection;
+    
+	
+	int keySelection;
     Choice Selected;
+
     sf::Clock clock;
 
     sf::Text titleTxt;
     sf::Text playTxt;
     sf::Text paramTxt;
     sf::Text quitTxt;
+
+	sf::Color mActiveColor;
+	sf::Color mInactiveColor;
+	sf::Color mDisabledColor;
   };
 };
 #endif

@@ -44,7 +44,13 @@ namespace Candy
 
 	namespace Math
 	{
-		
+	  Real min(Real val1, Real val2);
+	  Real max(Real val1, Real val2);
+	  Real clamp(Real val, Real min, Real max);
+	  
+	  int min(int val1, int val2);
+	  int max(int val1, int val2);
+	  int clamp(int val, int min, int max);
 	};
 
 };

@@ -13,16 +13,10 @@ all: $(TARGET)
 test:
 	make -C tests
 $(TARGET): $(OBJ)
-		@tput setaf 3
-		@echo "[ Linking $^ ]"
-		@tput sgr 0
-		@$(CXX) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+		$(CXX) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
-		@tput setaf 2
-		@echo "[ Compiling $^ ]"
-		@tput sgr 0
-		@$(CXX) -c -o $@ $< $(CFLAGS)
+		$(CXX) -c -o $@ $< $(CFLAGS)
 
 
 .PHONY: clean

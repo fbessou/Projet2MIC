@@ -5,7 +5,7 @@ using namespace Candy;
 using namespace sf;
 
 
-Settings::Settings(Game * game, RenderWindow * window):
+Settings::Settings(Game * game, RenderWindow * window, GameState * previousState):
   GameState(game,window), returnTxt("Return to main menu",game->getFont(),40)
 {
 	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~The Empty Menu~");
@@ -13,7 +13,9 @@ Settings::Settings(Game * game, RenderWindow * window):
 	returnTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	returnTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f));
 	
-	returnTxt.setColor(Color::Yellow);
+	returnTxt.setColor(Color::White);
+
+	mpreviousState = previousState;
 
 	clock.restart();
 
@@ -30,12 +32,14 @@ void Settings::leave(){}
 
 bool Settings::update(){
  
-  if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
-    {
-      mGame->changeState(new MainMenu(mGame, mWindow));
-    }
-
   mWindow->clear();
   mWindow->draw(returnTxt);
+
+  if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
+    {
+      mGame->changeState(mpreviousState);
+      delete this;
+    }
+
   return true;
 }

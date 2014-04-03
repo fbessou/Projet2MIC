@@ -16,13 +16,13 @@ World::~World()
 
 void World::step( unsigned int)
 {
-	//test collision for each 
+	//test collision for each Actor
 	for(auto comb = mActors.begin() ; comb != mActors.end() ; comb++)
 	{
 		if(!(*comb)->isGhost())
 		for(auto comb2 = comb; ++comb2 != mActors.end();)
 		{
-			testCollision(*comb, *comb2);
+			testCollision(**comb, **comb2);
 		}
 	}
 }
@@ -32,20 +32,20 @@ void World::addActor(Actor * actor)
 	mActors.insert(actor);
 }
 
-bool World::removeActor(Actor * actor)
+Actor * World::removeActor(Actor * actor)
 {
 	if(false)
-		return false;
+		return actor;
 
-	return true;
+	return actor;
 }
 
 //Private member functions
 
-bool World::testCollision(const Actor* actor1,const Actor * actor2)
+bool World::testCollision(const Actor& actor1,const Actor & actor2)
 {
-	const Body * b1=actor1->getBody();
-	const Body * b2=actor2->getBody();
+	const Body * b1=actor1.getBody();
+	const Body * b2=actor2.getBody();
 
 	switch(b1->getType())
 	{
@@ -87,31 +87,30 @@ bool World::testCollision(const Actor* actor1,const Actor * actor2)
 	return true;
 }
 
-
-bool World::_collisionRectangleRectangle(const Actor * a1,const Actor * a2) const
+bool World::_collisionRectangleRectangle(const Actor & a1,const Actor & a2) const
 {
 	return true;
 }
-bool World::_collisionRectangleConvex(const Actor * a1,   const Actor * a2) const
+bool World::_collisionRectangleConvex(const Actor & a1,   const Actor & a2) const
 {
 	return true;
 }
-bool World::_collisionRectangleCircle(const Actor * a1,   const Actor * a2)const 
+bool World::_collisionRectangleCircle(const Actor & a1,   const Actor & a2)const 
 {
 	return true;
 }
-bool World::_collisionCircleConvex(const Actor * a1,      const Actor * a2)const 
+bool World::_collisionCircleConvex(const Actor & a1,      const Actor & a2)const 
 {
 	return true;
 }
-bool World::_collisionCircleCircle(const Actor * a1,      const Actor * a2)const 
+bool World::_collisionCircleCircle(const Actor & a1,      const Actor & a2)const 
 {
-	Real sqDist = (a1->getPosition()-a2->getPosition()).squaredLength();
-	Real sqSumOfRadius = (a1->getBody()->getCircle().radius+a2->getBody()->getCircle().radius);
+	Real sqDist = (a1.getPosition()-a2.getPosition()).squaredLength();
+	Real sqSumOfRadius = (a1.getBody()->getCircle().radius+a2.getBody()->getCircle().radius);
 	sqSumOfRadius*=sqSumOfRadius;
 	return sqDist<=sqSumOfRadius;
 }
-bool World::_collisionConvexConvex(const Actor * a1,      const Actor * a2)const 
+bool World::_collisionConvexConvex(const Actor & a1,      const Actor & a2)const 
 {
 	return true;
 }

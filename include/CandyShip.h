@@ -7,23 +7,23 @@
 
 namespace Candy
 {
-  class Ship : public Actor
-  {
-  public:
-    Ship(/*Team & owner,*/ unsigned int maxLife);
-    ~Ship();
-    void setLife(unsigned int life);
-    unsigned int getLife();
-    
-    void setMaxLife(unsigned int newMax);
+	class Ship : public Actor
+	{
+		public:
+			Ship(/*Team & owner,*/ unsigned int maxLife);
+			~Ship();
+			void setLife(unsigned int life);
+			unsigned int getLife();
 
-    //void setWeapon();
-    //    Weapon getWeapon();
-  protected:
-    unsigned int mLife;
-    unsigned int mMaxLife;
-    // Team  mTeam;
-    // Weapon  mWeapon;		
-  };
+			void setMaxLife(unsigned int newMax);
+
+			//void setWeapon();
+			//    Weapon getWeapon();
+		protected:
+			unsigned int mLife;
+			unsigned int mMaxLife;
+			// Team  mTeam;
+			// Weapon  mWeapon;		
+	};
 };
 #endif 

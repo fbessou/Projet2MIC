@@ -1,12 +1,14 @@
 #include "CandyShip.h"
 #include "CandyMath.h"
-
 using namespace Candy;
 
 Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0))
 {
-  // mTeam = Team;
-  mMaxLife = maxLife;
+
+	// mTeam = Team;
+	mMaxLife = maxLife;
+	mDrawable = new sf::CircleShape(10.5,4);
+
 }
 
 Ship::~Ship()
@@ -15,15 +17,15 @@ Ship::~Ship()
 
 void Ship::setLife(unsigned int life)
 {
-  mLife = Math::clamp(life,0,mMaxLife);
+	mLife = Math::clamp(life,0,mMaxLife);
 }
 
 unsigned int Ship::getLife()
 {
-  return mLife;
+	return mLife;
 }
 
 void Ship::setMaxLife(unsigned int newMax)
 {
-  mMaxLife = newMax;
+	mMaxLife = newMax;
 }

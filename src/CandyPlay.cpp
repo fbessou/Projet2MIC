@@ -20,7 +20,7 @@ bool Play::update(){
   
   if (Keyboard::isKeyPressed(Keyboard::Escape))
     {
-      mGame->changeState(new Pause(mGame,mWindow,this));
+      mGame->changeState(new Pause(mGame,mWindow,this,"Candy Saga 3 Le Retour des Caries ~The Main game~"));
     }
 
   return true;

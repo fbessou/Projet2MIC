@@ -14,12 +14,16 @@ namespace Candy
     const std::string highscoreButton;
  
   public:
-    Settings(Game * game, sf::RenderWindow * window);
+    Settings(Game * game, sf::RenderWindow * window,GameState* previousState,string previousTitle);
     ~Settings();
     void enter();
     bool update();
     void leave();
   private:
+    //to remember from where the Settings State was called and to go back to it
+    GameState * mpreviousState;
+    string mPreviousTitle;
+
     enum Choice {RETURN};
     int keySelection;
     Choice Selected;

@@ -1,5 +1,6 @@
 #include "CandyMainMenu.h"
 #include "CandySettings.h"
+#include "CandyPlay.h"
 
 using namespace Candy;
 using namespace sf;
@@ -59,14 +60,14 @@ bool MainMenu::update(){
 	  switch (Selected)
 	    {
 	    case PLAY:
+	      mGame->changeState(new Play(mGame,mWindow));
 	      break;
 	    case SETTINGS:
-	      mGame->changeState(new Settings(mGame, mWindow));
+	      mGame->changeState(new Settings(mGame, mWindow,this,"Candy Saga 3 Le Retour des Caries  ~Menu~"));
 	      break;
 	    case QUIT:
 	      mGame->quit();
 	      break;
-
 	    }
 	}
     }

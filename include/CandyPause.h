@@ -3,13 +3,14 @@
 
 #include "CandyGameState.h"
 #include <SFML/Graphics.hpp>
+#include <string>
 
 namespace Candy
 {
   class Pause: public GameState
   {
   public:
-    Pause(Game *game, sf::RenderWindow *window, GameState *gameSession);
+    Pause(Game *game, sf::RenderWindow *window, GameState *gameSession,string previousTitle);
     ~Pause();
     void enter();
     bool update();
@@ -20,6 +21,7 @@ namespace Candy
     int keySelection;
     Choice Selected;
     GameState *mGameSession;
+    string mPreviousTitle;
     
     sf::Text titleTxt;
     sf::Text returnTxt;

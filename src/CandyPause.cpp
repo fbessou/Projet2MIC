@@ -5,7 +5,7 @@
 using namespace Candy;
 using namespace sf;
 
-Pause::Pause(Game *game, RenderWindow * window,GameState *gameSession):
+Pause::Pause(Game *game, RenderWindow * window,GameState *gameSession,string previousTitle):
   GameState(game,window),titleTxt("Pause",game->getFont(),100),returnTxt("Go back playing",game->getFont(),40),paramTxt("Parameters",game->getFont(),40),exitGameTxt("Retourner au menu principal",game->getFont(),40),quitAppTxt("See you later",game->getFont(),40)
 {
   mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Pause~");
@@ -13,6 +13,8 @@ Pause::Pause(Game *game, RenderWindow * window,GameState *gameSession):
   mActiveColor=Color::White;
   mInactiveColor=Color(150,150,150);
   mDisabledColor=Color(90,90,90);
+
+  mPreviousTitle = previousTitle;
 
   sf::FloatRect textRect = titleTxt.getLocalBounds();
   titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
@@ -71,14 +73,16 @@ bool Pause::update(){
 	  switch (Selected)
 	    {
 	    case PLAY:
+	      mWindow->setTitle(mPreviousTitle);
 	      mGame->changeState(mGameSession);
 	      break;
 	    case SETTINGS:
-	      mGame->changeState(new Settings(mGame, mWindow,this));
+	      mGame->changeState(new Settings(mGame, mWindow,this,"Candy Saga 3 Le Retour des Caries  ~Pause~"));
 	      break;
 	      //should erase gameSession before quitting
 	    case MAINMENU:
 	      mGame->changeState(new MainMenu(mGame,mWindow));
+	      break;
 	      //here as well
 	    case QUIT:
 	      mGame->quit();

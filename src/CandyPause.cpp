@@ -1,0 +1,132 @@
+#include "CandyPause.h"
+#include "CandySettings.h"
+#include "CandyMainMenu.h"
+
+using namespace Candy;
+using namespace sf;
+
+Pause::Pause(Game *game, RenderWindow * window,GameState *gameSession):
+  GameState(game,window),titleTxt("Pause",game->getFont(),100),returnTxt("Go back playing",game->getFont(),40),paramTxt("Parameters",game->getFont(),40),exitGameTxt("Retourner au menu principal",game->getFont(),40),quitAppTxt("See you later",game->getFont(),40)
+{
+  mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Pause~");
+
+  mActiveColor=Color::White;
+  mInactiveColor=Color(150,150,150);
+  mDisabledColor=Color(90,90,90);
+
+  sf::FloatRect textRect = titleTxt.getLocalBounds();
+  titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+  titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
+
+  textRect = returnTxt.getLocalBounds();
+  returnTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+  returnTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*2.0/3.0));
+
+  textRect = paramTxt.getLocalBounds();
+  paramTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+  paramTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f));
+
+  textRect = exitGameTxt.getLocalBounds();
+  exitGameTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+  exitGameTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*4.0/3.0));
+
+  textRect = quitAppTxt.getLocalBounds();
+  quitAppTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+  quitAppTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*5.0/3.0));
+
+  titleTxt.setColor(Color::Red);
+  returnTxt.setColor(mActiveColor);
+
+  clock.restart();
+
+  Selected = PLAY;
+  keySelection = 0;
+
+  mGameSession = gameSession;
+}
+
+Pause::~Pause()
+{
+}
+
+void Pause::enter(){}
+void Pause::leave(){}
+
+bool Pause::update(){
+  mWindow->clear();
+  mWindow->draw(returnTxt);
+  mWindow->draw(paramTxt);
+  mWindow->draw(exitGameTxt);
+  mWindow->draw(quitAppTxt);
+  mWindow->draw(titleTxt);
+
+  if (!(clock.getElapsedTime().asSeconds() < 0.12))
+    {
+      if (Keyboard::isKeyPressed(Keyboard::Up))
+	keySelection--;
+      if (Keyboard::isKeyPressed(Keyboard::Down))
+	keySelection++;
+      if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
+	{
+	  switch (Selected)
+	    {
+	    case PLAY:
+	      mGame->changeState(mGameSession);
+	      break;
+	    case SETTINGS:
+	      mGame->changeState(new Settings(mGame, mWindow,this));
+	      break;
+	      //should erase gameSession before quitting
+	    case MAINMENU:
+	      mGame->changeState(new MainMenu(mGame,mWindow));
+	      //here as well
+	    case QUIT:
+	      mGame->quit();
+	      break;
+	    }
+	}
+    }
+
+  keySelection = keySelection>=0 ? keySelection%4 : 3;
+
+  if (clock.getElapsedTime().asSeconds() > 0.12)
+    {
+      switch (keySelection)
+	{
+	case 0:
+	  returnTxt.setColor(mActiveColor);
+	  paramTxt.setColor(mInactiveColor);
+	  exitGameTxt.setColor(mInactiveColor);
+	  quitAppTxt.setColor(mInactiveColor);
+	  Selected = PLAY;
+	  clock.restart();
+	  break;
+	case 1:
+	  returnTxt.setColor(mInactiveColor);
+	  paramTxt.setColor(mActiveColor);
+	  exitGameTxt.setColor(mInactiveColor);
+	  quitAppTxt.setColor(mInactiveColor);
+	  Selected = SETTINGS;
+	  clock.restart();
+	  break;
+	case 2:
+	  returnTxt.setColor(mInactiveColor);
+	  paramTxt.setColor(mInactiveColor);
+	  exitGameTxt.setColor(mActiveColor);
+	  quitAppTxt.setColor(mInactiveColor);
+	  Selected = MAINMENU;
+	  clock.restart();
+	  break;
+	case 3:
+	  returnTxt.setColor(mInactiveColor);
+	  paramTxt.setColor(mInactiveColor);
+	  exitGameTxt.setColor(mInactiveColor);
+	  quitAppTxt.setColor(mActiveColor);
+	  Selected = QUIT;
+	  clock.restart();
+	  break;
+	}
+    }
+
+  return true;
+}

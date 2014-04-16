@@ -4,15 +4,22 @@
 #include "CandyCommon.h"
 #include "CandyBody.h"
 #include "CandyMath.h"
-
+#include <SFML/Graphics.hpp>
 namespace Candy
 {
 	class Actor{
-		private:
+		protected:
 			const std::string mType;
 			Vector mPosition;
 			Vector mVelocity;
 		protected:
+
+			union
+			{
+				sf::Drawable * mDrawable;
+				sf::Transformable * mTransformable;
+			};
+
 			Body * mBody;
 			bool mGhost;
 			bool mVisible;
@@ -22,7 +29,7 @@ namespace Candy
 		public:
 			Actor(const string type, const Vector & position, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
 			void update(unsigned int);
-			void draw();
+			void draw(sf::RenderTarget & );
 			
 			const Body * getBody() const;
 			void setBody(Body * mBody);

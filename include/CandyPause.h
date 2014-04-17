@@ -2,6 +2,7 @@
 #define _CANDY_PAUSE_H_
 
 #include "CandyGameState.h"
+#include "CandyPlay.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -10,7 +11,7 @@ namespace Candy
   class Pause: public GameState
   {
   public:
-    Pause(Game *game, sf::RenderWindow *window, GameState *gameSession,string previousTitle);
+    Pause(Game *game, sf::RenderWindow *window, Play *gameSession);
     ~Pause();
     void enter();
     bool update();

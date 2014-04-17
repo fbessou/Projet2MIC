@@ -10,6 +10,7 @@ OBJFILES=CandyGame.o CandyMainMenu.o CandyBody.o CandyMath.o main.o CandyGameSta
 OBJ=$(patsubst %,$(OBJDIR)/%,$(OBJFILES))
 
 all: $(TARGET)
+
 test:
 	make -C tests
 $(TARGET): $(OBJ)

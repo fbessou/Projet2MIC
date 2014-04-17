@@ -14,14 +14,15 @@ namespace Candy
 			~Ship();
 			void setLife(unsigned int life);
 			unsigned int getLife();
-
+			
 			void setMaxLife(unsigned int newMax);
-
+			virtual void update(unsigned int);
 			//void setWeapon();
 			//    Weapon getWeapon();
 		protected:
 			unsigned int mLife;
 			unsigned int mMaxLife;
+			sf::Texture * mTexture;
 			// Team  mTeam;
 			// Weapon  mWeapon;		
 	};

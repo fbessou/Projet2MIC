@@ -1,11 +1,12 @@
 #include "CandyMainMenu.h"
 #include "CandySettings.h"
+#include "CandyShip.h"
 
 using namespace Candy;
 using namespace sf;
 
 MainMenu::MainMenu(Game * game, RenderWindow * window):
-  GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40)
+	GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40),mWorld(mWindow)
 {
 	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
 	mActiveColor=Color::White;
@@ -27,7 +28,7 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	textRect = titleTxt.getLocalBounds();
 	titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
-	
+
 	titleTxt.setColor(Color::Red);
 	playTxt.setColor(mActiveColor);
 
@@ -37,6 +38,7 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	Selected = PLAY;
 
 	newState = nullptr;
+	mWorld.addActor(new Ship(100));
 }
 
 MainMenu::~MainMenu()
@@ -48,63 +50,65 @@ void MainMenu::leave(){
 }
 
 bool MainMenu::update(){
-  if (!(clock.getElapsedTime().asSeconds() < 0.12))
-    {
-      if (Keyboard::isKeyPressed(Keyboard::Up))
-	keySelection--;
-      if (Keyboard::isKeyPressed(Keyboard::Down))
-	keySelection++;
-      if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
+	if (clock.getElapsedTime().asSeconds() > 0.12)
 	{
-	  switch (Selected)
-	    {
-	    case PLAY:
-	      break;
-	    case SETTINGS:
-	      mGame->changeState(new Settings(mGame, mWindow));
-	      break;
-	    case QUIT:
-	      mGame->quit();
-	      break;
+		if (Keyboard::isKeyPressed(Keyboard::Up))
+		{
+			keySelection--;
+				clock.restart();
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Down))
+		{
+			keySelection++;
+				clock.restart();
+		}
+		keySelection = keySelection>=0 ? keySelection%3 : 2;
 
-	    }
+		if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
+		{
+			switch (Selected)
+			{
+				case PLAY:
+					break;
+				case SETTINGS:
+					mGame->changeState(new Settings(mGame, mWindow));
+					break;
+				case QUIT:
+					mGame->quit();
+					break;
+
+			}
+		}
+
+		switch (keySelection)
+		{
+			case 0:
+				playTxt.setColor(mActiveColor);
+				paramTxt.setColor(mInactiveColor);
+				quitTxt.setColor(mInactiveColor);
+				Selected = PLAY;
+				break;
+			case 1:
+				playTxt.setColor(mInactiveColor);
+				paramTxt.setColor(mActiveColor);
+				quitTxt.setColor(mInactiveColor);
+				Selected = SETTINGS;
+				break;
+			case 2:
+				playTxt.setColor(mInactiveColor);
+				paramTxt.setColor(mInactiveColor);
+				quitTxt.setColor(mActiveColor);
+				Selected = QUIT;
+				break;
+		}
 	}
-    }
 
-  keySelection = keySelection>=0 ? keySelection%3 : 2;
-
-  if (clock.getElapsedTime().asSeconds() > 0.12)
-    {
-      switch (keySelection)
-	{
-	case 0:
-	  playTxt.setColor(mActiveColor);
-	  paramTxt.setColor(mInactiveColor);
-	  quitTxt.setColor(mInactiveColor);
-	  Selected = PLAY;
-	  clock.restart();
-	  break;
-	case 1:
-	  playTxt.setColor(mInactiveColor);
-	  paramTxt.setColor(mActiveColor);
-	  quitTxt.setColor(mInactiveColor);
-	  Selected = SETTINGS;
-	  clock.restart();
-	  break;
-	case 2:
-	  playTxt.setColor(mInactiveColor);
-	  paramTxt.setColor(mInactiveColor);
-	  quitTxt.setColor(mActiveColor);
-	  Selected = QUIT;
-	  clock.restart();
-	  break;
-	}
-    }
-
-  mWindow->clear();
-  mWindow->draw(titleTxt);
-  mWindow->draw(playTxt);
-  mWindow->draw(paramTxt);
-  mWindow->draw(quitTxt);
-  return true;
+	mWindow->clear();
+	mWindow->draw(titleTxt);
+	mWindow->draw(playTxt);
+	mWindow->draw(paramTxt);
+	mWindow->draw(quitTxt);
+	mWorld.step(0.1);
+	mWorld.render();
+	return true;
 }

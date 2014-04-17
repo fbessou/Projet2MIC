@@ -1,9 +1,9 @@
-
+#include <iostream>
 #include "CandyMath.h"
 #include "CandyWorld.h"
 using namespace Candy;
 
-World::World()
+World::World(sf::RenderTarget * renderTarget): mRenderTarget(renderTarget)
 {
 
 }
@@ -14,15 +14,16 @@ World::~World()
 	//Destroy all actors remaining
 }
 
-void World::step( unsigned int)
+void World::step( unsigned int elapsedTime)
 {
 	//test collision for each Actor
-	for(auto comb = mActors.begin() ; comb != mActors.end() ; comb++)
+	for(auto itActor1 = mActors.begin() ; itActor1 != mActors.end() ; itActor1++)
 	{
-		if(!(*comb)->isGhost())
-		for(auto comb2 = comb; ++comb2 != mActors.end();)
+		(*itActor1)->update(elapsedTime);
+		if(!(*itActor1)->isGhost())
+		for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
 		{
-			testCollision(**comb, **comb2);
+			testCollision(**itActor1, **itActor2);
 		}
 	}
 }
@@ -30,6 +31,14 @@ void World::step( unsigned int)
 void World::addActor(Actor * actor)
 {
 	mActors.insert(actor);
+}
+
+void World::render() const
+{
+	for(auto it = mActors.begin(); it!=mActors.end();it++)
+	{
+		(*it)->draw(*mRenderTarget);
+	}
 }
 
 Actor * World::removeActor(Actor * actor)

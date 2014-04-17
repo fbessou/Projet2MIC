@@ -1,5 +1,6 @@
 #include "CandyActor.h"
 #include <SFML/Window.hpp>
+#include <iostream>
 using namespace Candy;
 
 Actor::Actor(const string type, const Vector & position, const Vector & velocity,const bool & ghost,const bool & visible):
@@ -24,7 +25,7 @@ void Actor::update(unsigned int step)
 
 void Actor::draw(sf::RenderTarget & target)
 {
-	target.draw(*mDrawable,sf::RenderStates::Default);
+	target.draw(*getSprite(),sf::RenderStates::Default);
 }
 
 const Body * Actor::getBody() const
@@ -35,6 +36,13 @@ const Body * Actor::getBody() const
 string Actor::getType() const
 {
 	return mType;
+}
+void Actor::setSprite(sf::Sprite * sprite)
+{
+	mSprite = sprite;
+	//sf::FloatRect * rect = mSprite.getLocalBounds();
+	
+	
 }
 
 const bool& Actor::isVisible() const
@@ -65,7 +73,7 @@ const Vector& Actor::getPosition() const
 void Actor::setPosition(const Vector& position)
 {
 	mPosition = position;
-	//mShape.position = position;
+	mSprite->setPosition(position.x,position.y);
 }
 
 const Vector& Actor::getVelocity() const

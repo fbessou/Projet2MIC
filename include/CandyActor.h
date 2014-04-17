@@ -8,17 +8,13 @@
 namespace Candy
 {
 	class Actor{
-		protected:
+		private:
 			const std::string mType;
 			Vector mPosition;
 			Vector mVelocity;
+			sf::Sprite * mSprite;
 		protected:
 
-			union
-			{
-				sf::Drawable * mDrawable;
-				sf::Transformable * mTransformable;
-			};
 
 			Body * mBody;
 			bool mGhost;
@@ -26,9 +22,12 @@ namespace Candy
 			//bool mSameTypeCollision;
 			virtual ~Actor();
 
+			void setSprite(sf::Sprite * sprite);
+			inline sf::Sprite * getSprite(){return mSprite;}
+
 		public:
 			Actor(const string type, const Vector & position, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
-			void update(unsigned int);
+			virtual void update(unsigned int);
 			void draw(sf::RenderTarget & );
 			
 			const Body * getBody() const;

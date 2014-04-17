@@ -2,6 +2,7 @@
 #define _CANDY_MENU_H_
 #include <string>
 #include "CandyGameState.h"
+#include "CandyWorld.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -38,6 +39,8 @@ namespace Candy
 	sf::Color mActiveColor;
 	sf::Color mInactiveColor;
 	sf::Color mDisabledColor;
+
+	World mWorld;
   };
 };
 #endif

@@ -1,6 +1,7 @@
 #ifndef _CANDY_WORLD_H_
 #define _CANDY_WORLD_H_
 
+#include "SFML/Graphics.hpp"
 #include "CandyCommon.h"
 #include "CandyActor.h"
 #include "CandyBody.h"
@@ -15,6 +16,7 @@ namespace Candy
 			//We choose to make a map with ActorType as key to check if one actor must test collision with others.
 			//std::map<ActorType,std::vector<Actor*>> mActors;
 			std::set<Actor*> mActors;
+			sf::RenderTarget * mRenderTarget;
 			bool _collisionRectangleRectangle(const Actor & a1,const Actor & a2) const;
 			bool _collisionRectangleConvex(const Actor & a1,   const Actor & a2) const ;
 			bool _collisionRectangleCircle(const Actor & a1,   const Actor & a2)const ;
@@ -25,12 +27,13 @@ namespace Candy
 			bool requireCollision(const string & );
 		public:
 
-			World();
+			World(sf::RenderTarget * target);
 			~World();
 			static int registerActorType();
 
 			void update();
 			void addActor(Actor* actor); 
+			void render() const;
 			Actor* removeActor(Actor* actor); //returns the instance removed from the scene. The actor still exists and you are 
 			void step(unsigned int );
 	};

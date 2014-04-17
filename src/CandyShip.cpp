@@ -1,5 +1,6 @@
 #include "CandyShip.h"
 #include "CandyMath.h"
+#include <iostream>
 using namespace Candy;
 
 Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0))
@@ -7,12 +8,19 @@ Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0))
 
 	// mTeam = Team;
 	mMaxLife = maxLife;
-	mDrawable = new sf::CircleShape(10.5,4);
+	sf::Texture * mTexture = new sf::Texture;
+	mTexture->loadFromFile("media/tes.png");
+	mTexture->setSmooth(true);
+	sf::Sprite * sprite = new sf::Sprite();
+	sprite->setTexture(*mTexture);
+	setSprite(sprite);
+	
 
 }
 
 Ship::~Ship()
 {
+	delete mTexture;
 }
 
 void Ship::setLife(unsigned int life)
@@ -28,4 +36,10 @@ unsigned int Ship::getLife()
 void Ship::setMaxLife(unsigned int newMax)
 {
 	mMaxLife = newMax;
+}
+
+void Ship::update(unsigned int t)
+{
+	Actor::update(t);
+	setPosition(getPosition()+Vector(0.01,0));
 }

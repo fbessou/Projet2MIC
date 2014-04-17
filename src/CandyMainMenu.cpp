@@ -1,6 +1,7 @@
 #include "CandyMainMenu.h"
 #include "CandySettings.h"
 #include "CandyShip.h"
+#include "CandyPlay.h"
 
 using namespace Candy;
 using namespace sf;
@@ -69,14 +70,14 @@ bool MainMenu::update(){
 			switch (Selected)
 			{
 				case PLAY:
+					mGame->changeState(new Play(mGame,mWindow));
 					break;
 				case SETTINGS:
-					mGame->changeState(new Settings(mGame, mWindow));
+					mGame->changeState(new Settings(mGame, mWindow,this));
 					break;
 				case QUIT:
 					mGame->quit();
 					break;
-
 			}
 		}
 

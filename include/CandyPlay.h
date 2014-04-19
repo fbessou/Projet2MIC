@@ -2,17 +2,20 @@
 #define _CANDY_PLAY_H_
 
 #include "CandyGameState.h"
+#include "CandyWorld.h"
 #include <SFML/Graphics.hpp>
 
 namespace Candy
 {
   class Play : public GameState
   {
-  public:
+	  protected:
+		World mWorld;
+	  public:
     Play(Game *mgame, sf::RenderWindow *window);
     ~Play();
     void enter();
-    bool update();
+    bool update(const Real &);
     void leave();
   };
 }

@@ -66,7 +66,7 @@ void Game::update()
 {
 		sf::Event event;
 		
-		mCurrentState->update();
+		mCurrentState->update(mSPF);
 
 		while (mWindow->isOpen() && mWindow->pollEvent(event)){
 			if(event.type == sf::Event::Closed)

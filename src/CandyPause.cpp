@@ -54,7 +54,7 @@ void Pause::enter(){
 }
 void Pause::leave(){}
 
-bool Pause::update(){
+bool Pause::update(const Real & timeSinceLastFrame){
 	mWindow->clear();
 	mWindow->draw(returnTxt);
 	mWindow->draw(paramTxt);

@@ -9,7 +9,7 @@ Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0))
 	// mTeam = Team;
 	mMaxLife = maxLife;
 	sf::Texture * mTexture = new sf::Texture;
-	mTexture->loadFromFile("media/tes.png");
+	mTexture->loadFromFile("media/test.png");
 	mTexture->setSmooth(true);
 	sf::Sprite * sprite = new sf::Sprite();
 	sprite->setTexture(*mTexture);
@@ -38,8 +38,10 @@ void Ship::setMaxLife(unsigned int newMax)
 	mMaxLife = newMax;
 }
 
-void Ship::update(unsigned int t)
+void Ship::update(const Real & timeSinceLastFrame)
 {
-	Actor::update(t);
-	setPosition(getPosition()+Vector(0.01,0));
+	Actor::update(timeSinceLastFrame);
+	std::cout.setf( std::ios::fixed, std:: ios::floatfield );
+	std::cout<<timeSinceLastFrame<<std::endl;
+	setPosition(getPosition()+Vector(100.00*timeSinceLastFrame,0));
 }

@@ -18,7 +18,7 @@ namespace Candy
     GameState(Game * game, sf::RenderWindow * window);
     virtual ~GameState(); // Needed to permit polymorphic destruction
     virtual void enter() = 0;
-    virtual bool update() = 0;
+    virtual bool update(const Real & ) = 0;
     virtual void leave() = 0;
 			
   protected:

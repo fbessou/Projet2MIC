@@ -14,7 +14,7 @@ World::~World()
 	//Destroy all actors remaining
 }
 
-void World::step( unsigned int elapsedTime)
+void World::step( const Real & elapsedTime)
 {
 	//test collision for each Actor
 	for(auto itActor1 = mActors.begin() ; itActor1 != mActors.end() ; itActor1++)

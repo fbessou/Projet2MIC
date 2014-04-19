@@ -23,7 +23,7 @@ namespace Candy
 
     sf::Clock mClock;
     unsigned int mFrameCount;
-    float mSPF;
+    Real mSPF;
     sf::Text mFPSText;
     void updateDebug();
 

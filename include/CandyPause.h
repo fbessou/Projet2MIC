@@ -14,7 +14,7 @@ namespace Candy
     Pause(Game *game, sf::RenderWindow *window, Play *gameSession);
     ~Pause();
     void enter();
-    bool update();
+    bool update(const Real & );
     void leave();
 
   private:

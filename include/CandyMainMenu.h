@@ -18,7 +18,7 @@ namespace Candy
     MainMenu(Game * game, sf::RenderWindow * window);
     ~MainMenu();
     void enter();
-    bool update();
+    bool update(const Real &);
     void leave();
   private:
     GameState * newState;

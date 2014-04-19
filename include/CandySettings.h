@@ -17,7 +17,7 @@ namespace Candy
     Settings(Game * game, sf::RenderWindow * window,GameState* previousState);
     ~Settings();
     void enter();
-    bool update();
+    bool update(const Real &);
     void leave();
   private:
     //to remember from where the Settings State was called and to go back to it

@@ -31,11 +31,10 @@ namespace Candy
 			~World();
 			static int registerActorType();
 
-			void update();
 			void addActor(Actor* actor); 
 			void render() const;
 			Actor* removeActor(Actor* actor); //returns the instance removed from the scene. The actor still exists and you are 
-			void step(unsigned int );
+			void step(const Real &  );
 	};
 
 }; // namespace Candy

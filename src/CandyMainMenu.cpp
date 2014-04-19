@@ -1,3 +1,4 @@
+#include <iostream>
 #include "CandyMainMenu.h"
 #include "CandySettings.h"
 #include "CandyShip.h"
@@ -50,7 +51,7 @@ void MainMenu::enter(){}
 void MainMenu::leave(){
 }
 
-bool MainMenu::update(){
+bool MainMenu::update(const Real & timeSinceLastFrame){
 	if (clock.getElapsedTime().asSeconds() > 0.12)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Up))
@@ -109,7 +110,7 @@ bool MainMenu::update(){
 	mWindow->draw(playTxt);
 	mWindow->draw(paramTxt);
 	mWindow->draw(quitTxt);
-	mWorld.step(0.1);
+	mWorld.step(timeSinceLastFrame);
 	mWorld.render();
 	return true;
 }

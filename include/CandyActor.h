@@ -27,7 +27,7 @@ namespace Candy
 
 		public:
 			Actor(const string type, const Vector & position, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
-			virtual void update(unsigned int);
+			virtual void update(const Real & );
 			void draw(sf::RenderTarget & );
 			
 			const Body * getBody() const;

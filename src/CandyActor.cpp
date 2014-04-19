@@ -18,7 +18,7 @@ Actor::~Actor()
 {
 }
 
-void Actor::update(unsigned int step)
+void Actor::update(const Real &  step)
 {
 	setPosition(getPosition()+getVelocity()*step);
 }

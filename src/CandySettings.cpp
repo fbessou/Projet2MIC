@@ -32,7 +32,7 @@ void Settings::enter(){
 }
 void Settings::leave(){}
 
-bool Settings::update(){
+bool Settings::update(const Real & timeSinceLastFrame){
  
   mWindow->clear();
   mWindow->draw(returnTxt);

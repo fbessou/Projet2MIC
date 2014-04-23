@@ -1,9 +1,8 @@
 #include "CandyShip.h"
 #include "CandyMath.h"
-#include <iostream>
 using namespace Candy;
 
-Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0))
+Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0),new Body(Body::Circle{5}))
 {
 
 	// mTeam = Team;
@@ -41,7 +40,5 @@ void Ship::setMaxLife(unsigned int newMax)
 void Ship::update(const Real & timeSinceLastFrame)
 {
 	Actor::update(timeSinceLastFrame);
-	std::cout.setf( std::ios::fixed, std:: ios::floatfield );
-	std::cout<<timeSinceLastFrame<<std::endl;
 	setPosition(getPosition()+Vector(100.00*timeSinceLastFrame,0));
 }

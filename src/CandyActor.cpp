@@ -3,10 +3,11 @@
 #include <iostream>
 using namespace Candy;
 
-Actor::Actor(const string type, const Vector & position, const Vector & velocity,const bool & ghost,const bool & visible):
+Actor::Actor(const string type, const Vector & position,Body * body, const Vector & velocity,const bool & ghost,const bool & visible):
 	mType(type),
 	mPosition(position),
 	mVelocity(velocity),
+	mBody(body),
 	mGhost(ghost),
 	mVisible(visible)
 

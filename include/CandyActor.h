@@ -26,7 +26,7 @@ namespace Candy
 			inline sf::Sprite * getSprite(){return mSprite;}
 
 		public:
-			Actor(const string type, const Vector & position, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
+			Actor(const string type, const Vector & position, Body * body, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
 			virtual void update(const Real & );
 			void draw(sf::RenderTarget & );
 			

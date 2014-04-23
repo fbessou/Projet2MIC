@@ -28,9 +28,10 @@ void World::step( const Real & elapsedTime)
 	}
 }
 
-void World::addActor(Actor * actor)
+Actor * World::addActor(Actor * actor)
 {
 	mActors.insert(actor);
+	return actor;
 }
 
 void World::render() const

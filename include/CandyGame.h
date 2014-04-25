@@ -8,6 +8,7 @@ namespace Candy
 
 #include "CandyCommon.h"
 #include "CandyGameState.h"
+#include "CandyTextureManager.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -20,7 +21,7 @@ namespace Candy
     sf::RenderWindow * mWindow;
     bool hasExited;
     sf::Font mFont;
-
+	TextureManager * mTextureManager;
     sf::Clock mClock;
     unsigned int mFrameCount;
     Real mSPF;
@@ -28,6 +29,8 @@ namespace Candy
     void updateDebug();
 
     sf::Clock clock;
+  protected:
+	void initResources();
   public:
     Game();
     ~Game();

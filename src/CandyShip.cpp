@@ -7,11 +7,8 @@ Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0),ne
 
 	// mTeam = Team;
 	mMaxLife = maxLife;
-	sf::Texture * mTexture = new sf::Texture;
-	mTexture->loadFromFile("media/test.png");
-	mTexture->setSmooth(true);
 	sf::Sprite * sprite = new sf::Sprite();
-	sprite->setTexture(*mTexture);
+	sprite->setTexture(TextureManager::getInstance().getTexture("BlueShip"));
 	setSprite(sprite);
 	
 
@@ -30,6 +27,11 @@ void Ship::setLife(unsigned int life)
 unsigned int Ship::getLife()
 {
 	return mLife;
+}
+
+void Ship::forwardImpulse()
+{
+	
 }
 
 void Ship::setMaxLife(unsigned int newMax)

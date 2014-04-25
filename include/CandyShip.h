@@ -17,6 +17,7 @@ namespace Candy
 			
 			void setMaxLife(unsigned int newMax);
 			virtual void update(const Real & );
+			void forwardImpulse();
 			//void setWeapon();
 			//    Weapon getWeapon();
 		protected:

@@ -1,6 +1,8 @@
 #ifndef _SINGLETON_H_
 #define _SINGLETON_H_
 
+#include <iostream>
+
 namespace Candy{
 	template <typename T>
 	class Singleton
@@ -15,7 +17,8 @@ namespace Candy{
 			};
 			static T & getInstance()
 			{
-				return mInstance;
+				std::cout<<"test"<<std::endl;
+				return *mInstance;
 			}
 	};
 

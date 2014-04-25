@@ -15,7 +15,7 @@ namespace Candy
 			~TextureManager();
 			bool addTexture(std::string name, std::string path,bool =true);
 			bool addTexture(std::string name, sf::Image &, bool = true );
-			sf::Texture * getTexture(std::string name, bool defaultOnFail);
+			sf::Texture & getTexture(std::string name, bool defaultOnFail=true);
 
 
 	};

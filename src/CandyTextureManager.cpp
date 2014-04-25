@@ -24,7 +24,7 @@ bool TextureManager::addTexture(std::string name, std::string path, bool smooth)
 	{
 		if(smooth)
 			newTexture->setSmooth(true);
-		mTextures["name"]=newTexture;
+		mTextures[name]=newTexture;
 		
 		return true;
 	}
@@ -48,10 +48,10 @@ bool TextureManager::addTexture(std::string name, sf::Image & image,bool smooth)
 		return false;
 }
 
-sf::Texture * TextureManager::getTexture(std::string name, bool defaultOnFail)
+sf::Texture & TextureManager::getTexture(std::string name, bool defaultOnFail)
 {
 	auto textureIt = mTextures.find(name); 
 	if(textureIt == mTextures.end())
-		return mErrorTexture;
-	return textureIt->second;
+		return *(mErrorTexture);
+	return *(textureIt->second);
 }

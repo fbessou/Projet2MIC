@@ -19,6 +19,7 @@ Game::Game():mCurrentState(nullptr),hasExited(false),mFrameCount(0),mFPSText()
 	//as the computed fps is smoothed with the previous one at each frame
 	//we set the first value of fps to 60fps
 	mSPF=1.0/60.0;
+	initResources();
 }
 
 Game::~Game()
@@ -77,6 +78,8 @@ void Game::update()
 		
 
 }
+
+
 void Game::updateDebug()
 {
 	mSPF = mSPF*0.5 + mClock.getElapsedTime().asSeconds()*0.5;
@@ -87,6 +90,13 @@ void Game::updateDebug()
 	}
 	mWindow->draw(mFPSText);
 	mClock.restart();
+}
+
+void Game::initResources()
+{
+	mTextureManager = new TextureManager();
+
+	mTextureManager->addTexture("BlueShip","media/test.png");
 }
 
 void Game::quit()

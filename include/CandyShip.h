@@ -21,6 +21,8 @@ namespace Candy
 			//void setWeapon();
 			//    Weapon getWeapon();
 		protected:
+			Real mMaxSpeed;
+			Real mPeakTime;
 			unsigned int mLife;
 			unsigned int mMaxLife;
 			sf::Texture * mTexture;

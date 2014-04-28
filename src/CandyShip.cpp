@@ -7,6 +7,8 @@ Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0),ne
 
 	// mTeam = Team;
 	mMaxLife = maxLife;
+	mMaxSpeed=50;
+	mPeakTime=1.2;
 	sf::Sprite * sprite = new sf::Sprite();
 	sprite->setTexture(TextureManager::getInstance().getTexture("BlueShip"));
 	setSprite(sprite);
@@ -31,7 +33,6 @@ unsigned int Ship::getLife()
 
 void Ship::forwardImpulse()
 {
-	
 }
 
 void Ship::setMaxLife(unsigned int newMax)
@@ -41,6 +42,17 @@ void Ship::setMaxLife(unsigned int newMax)
 
 void Ship::update(const Real & timeSinceLastFrame)
 {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		move(Vector(0,timeSinceLastFrame*120),TS_LOCAL);
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		rotate(-timeSinceLastFrame*300);
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		rotate(timeSinceLastFrame*300);
+	}
 	Actor::update(timeSinceLastFrame);
-	setPosition(getPosition()+Vector(100.00*timeSinceLastFrame,0));
 }

@@ -41,6 +41,10 @@ string Actor::getType() const
 void Actor::setSprite(sf::Sprite * sprite)
 {
 	mSprite = sprite;
+	sf::FloatRect rect = sprite->getLocalBounds();
+	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
+	sprite->setOrigin(center);
+
 	//sf::FloatRect * rect = mSprite.getLocalBounds();
 	
 	
@@ -87,8 +91,32 @@ void Actor::setVelocity(const Vector& velocity)
 	mVelocity = velocity;
 	//mShape.velocity = velocity;
 }
+void Actor::move(const Vector & translation, const TransformSpace & ts)
+{
+		
+	sf::Vector2f tmp = mSprite->getPosition();
+	switch(ts)
+	{
+		case TS_WORLD:
+			mSprite->move(translation.x,translation.y);
+			break;
+		case TS_LOCAL:
+			sf::Transform localTransform = sf::Transform::Identity;
+			localTransform.rotate(mSprite->getRotation());
+			mSprite->move(localTransform.transformPoint(translation.x,translation.y));
+	}
+	tmp = mSprite->getPosition();
+	mPosition= {tmp.x,tmp.y};
+}
+
+void Actor::rotate(const Real & angle)
+{
+	mSprite->rotate(angle);
+}
 
 void Actor::onCollision(Actor* actor)
 {
 
 }
+
+

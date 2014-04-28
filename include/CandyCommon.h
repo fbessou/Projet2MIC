@@ -10,5 +10,11 @@ typedef double Real;
 typedef float Real;
 #endif
 
+enum TransformSpace
+{
+	TS_WORLD,
+	TS_LOCAL
+};
+
 };	
 #endif

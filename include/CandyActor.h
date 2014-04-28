@@ -11,11 +11,11 @@ namespace Candy
 		private:
 			const std::string mType;
 			Vector mPosition;
-			Vector mVelocity;
 			sf::Sprite * mSprite;
 		protected:
 
 
+			Vector mVelocity;
 			Body * mBody;
 			bool mGhost;
 			bool mVisible;
@@ -46,6 +46,9 @@ namespace Candy
 
 			const Vector& getVelocity() const;
 			void setVelocity(const Vector&);
+
+			void move(const Vector&, const TransformSpace & = TS_WORLD);
+			void rotate(const Real & angle);
 
 			virtual void onCollision(Actor * actor);
 			

@@ -95,6 +95,10 @@ void Game::updateDebug()
 void Game::initResources()
 {
 	mTextureManager = new TextureManager();
+	sf::Texture * tex;
+	tex = mTextureManager->addTexture("NightSky","media/sky.png");
+	tex->setRepeated(true);
+
 
 	mTextureManager->addTexture("BlueShip","media/test.png");
 	mTextureManager->addTexture("Bullet","media/projectile.png");

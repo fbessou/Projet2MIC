@@ -17,7 +17,7 @@ TextureManager::~TextureManager()
 	}
 }
 
-bool TextureManager::addTexture(std::string name, std::string path, bool smooth)
+sf::Texture * TextureManager::addTexture(std::string name, std::string path, bool smooth)
 {
 	sf::Texture * newTexture = new sf::Texture;
 	if(newTexture->loadFromFile(path))
@@ -26,13 +26,13 @@ bool TextureManager::addTexture(std::string name, std::string path, bool smooth)
 			newTexture->setSmooth(true);
 		mTextures[name]=newTexture;
 		
-		return true;
+		return newTexture;
 	}
 	else
-		return false;
+		return nullptr;
 }
 
-bool TextureManager::addTexture(std::string name, sf::Image & image,bool smooth)
+sf::Texture *  TextureManager::addTexture(std::string name, sf::Image & image,bool smooth)
 {
 	sf::Texture * newTexture = new sf::Texture;
 
@@ -42,10 +42,10 @@ bool TextureManager::addTexture(std::string name, sf::Image & image,bool smooth)
 			newTexture->setSmooth(true);
 		mTextures["name"]=newTexture;
 		
-		return true;
+		return newTexture;
 	}
 	else
-		return false;
+		return nullptr;
 }
 
 sf::Texture & TextureManager::getTexture(std::string name, bool defaultOnFail)

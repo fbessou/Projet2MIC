@@ -9,6 +9,8 @@ namespace Candy
 {
   class Play : public GameState
   {
+	  private:
+	  sf::Sprite  mBackground;
 	  protected:
 		World mWorld;
 	  public:

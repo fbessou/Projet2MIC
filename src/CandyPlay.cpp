@@ -8,6 +8,8 @@ using namespace sf;
 Play::Play(Game * game, RenderWindow * window):
 	GameState(game,window),mWorld(window)
 {
+	mBackground.setTexture(TextureManager::getInstance().getTexture("NightSky"));
+	mBackground.setTextureRect(IntRect(0,0,800,600));
 	mWorld.addActor(new Ship(100));
 }
 
@@ -28,6 +30,7 @@ bool Play::update(const Real & timeSinceLastFrame){
 		mGame->changeState(new Pause(mGame,mWindow,this));
 	}
 	mWorld.step(timeSinceLastFrame);
+	mWindow->draw(mBackground);
 	mWorld.render();
 
 	return true;

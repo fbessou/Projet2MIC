@@ -97,6 +97,7 @@ void Game::initResources()
 	mTextureManager = new TextureManager();
 
 	mTextureManager->addTexture("BlueShip","media/test.png");
+	mTextureManager->addTexture("Bullet","media/projectile.png");
 }
 
 void Game::quit()

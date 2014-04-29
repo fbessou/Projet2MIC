@@ -5,23 +5,27 @@ using namespace Candy;
 
 Actor::Actor(const string type, const Vector & position,Body * body, const Vector & velocity,const bool & ghost,const bool & visible):
 	mType(type),
-	mPosition(position),
+	mSprite(new sf::Sprite()),
 	mVelocity(velocity),
 	mBody(body),
 	mGhost(ghost),
 	mVisible(visible)
 
 {
-	
+	setPosition(position);
 }
 
 Actor::~Actor()
 {
 }
+void Actor::_onOwnerChanged(World * owner)
+{
+	mWorld=owner;
+}
 
 void Actor::update(const Real &  step)
 {
-	setPosition(getPosition()+getVelocity()*step);
+	move(getVelocity()*step);
 }
 
 void Actor::draw(sf::RenderTarget & target)
@@ -38,18 +42,17 @@ string Actor::getType() const
 {
 	return mType;
 }
-void Actor::setSprite(sf::Sprite * sprite)
-{
-	mSprite = sprite;
-	sf::FloatRect rect = sprite->getLocalBounds();
-	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
-	sprite->setOrigin(center);
 
-	//sf::FloatRect * rect = mSprite.getLocalBounds();
+void Actor::setTexture(const sf::Texture & texture)
+{
+	mSprite->setTexture(texture);
+	sf::FloatRect rect = mSprite->getLocalBounds();
+	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
+	mSprite->setOrigin(center);
+
 	
 	
 }
-
 const bool& Actor::isVisible() const
 {
 	return mVisible;
@@ -81,6 +84,7 @@ void Actor::setPosition(const Vector& position)
 	mSprite->setPosition(position.x,position.y);
 }
 
+
 const Vector& Actor::getVelocity() const
 {
 	return mVelocity;
@@ -89,7 +93,6 @@ const Vector& Actor::getVelocity() const
 void Actor::setVelocity(const Vector& velocity)
 {
 	mVelocity = velocity;
-	//mShape.velocity = velocity;
 }
 void Actor::move(const Vector & translation, const TransformSpace & ts)
 {
@@ -109,10 +112,24 @@ void Actor::move(const Vector & translation, const TransformSpace & ts)
 	mPosition= {tmp.x,tmp.y};
 }
 
-void Actor::rotate(const Real & angle)
+void Actor::rotate(const Real & angle,const Math::AngleMode & mode)
 {
-	mSprite->rotate(angle);
+	
+	mSprite->rotate(mode == Math::DEGREE ? angle : angle * Math::PI/180);
 }
+
+Real Actor::getRotation(const Math::AngleMode & mode)
+{
+	return (mode == Math::DEGREE ? mSprite->getRotation(): mSprite->getRotation()*Math::PI/180);
+}
+
+Vector Actor::getDirectionVector()
+{
+	Real rot = getRotation(Math::RADIAN);
+	Vector v(cos(rot),sin(rot));
+	return v;
+};
+
 
 void Actor::onCollision(Actor* actor)
 {

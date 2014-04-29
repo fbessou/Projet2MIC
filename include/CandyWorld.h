@@ -3,6 +3,10 @@
 
 #include "SFML/Graphics.hpp"
 #include "CandyCommon.h"
+namespace Candy
+{
+	class World;
+}
 #include "CandyActor.h"
 #include "CandyBody.h"
 #include <set>

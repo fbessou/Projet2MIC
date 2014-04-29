@@ -1,5 +1,6 @@
 #include "CandyShip.h"
 #include "CandyMath.h"
+#include "CandyBullet.h"
 using namespace Candy;
 
 Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0),new Body(Body::Circle{5}))
@@ -9,9 +10,8 @@ Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0),ne
 	mMaxLife = maxLife;
 	mMaxSpeed=50;
 	mPeakTime=1.2;
-	sf::Sprite * sprite = new sf::Sprite();
-	sprite->setTexture(TextureManager::getInstance().getTexture("BlueShip"));
-	setSprite(sprite);
+	
+	setTexture(TextureManager::getInstance().getTexture("BlueShip"));
 	
 
 }
@@ -44,7 +44,7 @@ void Ship::update(const Real & timeSinceLastFrame)
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		move(Vector(0,timeSinceLastFrame*120),TS_LOCAL);
+		move(Vector(timeSinceLastFrame*120,0),TS_LOCAL);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
@@ -52,7 +52,12 @@ void Ship::update(const Real & timeSinceLastFrame)
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		rotate(timeSinceLastFrame*300);
+		rotate(timeSinceLastFrame*360);
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		mWorld->addActor(new Bullet(getPosition(),getDirectionVector()*1000));
 	}
 	Actor::update(timeSinceLastFrame);
+
 }

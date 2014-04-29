@@ -9,7 +9,6 @@ Play::Play(Game * game, RenderWindow * window):
 	GameState(game,window),mWorld(window)
 {
 	mWorld.addActor(new Ship(100));
-	mWorld.addActor(new Ship(1000));
 }
 
 Play::~Play(){}

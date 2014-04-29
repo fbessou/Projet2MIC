@@ -31,6 +31,7 @@ void World::step( const Real & elapsedTime)
 Actor * World::addActor(Actor * actor)
 {
 	mActors.insert(actor);
+	actor->_onOwnerChanged(this);
 	return actor;
 }
 

@@ -12,6 +12,7 @@ namespace Candy
 		public:
 			Real x,y;
 		public:
+			Vector();
 			Vector(const Real & ,const Real &);
 			~Vector();
 
@@ -51,6 +52,13 @@ namespace Candy
 	  int min(int val1, int val2);
 	  int max(int val1, int val2);
 	  int clamp(int val, int min, int max);
+
+	  const Real PI=3.14159263358979;
+	  enum AngleMode
+	  {
+		  DEGREE,
+		  RADIAN
+	  };
 	};
 
 };

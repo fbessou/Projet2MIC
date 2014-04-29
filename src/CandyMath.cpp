@@ -2,14 +2,15 @@
 #include <cmath>
 #include <ostream>
 #include <sstream>
+#include <iostream>
 using namespace Candy;
 
 const Vector Vector::UNIT_X(1.0, 0.0);
 const Vector Vector::UNIT_Y(0.0, 1.0);
 
+Vector::Vector(): x(0), y(0){}
 Vector::Vector(const Real & _x, const Real & _y): x(_x), y(_y){}
 Vector::~Vector(){}
-
 bool Vector::isNormalised() const {
   return length()==1;
 }

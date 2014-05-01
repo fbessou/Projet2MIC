@@ -40,7 +40,7 @@ void Ship::setMaxLife(unsigned int newMax)
 	mMaxLife = newMax;
 }
 
-void Ship::update(const Real & timeSinceLastFrame)
+bool Ship::update(const Real & timeSinceLastFrame)
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -48,7 +48,7 @@ void Ship::update(const Real & timeSinceLastFrame)
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		rotate(-timeSinceLastFrame*300);
+		rotate(-timeSinceLastFrame*360);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
@@ -59,5 +59,5 @@ void Ship::update(const Real & timeSinceLastFrame)
 		mWorld->addActor(new Bullet(getPosition(),getDirectionVector()*1000));
 	}
 	Actor::update(timeSinceLastFrame);
-
+	return true;
 }

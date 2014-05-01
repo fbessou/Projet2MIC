@@ -17,7 +17,6 @@ namespace Candy{
 			};
 			static T & getInstance()
 			{
-				std::cout<<"test"<<std::endl;
 				return *mInstance;
 			}
 	};

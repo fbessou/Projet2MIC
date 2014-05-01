@@ -1,7 +1,10 @@
 #include "CandyPlay.h"
 #include "CandyPause.h"
 #include "CandyShip.h"
+#include "CandyBonus.h"
 #include "CandyWorld.h"
+
+
 using namespace Candy;
 using namespace sf;
 
@@ -28,6 +31,11 @@ bool Play::update(const Real & timeSinceLastFrame){
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		mGame->changeState(new Pause(mGame,mWindow,this));
+	}
+	else if(Keyboard::isKeyPressed(Keyboard::A))
+	{
+		auto func = Math::IntURNG::randomByte;
+		mWorld.addActor(new Bonus(Vector(func(),func()),sf::Color((*func)(),(*func)(),(*func)(),255)));
 	}
 	mWorld.step(timeSinceLastFrame);
 	mWindow->draw(mBackground);

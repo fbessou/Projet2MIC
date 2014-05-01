@@ -6,10 +6,12 @@ namespace Candy
 {
 	class Bullet : public Actor
 	{
+		protected:
+			Real mTimeToLive;
 		public:
 			Bullet(const Vector & , const Vector & );
 			~Bullet();
-		private:
+			virtual bool update(const Real & ) override;
 	};
 };
 #endif

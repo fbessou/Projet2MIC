@@ -23,9 +23,10 @@ void Actor::_onOwnerChanged(World * owner)
 	mWorld=owner;
 }
 
-void Actor::update(const Real &  step)
+bool Actor::update(const Real &  step)
 {
 	move(getVelocity()*step);
+	return true;
 }
 
 void Actor::draw(sf::RenderTarget & target)

@@ -16,26 +16,26 @@ namespace Candy
 		private:
 			const std::string mType;
 			Vector mPosition;
-			sf::Sprite * mSprite;
 		protected:
+			sf::Sprite * mSprite;
 			World * mWorld;
 			Vector mVelocity;
 			Body * mBody;
 			bool mGhost;
 			bool mVisible;
 			//bool mSameTypeCollision;
-			virtual ~Actor();
 
 			void setTexture(const sf::Texture & texture);
 			inline sf::Sprite * getSprite(){return mSprite;}
 
 		public:
 			Actor(const string type, const Vector & position, Body * body, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
+			virtual ~Actor();
 
 			void _onOwnerChanged(World * owner );
 
 
-			virtual void update(const Real & );
+			virtual bool update(const Real & );
 
 			void draw(sf::RenderTarget & );
 			

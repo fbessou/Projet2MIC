@@ -130,3 +130,5 @@ int Math::clamp(int val, int min, int max)
 {
   return Math::max(Math::min(val,max),min);
 }
+Math::IntURNG Math::IntURNG::random0_255(0,255);
+Math::RealURNG Math::RealURNG::random0_1(0,1);

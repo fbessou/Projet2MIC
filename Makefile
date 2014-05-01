@@ -6,7 +6,7 @@ INCDIR=include
 CFLAGS= -I$(INCDIR) -I./SFML-2.1/include -std=c++0x -Wall -g -ggdb
 LDFLAGS= -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-network
 DEPS=
-OBJFILES=CandyGame.o CandyMainMenu.o CandyBody.o CandyMath.o main.o CandyGameState.o CandyWorld.o CandyActor.o CandySettings.o CandyShip.o CandyPlay.o CandyPause.o CandyTextureManager.o CandyBullet.o
+OBJFILES=CandyGame.o CandyMainMenu.o CandyBody.o CandyMath.o main.o CandyGameState.o CandyWorld.o CandyActor.o CandySettings.o CandyShip.o CandyPlay.o CandyPause.o CandyTextureManager.o CandyBullet.o CandyBonus.o
 OBJ=$(patsubst %,$(OBJDIR)/%,$(OBJFILES))
 
 all: $(TARGET)

@@ -17,14 +17,23 @@ World::~World()
 void World::step( const Real & elapsedTime)
 {
 	//test collision for each Actor
-	for(auto itActor1 = mActors.begin() ; itActor1 != mActors.end() ; itActor1++)
+	for(auto itActor1 = mActors.begin() ; itActor1 != mActors.end() ;)
 	{
-		(*itActor1)->update(elapsedTime);
-		if(!(*itActor1)->isGhost())
-		for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
+		if((*itActor1)->update(elapsedTime))
 		{
-			testCollision(**itActor1, **itActor2);
+			if(!(*itActor1)->isGhost())
+			for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
+			{
+				testCollision(**itActor1, **itActor2);
+			}
+			itActor1++;
 		}
+		else
+		{
+			delete (*itActor1);
+			itActor1=mActors.erase(itActor1);
+		}
+			
 	}
 }
 

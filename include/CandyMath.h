@@ -2,7 +2,7 @@
 #define _CANDY_MATH_H_
 
 #include "CandyCommon.h"
-
+#include <random>
 #include <ostream>
 
 namespace Candy
@@ -45,20 +45,47 @@ namespace Candy
 
 	namespace Math
 	{
-	  Real min(Real val1, Real val2);
-	  Real max(Real val1, Real val2);
-	  Real clamp(Real val, Real min, Real max);
-	  
-	  int min(int val1, int val2);
-	  int max(int val1, int val2);
-	  int clamp(int val, int min, int max);
+		Real min(Real val1, Real val2);
+		Real max(Real val1, Real val2);
+		Real clamp(Real val, Real min, Real max);
 
-	  const Real PI=3.14159263358979;
-	  enum AngleMode
-	  {
-		  DEGREE,
-		  RADIAN
-	  };
+		int min(int val1, int val2);
+		int max(int val1, int val2);
+		int clamp(int val, int min, int max);
+
+		const Real PI=3.14159263358979;
+
+		enum AngleMode
+		{
+			DEGREE,
+			RADIAN
+		};
+
+		class RealURNG
+		{
+			private:
+				std::random_device rd;
+				std::mt19937 mSeed;
+				std::uniform_real_distribution<Real> mDistribution;
+				static RealURNG random0_1;
+			public:
+				RealURNG(Real min, Real max):rd(), mSeed(rd()),mDistribution(min,max){}
+				Real operator()(){return mDistribution(mSeed);}
+				static Real normalised(){return random0_1();}
+		};
+
+		class IntURNG
+		{
+			private:
+				std::random_device rd;
+				std::mt19937 mSeed;
+				std::uniform_int_distribution<> mDistribution;
+				static IntURNG random0_255;
+			public:
+				IntURNG(int min, int max):rd(), mSeed(rd()),mDistribution(min,max){}
+				int operator()(){return mDistribution(mSeed);}
+				static int randomByte(){return random0_255();}
+		};
 	};
 
 };

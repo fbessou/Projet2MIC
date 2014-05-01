@@ -56,6 +56,7 @@ void Pause::leave(){}
 
 bool Pause::update(const Real & timeSinceLastFrame){
 	mWindow->clear();
+	mGameSession->update(0);
 	mWindow->draw(returnTxt);
 	mWindow->draw(paramTxt);
 	mWindow->draw(exitGameTxt);

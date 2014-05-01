@@ -20,6 +20,8 @@ namespace Candy
     virtual void enter() = 0;
     virtual bool update(const Real & ) = 0;
     virtual void leave() = 0;
+	virtual void onLostFocus();
+	virtual void onGainFocus();
 			
   protected:
     sf::RenderWindow * mWindow;

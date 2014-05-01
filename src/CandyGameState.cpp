@@ -9,3 +9,13 @@ GameState::GameState(Game * game, RenderWindow * window):mWindow(window),mGame(g
 }
 GameState::~GameState(){
 }
+
+void GameState::onLostFocus()
+{
+	
+}
+
+void GameState::onGainFocus()
+{
+
+}

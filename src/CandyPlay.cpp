@@ -48,3 +48,8 @@ bool Play::update(const Real & timeSinceLastFrame){
 
 	return true;
 }
+
+void Play::onLostFocus()
+{
+		mGame->changeState(new Pause(mGame,mWindow,this));
+}

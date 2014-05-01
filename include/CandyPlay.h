@@ -16,9 +16,12 @@ namespace Candy
 	  public:
     Play(Game *mgame, sf::RenderWindow *window);
     ~Play();
-    void enter();
-    bool update(const Real &);
-    void leave();
+    void enter() override;
+    bool update(const Real &) override;
+    void leave() override;
+
+	void onLostFocus() override;
+	
   };
 }
 

@@ -69,13 +69,19 @@ void Game::update()
 		
 		mCurrentState->update(mSPF);
 
-		while (mWindow->isOpen() && mWindow->pollEvent(event)){
-			if(event.type == sf::Event::Closed)
+		while (mWindow->isOpen() && mWindow->pollEvent(event) && !hasExited){
+			switch(event.type)
 			{
-				hasExited=true;
+				case sf::Event::Closed:
+					hasExited=true; //end the app
+					break;
+				case sf::Event::LostFocus:
+					mCurrentState->onLostFocus(); //mainly used to enter pause in game
+					break;
+				default:
+					break;
 			}
 		}
-		
 
 }
 

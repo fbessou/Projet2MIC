@@ -10,7 +10,6 @@ using namespace sf;
 MainMenu::MainMenu(Game * game, RenderWindow * window):
 	GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40),mWorld(mWindow)
 {
-	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Menu~");
 	mActiveColor=Color::White;
 	mInactiveColor=Color(150,150,150);
 	mDisabledColor=Color(90,90,90);
@@ -47,7 +46,9 @@ MainMenu::~MainMenu()
 {
 }
 
-void MainMenu::enter(){}
+void MainMenu::enter(){
+	mWindow->setTitle("Candy Saga ~Menu~");
+}
 void MainMenu::leave(){
 }
 

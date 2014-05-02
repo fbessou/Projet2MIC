@@ -50,7 +50,7 @@ Pause::~Pause()
 }
 
 void Pause::enter(){
-	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~Pause~");
+	mWindow->setTitle("Candy Saga ~Pause~");
 }
 void Pause::leave(){}
 

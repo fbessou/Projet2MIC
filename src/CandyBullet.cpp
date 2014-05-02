@@ -2,13 +2,12 @@
 #include "CandyBullet.h"
 #include <iostream>
 using namespace Candy;
-Bullet::Bullet(const Vector & position, const Vector & velocity):Actor("Bullet", position,new Body(Body::Circle{5}),velocity),mTimeToLive(3)
+Bullet::Bullet(const Vector & position, const Vector & velocity):Actor("Bullet", position,new Body(Body::Circle{5}),velocity),mTimeToLive(1)
 {
 	setTexture(TextureManager::getInstance().getTexture("Bullet"));
 }
 Bullet::~Bullet()
 {
-	std::cout<<"Bullet destroyed"<<std::endl;
 }
 
 bool Bullet::update( const Real & t)

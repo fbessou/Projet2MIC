@@ -22,7 +22,7 @@ Play::~Play(){}
 
 void Play::enter(){
 	/* On redefini le titre */
-	mWindow->setTitle("Candy Saga 3 Le Retour des Caries ~The Main Game~");
+	mWindow->setTitle("Candy Saga");
 }
 
 void Play::leave(){}

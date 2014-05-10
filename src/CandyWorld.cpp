@@ -97,6 +97,18 @@ bool World::testCollision(const Actor& actor1,const Actor & actor2)
 	return true;
 }
 
+Vector support(const Actor & a1, const Actor & a2, Vector d)
+{
+	struct Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
+	struct Body::ConvexHull hull2 = a2.getBody()->getConvexHull();
+	Vector p1 = hull1.getFarthestPoint(d);
+	Vector p2 = hull2.getFarthestPoint(d.negative());
+
+	Vector result = p1-p2;
+
+	return result;
+}
+
 bool World::_collisionRectangleRectangle(const Actor & a1,const Actor & a2) const
 {
 	return true;

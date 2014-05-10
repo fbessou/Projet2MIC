@@ -25,6 +25,9 @@ namespace Candy
 			struct ConvexHull
 			{
 				std::vector<Vector> pointList;
+
+				// access to the farthest point in a given direction
+				Vector getFarthestPoint(Vector d);
 			};
 
 			enum Type

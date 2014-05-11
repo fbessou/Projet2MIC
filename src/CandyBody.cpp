@@ -54,8 +54,6 @@ const Body::ConvexHull & Body::getConvexHull() const
 	return mHull;
 }
 
-
-
 Vector Body::ConvexHull::getFarthestPoint(Vector d)
 {
 	Vector result=pointList[0];
@@ -71,4 +69,9 @@ Vector Body::ConvexHull::getFarthestPoint(Vector d)
 		}
 	}
 	return result;
+}
+
+Vector Body::ConvexHull::getLast()
+{
+	return pointList.back();
 }

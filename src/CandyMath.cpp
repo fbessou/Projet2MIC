@@ -37,6 +37,12 @@ Vector::operator std::string() const
 	return ss.str();
 }
 
+void Vector::negate()
+{
+	x=-x;
+	y=-y;
+}
+
 Vector Vector::operator+(const Vector & v) const {
   return {x+v.x, y+v.y};
 }
@@ -55,6 +61,11 @@ Vector Candy::operator*(const Real & r, const Vector & v)
   return {r*v.x, r*v.y};
 }
 
+Real Candy::dot(const Vector & vect1,const Vector & vect2)
+{
+	return vect1.x*vect2.x+vect1.y*vect2.y;
+}
+
 Vector Vector::operator/(const Real & r) const
 {
   return {x/r, y/r};
@@ -66,7 +77,6 @@ const Vector & Vector::operator=(const Vector & vect)
 	y=vect.y;
 	return *this;
 }
-
 
 const Vector & Vector::operator+=(const Vector & vect)
 {
@@ -94,6 +104,16 @@ const Vector & Vector::operator/=(const Real & k)
 	x/=k;
 	y/=k;
 	return *this;
+}
+
+bool Vector::operator==(const Vector & vect)
+{
+	return (x==vect.x && y==vect.y);
+}
+
+bool Vector::operator<(const Vector & vect)
+{
+	return (x<vect.x) || (y<vect.y);
 }
 
 std::ostream& Candy::operator<<(std::ostream& stream, const Vector& v){

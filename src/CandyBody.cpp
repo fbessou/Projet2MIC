@@ -54,3 +54,34 @@ const Body::ConvexHull & Body::getConvexHull() const
 	return mHull;
 }
 
+Vector Body::ConvexHull::getFarthestPoint(Vector d)
+{
+	Vector result=pointList[0];
+	Real farthestDistance=dot(pointList[0],d);
+	Real tmp;
+	for (auto row:pointList)
+	{
+		tmp=dot(row,d);
+		if (tmp>farthestDistance)
+		{
+			farthestDistance=tmp;
+			result=row;
+		}
+	}
+	return result;
+}
+
+void Body::ConvexHull::addPoint(Vector p)
+{
+	pointList.push_back(p);
+}
+
+Vector Body::ConvexHull::getLast()
+{
+	return pointList.back();
+}
+
+void Body::ConvexHull::delFirst()
+{
+	pointList.erase(pointList.begin());
+}

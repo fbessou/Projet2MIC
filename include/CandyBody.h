@@ -28,6 +28,14 @@ namespace Candy
 
 				// access to the farthest point in a given direction
 				Vector getFarthestPoint(Vector d);
+
+				// add point to the end of the list
+				void addPoint(Vector p);
+				// get the lastly added point
+				Vector getLast();
+				
+				//delete the firstly added point
+				void delFirst();
 			};
 
 			enum Type

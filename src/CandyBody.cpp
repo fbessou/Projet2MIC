@@ -71,7 +71,17 @@ Vector Body::ConvexHull::getFarthestPoint(Vector d)
 	return result;
 }
 
+void Body::ConvexHull::addPoint(Vector p)
+{
+	pointList.push_back(p);
+}
+
 Vector Body::ConvexHull::getLast()
 {
 	return pointList.back();
+}
+
+void Body::ConvexHull::delFirst()
+{
+	pointList.erase(pointList.begin());
 }

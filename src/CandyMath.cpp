@@ -36,9 +36,10 @@ Vector::operator std::string() const
 	return ss.str();
 }
 
-Vector Vector::negative() const
+void Vector::negate()
 {
-	return {-x,-y};
+	x=-x;
+	y=-y;
 }
 
 Vector Vector::operator+(const Vector & v) const {
@@ -76,7 +77,6 @@ const Vector & Vector::operator=(const Vector & vect)
 	return *this;
 }
 
-
 const Vector & Vector::operator+=(const Vector & vect)
 {
 	x+=vect.x;
@@ -103,6 +103,11 @@ const Vector & Vector::operator/=(const Real & k)
 	x/=k;
 	y/=k;
 	return *this;
+}
+
+const Vector & Vector::operator-()
+{
+	return {-x, -y};
 }
 
 bool Vector::operator==(const Vector & vect)

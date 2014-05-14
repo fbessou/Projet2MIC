@@ -116,7 +116,13 @@ Vector Body::ConvexHull::getLast()
 	return pointList.back();
 }
 
-void Body::ConvexHull::delFirst()
+void Body::ConvexHull::remove(const Vector p)
 {
-	pointList.erase(pointList.begin());
+	for (auto row=pointList.begin(); row!=pointList.end(); row++)
+	{
+		if (*row==p)
+		{
+			row=pointList.erase(row);
+		}
+	}
 }

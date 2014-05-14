@@ -33,10 +33,13 @@ namespace Candy
 				// add point to the end of the list
 				void addPoint(Vector p);
 				// get the lastly added point
+				// to use for collision
 				Vector getLast();
-				
+				Vector getB();
+				Vector getC();
+
 				//delete the firstly added point
-				void delFirst();
+				void remove(const Vector p);
 			};
 
 			enum Type

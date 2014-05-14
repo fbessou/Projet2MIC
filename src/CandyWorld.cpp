@@ -111,6 +111,26 @@ bool World::testCollision(const Actor& actor1,const Actor & actor2)
 	return true;
 }
 
+// function that will return an edge from the difference between two shape in a given direction
+Vector support(const Actor & a1, const Actor & a2, Vector d)
+{
+	struct Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
+	struct Body::ConvexHull hull2 = a2.getBody()->getConvexHull();
+	Vector p1 = hull1.getFarthestPoint(d);
+	//Vector p2 = hull2.getFarthestPoint(-d);
+
+	//Vector result = p1-p2;
+
+	//return result;
+	return {0,0};
+}
+
+// function that looks if a point is included in a ConvexHull in a given direction
+bool contains(Body::ConvexHull Simplex, Vector point, Vector d)
+{
+	return true;
+}
+
 bool World::_collisionRectangleRectangle(const Actor & a1,const Actor & a2) const
 {
 	return true;
@@ -134,7 +154,43 @@ bool World::_collisionCircleCircle(const Actor & a1,      const Actor & a2)const
 	sqSumOfRadius*=sqSumOfRadius;
 	return sqDist<=sqSumOfRadius;
 }
-bool World::_collisionConvexConvex(const Actor & a1,      const Actor & a2)const 
+/*
+// see if the Simplex contains the point p
+bool contains(Vector<Vector> Simplex, Vector d, Vector p)
 {
+	Vector a = Simplex.getLast();
+
 	return true;
+}*/
+
+bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const 
+{
+	//on décide d'une direction arbitrairement
+	Vector d={0,1};
+
+	Body::ConvexHull Simplex;
+
+	//ajout d'un sommet dans une direction
+	Simplex.addPoint(support(a1,a2,d));
+
+	//inverser la direction pour trouver un sommet dans l'autre direction
+	d.negate();
+
+	while (true)
+	{
+		Simplex.addPoint(support(a1,a2,d));
+		if (dot(d,Simplex.getLast()) <= 0)
+		{
+			return false;
+		}else{
+		/*	if (Simplex.contains({0,0})
+			{
+				return true;
+			}else{
+				d = getDirection(Simplex);
+			}*/
+		}
+
+	return true;
+	}
 }

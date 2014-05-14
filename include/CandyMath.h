@@ -32,11 +32,17 @@ namespace Candy
 			const Vector & operator*=(const Real &);
 			const Vector & operator/=(const Real &);
 			Vector directOrthogonal() const;
+			const Vector & operator-();
+			bool operator==(const Vector &);
+			bool operator<(const Vector &);
 			//Real angleBetween(Vec)
 			Real length() const; // return the magnitude of the vector
 			Real squaredLength() const; // return the squared magnitude of the vector (much faster)
 			operator std::string() const;
 			operator sf::Vector2f()const;
+
+			//negate a Vector
+			void negate();
 		public:
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;
@@ -44,6 +50,8 @@ namespace Candy
 	//pour la commutativité, on place les opérateur
 	Vector operator*(const Real &,const Vector &);
 	Vector operator*(const Vector & , const Real &);
+	//produit scalaire entre deux vecteurs de dimension 2
+	Real dot(const Vector &, const Vector &);
 
 	std::ostream& operator<<(std::ostream& stream, const Vector& v);
 

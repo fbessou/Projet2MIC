@@ -103,11 +103,12 @@ Vector support(const Actor & a1, const Actor & a2, Vector d)
 	struct Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
 	struct Body::ConvexHull hull2 = a2.getBody()->getConvexHull();
 	Vector p1 = hull1.getFarthestPoint(d);
-	Vector p2 = hull2.getFarthestPoint(-d);
+	//Vector p2 = hull2.getFarthestPoint(-d);
 
-	Vector result = p1-p2;
+	//Vector result = p1-p2;
 
-	return result;
+	//return result;
+	return {0,0};
 }
 
 // function that looks if a point is included in a ConvexHull in a given direction

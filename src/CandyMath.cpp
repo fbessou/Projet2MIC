@@ -105,11 +105,6 @@ const Vector & Vector::operator/=(const Real & k)
 	return *this;
 }
 
-const Vector & Vector::operator-()
-{
-	return {-x, -y};
-}
-
 bool Vector::operator==(const Vector & vect)
 {
 	return (x==vect.x && y==vect.y);

@@ -112,21 +112,20 @@ bool World::testCollision(const Actor& actor1,const Actor & actor2)
 }
 
 // function that will return an edge from the difference between two shape in a given direction
-Vector support(const Actor & a1, const Actor & a2, Vector d)
+Vector support(const Actor & a1, const Actor & a2, const Vector d)
 {
 	struct Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
 	struct Body::ConvexHull hull2 = a2.getBody()->getConvexHull();
 	Vector p1 = hull1.getFarthestPoint(d);
-	//Vector p2 = hull2.getFarthestPoint(-d);
+	Vector p2 = hull2.getFarthestPoint(-d);
 
-	//Vector result = p1-p2;
+	Vector result = p1-p2;
 
-	//return result;
-	return {0,0};
+	return result;
 }
 
 // function that looks if a point is included in a ConvexHull in a given direction
-bool contains(Body::ConvexHull Simplex, Vector point, Vector d)
+bool contains(Body::ConvexHull Simplex,const Vector point, Vector d)
 {
 	return true;
 }
@@ -154,14 +153,7 @@ bool World::_collisionCircleCircle(const Actor & a1,      const Actor & a2)const
 	sqSumOfRadius*=sqSumOfRadius;
 	return sqDist<=sqSumOfRadius;
 }
-/*
-// see if the Simplex contains the point p
-bool contains(Vector<Vector> Simplex, Vector d, Vector p)
-{
-	Vector a = Simplex.getLast();
 
-	return true;
-}*/
 
 bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const 
 {

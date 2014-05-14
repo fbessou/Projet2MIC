@@ -14,11 +14,33 @@ Play::Play(Game * game, RenderWindow * window):
 	/* On met une jolie texture de ciel etoile*/
 	mBackground.setTexture(TextureManager::getInstance().getTexture("NightSky"));
 	mBackground.setTextureRect(IntRect(0,0,800,600));
-	/*On rajoute un vaisseau*/
-	mWorld.addActor(new Ship(100));
+	//TODO charger le KeyBinding de la config plutot qu'en dur
+	KeyBinding bindingTeam1{sf::Keyboard::LShift,
+							sf::Keyboard::Q,
+							sf::Keyboard::A,
+							sf::Keyboard::D,
+							sf::Keyboard::Z,
+							};
+
+	KeyBinding bindingTeam2{sf::Keyboard::Space,
+							sf::Keyboard::M,
+							sf::Keyboard::K,
+							sf::Keyboard::P,
+							sf::Keyboard::O,
+							};
+	/*On cree chaque equipe*/
+	mTeam1 = new Team(Vector(100,300),Vector::UNIT_X,bindingTeam1);
+	mTeam2 = new Team(Vector(700,300),-Vector::UNIT_X,bindingTeam2);
+	/*On rajoute les vaisseaux*/
+
+	mWorld.addActor(new Ship(mTeam1,100));
+	mWorld.addActor(new Ship(mTeam2,100));
 }
 
-Play::~Play(){}
+Play::~Play(){
+delete mTeam1;
+delete mTeam2;
+}
 
 void Play::enter(){
 	/* On redefini le titre */

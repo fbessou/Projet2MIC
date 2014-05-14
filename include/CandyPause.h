@@ -21,15 +21,17 @@ namespace Candy
     enum Choice {PLAY, SETTINGS, MAINMENU, QUIT};
     int keySelection;
     Choice Selected;
+
     GameState *mGameSession;
-    string mPreviousTitle;
+	std::string mPreviousTitle;
     
+	sf::RectangleShape  mTransparentLayer;
+
     sf::Text titleTxt;
     sf::Text returnTxt;
     sf::Text paramTxt;
     sf::Text exitGameTxt;
     sf::Text quitAppTxt;
-
     sf::Color mActiveColor;
     sf::Color mInactiveColor;
     sf::Color mDisabledColor;

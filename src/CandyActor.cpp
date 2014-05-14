@@ -2,14 +2,16 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 using namespace Candy;
+unsigned long Actor::currentActorId = 0;
 
-Actor::Actor(const string type, const Vector & position,Body * body, const Vector & velocity,const bool & ghost,const bool & visible):
+Actor::Actor(const std::string type, const Vector & position,Body * body, const Vector & velocity,const bool & ghost,const bool & visible):
 	mType(type),
 	mSprite(new sf::Sprite()),
 	mVelocity(velocity),
 	mBody(body),
 	mGhost(ghost),
-	mVisible(visible)
+	mVisible(visible),
+	id(++currentActorId)
 
 {
 	setPosition(position);
@@ -32,14 +34,19 @@ bool Actor::update(const Real &  step)
 void Actor::draw(sf::RenderTarget & target)
 {
 	target.draw(*getSprite(),sf::RenderStates::Default);
+	if(!isGhost())
+	{
+		sf::Drawable * hullShape = getBody()->getAsDrawable(mPosition,getRotation());
+		target.draw(*hullShape);
+		delete hullShape;
+	}
 }
 
-const Body * Actor::getBody() const
-{
+const Body * Actor::getBody() const {
 	return mBody;
 }
 
-string Actor::getType() const
+std::string Actor::getType() const
 {
 	return mType;
 }
@@ -51,8 +58,8 @@ void Actor::setTexture(const sf::Texture & texture)
 	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
 	mSprite->setOrigin(center);
 
-	
-	
+
+
 }
 const bool& Actor::isVisible() const
 {
@@ -97,7 +104,7 @@ void Actor::setVelocity(const Vector& velocity)
 }
 void Actor::move(const Vector & translation, const TransformSpace & ts)
 {
-		
+
 	sf::Vector2f tmp = mSprite->getPosition();
 	switch(ts)
 	{
@@ -115,8 +122,8 @@ void Actor::move(const Vector & translation, const TransformSpace & ts)
 
 void Actor::rotate(const Real & angle,const Math::AngleMode & mode)
 {
-	
-	mSprite->rotate(mode == Math::DEGREE ? angle : angle * Math::PI/180);
+
+	mSprite->rotate(mode == Math::DEGREE ? angle : angle *180./Math::PI);
 }
 
 Real Actor::getRotation(const Math::AngleMode & mode)
@@ -134,7 +141,11 @@ Vector Actor::getDirectionVector()
 
 void Actor::onCollision(Actor* actor)
 {
+	mSprite->setColor(sf::Color(0,255,255,255));
 
 }
 
-
+bool ActorComparator::operator()(const Actor * a1, const Actor * a2)
+{
+	return a1>a2;
+}

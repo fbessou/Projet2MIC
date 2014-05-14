@@ -3,6 +3,7 @@
 #include "CandyCommon.h"
 #include "CandyActor.h"
 #include "CandyGame.h"
+#include "CandyTeam.h"
 // #include "CandyWeapon.h"
 
 namespace Candy
@@ -10,7 +11,7 @@ namespace Candy
 	class Ship : public Actor
 	{
 		public:
-			Ship(/*Team & owner,*/ unsigned int maxLife);
+			Ship(Team * owner, unsigned int maxLife);
 			~Ship();
 			void setLife(unsigned int life);
 			unsigned int getLife();
@@ -26,8 +27,10 @@ namespace Candy
 			unsigned int mLife;
 			unsigned int mMaxLife;
 			sf::Texture * mTexture;
-			// Team  mTeam;
+			Team * mTeam;
 			// Weapon  mWeapon;		
+		private :
+			const Vector mLateralDirection;
 	};
 };
 #endif 

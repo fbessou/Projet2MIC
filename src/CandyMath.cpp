@@ -36,6 +36,14 @@ Vector::operator std::string() const
 	ss<<"( "<<x<<", "<<y<<" )";
 	return ss.str();
 }
+Vector Vector::operator-() const
+{
+	return Vector(-x,-y);
+}
+Vector::operator sf::Vector2f() const
+{
+	return sf::Vector2f(x,y);
+}
 
 Vector Vector::operator+(const Vector & v) const {
   return {x+v.x, y+v.y};
@@ -96,11 +104,19 @@ const Vector & Vector::operator/=(const Real & k)
 	return *this;
 }
 
+Vector Vector::directOrthogonal() const
+{
+	return Vector(-y,x);
+}
+
 std::ostream& Candy::operator<<(std::ostream& stream, const Vector& v){
   stream<<(std::string)v;
   return stream;
 }
-
+Real Math::atan2(Real y , Real x)
+{
+	return ::atan2(y,x);
+}
 Real Math::min(Real val1, Real val2)
 {
   return val1<val2 ? val1 : val2;

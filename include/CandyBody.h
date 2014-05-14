@@ -3,6 +3,7 @@
 #include "CandyCommon.h"
 
 #include "CandyMath.h"
+#include <SFML/Graphics.hpp>
 #include <vector>
 namespace Candy
 {
@@ -49,7 +50,7 @@ namespace Candy
 			Body( const ConvexHull & hull, const Vector & center = Vector(0,0));
 
 			~Body();
-
+			sf::Drawable * getAsDrawable(const Vector &, const Real&) const;
 			void setCenter(const Vector & center);
 			const Vector & getCenter() const;
 

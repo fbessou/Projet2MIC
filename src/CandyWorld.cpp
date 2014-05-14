@@ -22,10 +22,14 @@ void World::step( const Real & elapsedTime)
 		if((*itActor1)->update(elapsedTime))
 		{
 			if(!(*itActor1)->isGhost())
-			for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
-			{
-				testCollision(**itActor1, **itActor2);
-			}
+				for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
+				{
+					if(testCollision(**itActor1, **itActor2))
+					{
+						(*itActor1)->onCollision(*itActor2);
+						(*itActor2)->onCollision(*itActor1);
+					}
+				}
 			itActor1++;
 		}
 		else
@@ -33,7 +37,7 @@ void World::step( const Real & elapsedTime)
 			delete (*itActor1);
 			itActor1=mActors.erase(itActor1);
 		}
-			
+
 	}
 }
 
@@ -86,7 +90,7 @@ bool World::testCollision(const Actor& actor1,const Actor & actor2)
 				case Body::RECTANGLE:
 					return _collisionRectangleCircle(actor2,actor1);
 				case Body::CIRCLE:
-					return _collisionRectangleCircle(actor1,actor2);
+					return _collisionCircleCircle(actor1,actor2);
 				case Body::CONVEX_HULL:
 					return _collisionCircleConvex(actor1,actor2);
 

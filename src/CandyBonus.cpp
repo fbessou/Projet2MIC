@@ -1,7 +1,7 @@
 #include "CandyBonus.h"
 #include "CandyTextureManager.h"
 using namespace Candy;
-Bonus::Bonus(const Vector & position, const sf::Color & color):Actor("Bonus",position,new Body(Body::Circle{5})),mTimeToLive(5)
+Bonus::Bonus(const Vector & position, const sf::Color & color):Actor("Bonus",position,new Body(Body::Circle{16})),mTimeToLive(5)
 {
 	setTexture(TextureManager::getInstance().getTexture("BonusM"));
 	mSprite->setColor(color);
@@ -25,7 +25,7 @@ bool Bonus::update(const Real & t)
 	else if(mTimeToLive < 2)
 	{
 		sf::Color color = mSprite->getColor();
-		color.a=(1-(int)(mTimeToLive*4)%2)*255;
+		color.a=((1.-(int)(mTimeToLive*4)%2)/2.+0.5)*255;
 		mSprite->setColor(color);
 	}
 	return true;

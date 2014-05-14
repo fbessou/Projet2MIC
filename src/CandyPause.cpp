@@ -13,7 +13,8 @@ Pause::Pause(Game *game, RenderWindow * window,Play * gameSession):
 	mInactiveColor=Color(150,150,150);
 	mDisabledColor=Color(90,90,90);
 
-
+	mTransparentLayer = RectangleShape(Vector(mWindow->getSize().x,mWindow->getSize().y));
+	mTransparentLayer.setFillColor(sf::Color(0,0,0,125));
 	sf::FloatRect textRect = titleTxt.getLocalBounds();
 	titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
@@ -57,6 +58,7 @@ void Pause::leave(){}
 bool Pause::update(const Real & timeSinceLastFrame){
 	mWindow->clear();
 	mGameSession->update(0);//draw the scene as it was when entering pause
+	mWindow->draw(mTransparentLayer);
 
 	mWindow->draw(returnTxt);
 	mWindow->draw(paramTxt);

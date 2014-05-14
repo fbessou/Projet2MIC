@@ -3,15 +3,18 @@
 #include "CandyBullet.h"
 using namespace Candy;
 
-Ship::Ship(/*Team & owner,*/ unsigned int maxLife) : Actor("Ship",Vector(0,0),new Body(Body::Circle{5}))
+Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",Vector(0,0),new Body(Body::Circle{32})),mLateralDirection()
 {
 
-	// mTeam = Team;
+	mTeam = owner;
 	mMaxLife = maxLife;
 	mMaxSpeed=50;
 	mPeakTime=1.2;
 	
 	setTexture(TextureManager::getInstance().getTexture("BlueShip"));
+	setPosition(mTeam->shipBase);
+	Real rotation = Math::atan2(mTeam->direction.y,mTeam->direction.x);
+	rotate(rotation,Math::RADIAN);
 	
 
 }
@@ -42,19 +45,22 @@ void Ship::setMaxLife(unsigned int newMax)
 
 bool Ship::update(const Real & timeSinceLastFrame)
 {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if(sf::Keyboard::isKeyPressed(mTeam->keys.forward))
 	{
-		move(Vector(timeSinceLastFrame*120,0),TS_LOCAL);
+		move(Vector(timeSinceLastFrame*200,0),TS_LOCAL);
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if(sf::Keyboard::isKeyPressed(mTeam->keys.right))
 	{
-		rotate(-timeSinceLastFrame*360);
+		move(Vector(0,timeSinceLastFrame*250),TS_LOCAL);
+		//rotate(-timeSinceLastFrame*360);
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if(sf::Keyboard::isKeyPressed(mTeam->keys.left))
 	{
-		rotate(timeSinceLastFrame*360);
+		move(Vector(0,-timeSinceLastFrame*250),TS_LOCAL);
+		//rotate(timeSinceLastFrame*360);
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+
+	if(sf::Keyboard::isKeyPressed(mTeam->keys.primary))
 	{
 		mWorld->addActor(new Bullet(getPosition(),getDirectionVector()*1000));
 	}

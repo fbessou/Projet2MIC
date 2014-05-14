@@ -3,6 +3,7 @@
 
 #include "CandyGameState.h"
 #include "CandyWorld.h"
+#include "CandyTeam.h"
 #include <SFML/Graphics.hpp>
 
 namespace Candy
@@ -11,6 +12,8 @@ namespace Candy
   {
 	  private:
 	  sf::Sprite  mBackground;
+	  Team * mTeam1;
+	  Team * mTeam2;
 	  protected:
 		World mWorld;
 	  public:

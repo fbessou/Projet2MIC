@@ -1,6 +1,7 @@
 #ifndef _CANDY_MATH_H_
 #define _CANDY_MATH_H_
 
+#include <SFML/System/Vector2.hpp>
 #include "CandyCommon.h"
 #include <random>
 #include <ostream>
@@ -21,6 +22,7 @@ namespace Candy
 			Vector normalisedCopy() const;
 
 			Real dotProduct(const Vector & ) const;
+			Vector operator-() const;
 			Vector operator+(const Vector & ) const;
 			Vector operator-(const Vector &) const;
 			Vector operator/(const Real &) const;
@@ -29,10 +31,12 @@ namespace Candy
 			const Vector & operator-=(const Vector &);
 			const Vector & operator*=(const Real &);
 			const Vector & operator/=(const Real &);
+			Vector directOrthogonal() const;
 			//Real angleBetween(Vec)
 			Real length() const; // return the magnitude of the vector
 			Real squaredLength() const; // return the squared magnitude of the vector (much faster)
 			operator std::string() const;
+			operator sf::Vector2f()const;
 		public:
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;
@@ -48,7 +52,7 @@ namespace Candy
 		Real min(Real val1, Real val2);
 		Real max(Real val1, Real val2);
 		Real clamp(Real val, Real min, Real max);
-
+		Real atan2(Real y,Real x);
 		int min(int val1, int val2);
 		int max(int val1, int val2);
 		int clamp(int val, int min, int max);

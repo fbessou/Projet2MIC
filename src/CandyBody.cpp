@@ -54,3 +54,37 @@ const Body::ConvexHull & Body::getConvexHull() const
 	return mHull;
 }
 
+sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotation) const 
+{
+	sf::Drawable * dr = nullptr;
+	switch(mType)
+	{
+		sf::RectangleShape * rect;
+		sf::CircleShape * circle;
+		sf::FloatRect * bounds;
+		case Body::RECTANGLE :
+			rect = new sf::RectangleShape();
+			rect->setPosition(position);
+			rect->setRotation(rotation);
+			bounds=new sf::FloatRect(rect->getLocalBounds());
+			rect->setOrigin((bounds->width-bounds->left)/2,(bounds->height-bounds->top)/2);
+			rect->setFillColor(sf::Color::Transparent);
+			rect->setOutlineColor(sf::Color::Red);
+			rect->setOutlineThickness(1);
+			dr=rect;
+			break;
+		case Body::CIRCLE:
+			circle = new sf::CircleShape(mCircle.radius,16);
+			circle->setPosition(position);
+			bounds=new sf::FloatRect(circle->getLocalBounds());
+			circle->setOrigin((bounds->width-bounds->left)/2,(bounds->height-bounds->top)/2);
+			circle->setFillColor(sf::Color::Transparent);
+			circle->setOutlineColor(sf::Color::Red);
+			circle->setOutlineThickness(1);
+			dr=circle;
+			break;
+		 default:
+			break;
+	}
+	return dr;
+}

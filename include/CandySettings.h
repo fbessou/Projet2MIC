@@ -22,7 +22,7 @@ namespace Candy
   private:
     //to remember from where the Settings State was called and to go back to it
     GameState * mpreviousState;
-    string mPreviousTitle;
+	std::string mPreviousTitle;
 
     enum Choice {RETURN};
     int keySelection;

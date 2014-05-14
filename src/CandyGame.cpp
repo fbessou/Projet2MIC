@@ -92,7 +92,7 @@ void Game::updateDebug()
 
 	if(mFrameCount++%30 == 0)
 	{
-		mFPSText.setString( string("FPS : ")+std::to_string(1./mSPF));
+		mFPSText.setString( std::string("FPS : ")+std::to_string(1./mSPF));
 	}
 	mWindow->draw(mFPSText);
 	mClock.restart();

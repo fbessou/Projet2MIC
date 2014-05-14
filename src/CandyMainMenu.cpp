@@ -39,7 +39,6 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	Selected = PLAY;
 
 	newState = nullptr;
-	mWorld.addActor(new Ship(100));
 }
 
 MainMenu::~MainMenu()

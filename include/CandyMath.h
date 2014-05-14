@@ -28,6 +28,7 @@ namespace Candy
 			const Vector & operator-=(const Vector &);
 			const Vector & operator*=(const Real &);
 			const Vector & operator/=(const Real &);
+			const Vector & operator-();
 			bool operator==(const Vector &);
 			bool operator<(const Vector &);
 			//Real angleBetween(Vec)
@@ -36,7 +37,7 @@ namespace Candy
 			operator std::string() const;
 
 			//negate a Vector
-			Vector negative() const;
+			void negate();
 		public:
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;

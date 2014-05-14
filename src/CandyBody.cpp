@@ -87,6 +87,7 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 			break;
 	}
 	return dr;
+}
 
 Vector Body::ConvexHull::getFarthestPoint(Vector d)
 {

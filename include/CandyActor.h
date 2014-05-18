@@ -56,10 +56,9 @@ namespace Candy
 			inline sf::Sprite * getSprite(){return mSprite;}
 
 			/* public attributes*/
+			const unsigned int & mLayer;
 		public:
-			const unsigned long id;
-		public:
-			Actor(const std::string type, const Vector & position, Body * body, const Vector & velocity = Vector(0,0),const bool & ghost = false,const bool & visible = true);
+			Actor(const std::string type, const Vector & position, Body * body, const Vector & velocity = Vector(0,0), const unsigned int & layer = 0, const bool & ghost = false,const bool & visible = true);
 			virtual ~Actor();
 
 			void _onOwnerChanged(World * owner );
@@ -95,6 +94,8 @@ namespace Candy
 
 			virtual void onCollision(Actor * actor);
 
+		public:
+			friend ActorComparator;
 
 	}; // class Actor
 

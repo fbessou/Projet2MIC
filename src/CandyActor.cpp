@@ -2,17 +2,15 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 using namespace Candy;
-unsigned long Actor::currentActorId = 0;
 
-Actor::Actor(const std::string type, const Vector & position,Body * body, const Vector & velocity,const bool & ghost,const bool & visible):
+Actor::Actor(const std::string type, const Vector & position,Body * body, const Vector & velocity, const unsigned int & layer, const bool & ghost,const bool & visible):
 	mType(type),
 	mSprite(new sf::Sprite()),
 	mVelocity(velocity),
 	mBody(body),
 	mGhost(ghost),
 	mVisible(visible),
-	id(++currentActorId)
-
+	mLayer(layer)
 {
 	setPosition(position);
 }
@@ -34,12 +32,12 @@ bool Actor::update(const Real &  step)
 void Actor::draw(sf::RenderTarget & target)
 {
 	target.draw(*getSprite(),sf::RenderStates::Default);
-	if(!isGhost())
+	/*if(!isGhost())
 	{
 		sf::Drawable * hullShape = getBody()->getAsDrawable(mPosition,getRotation());
 		target.draw(*hullShape);
 		delete hullShape;
-	}
+	}*/
 }
 
 const Body * Actor::getBody() const {
@@ -141,11 +139,12 @@ Vector Actor::getDirectionVector()
 
 void Actor::onCollision(Actor* actor)
 {
-	mSprite->setColor(sf::Color(0,255,255,255));
+	std::cout<<"collision"<<std::endl;
+	//mSprite->setColor(sf::Color(0,255,255,255));
 
 }
 
 bool ActorComparator::operator()(const Actor * a1, const Actor * a2)
 {
-	return a1>a2;
+	return (a1->mLayer<a2->mLayer ? 0: (a1->mLayer>a2->mLayer?1:a1<a2));
 }

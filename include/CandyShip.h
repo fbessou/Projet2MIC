@@ -4,7 +4,11 @@
 #include "CandyActor.h"
 #include "CandyGame.h"
 #include "CandyTeam.h"
-// #include "CandyWeapon.h"
+namespace Candy
+{
+	class Ship;
+}
+#include "CandyWeapon.h"
 
 namespace Candy
 {
@@ -14,13 +18,16 @@ namespace Candy
 			Ship(Team * owner, unsigned int maxLife);
 			~Ship();
 			void setLife(unsigned int life);
-			unsigned int getLife();
+			unsigned int getLife() const;
 			
 			void setMaxLife(unsigned int newMax);
 			virtual bool update(const Real & ) override ;
 			void forwardImpulse();
-			//void setWeapon();
-			//    Weapon getWeapon();
+			void setSecondaryWeapon(Weapon * );
+			void setPrimaryWeapon(Weapon * );
+			World * getWorld(){return mWorld;}
+			
+			void onCollision(Actor * actor);
 		protected:
 			Real mMaxSpeed;
 			Real mPeakTime;
@@ -28,8 +35,10 @@ namespace Candy
 			unsigned int mMaxLife;
 			sf::Texture * mTexture;
 			Team * mTeam;
-			// Weapon  mWeapon;		
+			Weapon * mPrimaryWeapon;		
+			Weapon * mSecondaryWeapon;		
 		private :
+			Vector getBaseRelativePosition() const;
 			const Vector mLateralDirection;
 	};
 };

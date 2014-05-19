@@ -43,6 +43,8 @@ namespace Candy
 
 			//negate a Vector
 			void negate();
+
+			void setVect(const Vector &);
 		public:
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;
@@ -52,6 +54,7 @@ namespace Candy
 	Vector operator*(const Vector & , const Real &);
 	//produit scalaire entre deux vecteurs de dimension 2
 	Real dot(const Vector &, const Vector &);
+	Vector tripleProduct(const Vector &,const Vector &, const Vector &);
 
 	std::ostream& operator<<(std::ostream& stream, const Vector& v);
 

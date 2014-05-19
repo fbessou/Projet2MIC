@@ -116,6 +116,21 @@ Vector Body::ConvexHull::getLast()
 	return pointList.back();
 }
 
+Vector Body::ConvexHull::getB()
+{
+	return pointList.front();
+}
+
+Vector Body::ConvexHull::getC()
+{
+	return pointList.at(2);
+}
+
+int Body::ConvexHull::size()
+{
+	return pointList.size();
+}
+
 void Body::ConvexHull::remove(const Vector p)
 {
 	for (auto row=pointList.begin(); row!=pointList.end(); row++)

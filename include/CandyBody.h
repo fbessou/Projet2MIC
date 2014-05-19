@@ -35,8 +35,11 @@ namespace Candy
 				// get the lastly added point
 				// to use for collision
 				Vector getLast();
+				//get the first one on the list
 				Vector getB();
+				//get the second one
 				Vector getC();
+				int size();
 
 				//delete the firstly added point
 				void remove(const Vector p);

@@ -2,13 +2,11 @@
 #include "CandyMath.h"
 #include "CandyBullet.h"
 #include <iostream>
-=======
 #include "CandyBasicWeapon.h"
 
 using namespace Candy;
 using namespace std;
 
-<<<<<<< HEAD
 Body * createShipBody()
 {
 	Body::ConvexHull hull;
@@ -18,8 +16,7 @@ Body * createShipBody()
 	hull.pointList.push_back(Vector(0,-10));
 	return new Body(hull); 
 }
-Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",Vector(0,0),createShipBody()),mLateralDirection()
-=======
+
 Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,new Body(Body::Circle{32}),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr)
 
 {

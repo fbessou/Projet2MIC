@@ -1,6 +1,8 @@
 #include "CandyBody.h"
+#include <iostream>
 
 using namespace Candy;
+using namespace std;
 
 Body::Body(const Rectangle & rect, const Vector & center ):mRectangle(rect),mCenter(center)
 {
@@ -17,7 +19,7 @@ Body::Body(const Circle & circle,const Vector & center ):mCircle(circle),mCenter
 Body::Body(const ConvexHull & hull, const Vector & center) : mCenter(center)
 {
 	mType = CONVEX_HULL;
-	new (&mHull) ConvexHull(mHull);
+	new (&mHull) ConvexHull(hull);
 }
 
 Body::~Body(){
@@ -62,6 +64,8 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 		sf::RectangleShape * rect;
 		sf::CircleShape * circle;
 		sf::FloatRect * bounds;
+		sf::ConvexShape * convex;
+		int index;
 		case Body::RECTANGLE :
 			rect = new sf::RectangleShape();
 			rect->setPosition(position);
@@ -83,27 +87,44 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 			circle->setOutlineThickness(1);
 			dr=circle;
 			break;
+		case Body::CONVEX_HULL:
+			index=0;
+			convex = new sf::ConvexShape(mHull.size());
+			for (auto point:mHull.pointList)
+			{
+				convex->setPoint(index,point);
+				index++;
+			}
+			convex->setPosition(position);
+			convex->setFillColor(sf::Color::Transparent);
+			convex->setOutlineColor(sf::Color::Red);
+			convex->setOutlineThickness(1);
+			dr=convex;
+			break;
 		 default:
 			break;
 	}
 	return dr;
 }
 
-Vector Body::ConvexHull::getFarthestPoint(Vector d)
+Vector Body::ConvexHull::getFarthestPoint(Vector d) const
 {
-	Vector result=pointList[0];
-	Real farthestDistance=dot(pointList[0],d);
-	Real tmp;
-	for (auto row:pointList)
+	if(!(pointList.empty()))
 	{
-		tmp=dot(row,d);
-		if (tmp>farthestDistance)
+		Vector result=(*(pointList.begin()));
+		Real farthestDistance=dot(result,d);
+		Real tmp;
+		for (auto row:pointList)
 		{
-			farthestDistance=tmp;
-			result=row;
+			tmp=dot(row,d);
+			if (tmp>farthestDistance)
+			{
+				farthestDistance=tmp;
+				result=row;
+			}
 		}
+		return result;
 	}
-	return result;
 }
 
 void Body::ConvexHull::addPoint(Vector p)
@@ -123,10 +144,10 @@ Vector Body::ConvexHull::getB()
 
 Vector Body::ConvexHull::getC()
 {
-	return pointList.at(2);
+	return pointList.at(1);
 }
 
-int Body::ConvexHull::size()
+int Body::ConvexHull::size() const
 {
 	return pointList.size();
 }

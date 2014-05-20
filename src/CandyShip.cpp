@@ -1,11 +1,21 @@
 #include "CandyShip.h"
 #include "CandyMath.h"
 #include "CandyBullet.h"
+#include <iostream>
 using namespace Candy;
+using namespace std;
 
-Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",Vector(0,0),new Body(Body::Circle{32})),mLateralDirection()
+Body * createShipBody()
 {
-
+	Body::ConvexHull hull;
+	hull.pointList.push_back(Vector(10,0));
+	hull.pointList.push_back(Vector(0,10));
+	hull.pointList.push_back(Vector(-10,0));
+	hull.pointList.push_back(Vector(0,-10));
+	return new Body(hull); 
+}
+Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",Vector(0,0),createShipBody()),mLateralDirection()
+{
 	mTeam = owner;
 	mMaxLife = maxLife;
 	mMaxSpeed=50;

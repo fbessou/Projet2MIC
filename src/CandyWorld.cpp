@@ -2,6 +2,7 @@
 #include "CandyMath.h"
 #include "CandyWorld.h"
 using namespace Candy;
+using namespace std;
 
 World::World(sf::RenderTarget * renderTarget): mRenderTarget(renderTarget)
 {
@@ -113,15 +114,12 @@ bool World::testCollision(const Actor& actor1,const Actor & actor2)
 
 // function that will return an edge from the difference between two shape in a given direction
 //remplacer par des pointeurs + mettre en arguments des hulls
-Vector support(const Actor & a1, const Actor & a2, const Vector d)
+Vector support(const Body::ConvexHull & hull1, const Body::ConvexHull & hull2, const Vector d)
 {
-	struct Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
-	struct Body::ConvexHull hull2 = a2.getBody()->getConvexHull();
-	Vector p1 = hull1.getFarthestPoint(d);
-	Vector p2 = hull2.getFarthestPoint(-d);
+	const Vector p1 = hull1.getFarthestPoint(d);
+	const Vector p2 = hull2.getFarthestPoint(-d);
 
 	Vector result = p1-p2;
-
 	return result;
 }
 
@@ -201,15 +199,17 @@ bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const
 
 	Body::ConvexHull Simplex;
 
-	//ajout d'un sommet dans une direction
-	Simplex.addPoint(support(a1,a2,d));
+	const Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
+	const Body::ConvexHull hull2 = a2.getBody()->getConvexHull();
 
+	//ajout d'un sommet dans une direction
+	Simplex.addPoint(support(hull1,hull2,d));
 	//inverser la direction pour trouver un sommet dans l'autre direction
 	d.negate();
 
 	while (true)
 	{
-		Simplex.addPoint(support(a1,a2,d));
+		Simplex.addPoint(support(hull1,hull2,d));
 		if (dot(d,Simplex.getLast()) <= 0)
 		{
 			return false;

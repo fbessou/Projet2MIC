@@ -32,7 +32,6 @@ namespace Candy
 			const Vector & operator*=(const Real &);
 			const Vector & operator/=(const Real &);
 			Vector directOrthogonal() const;
-			const Vector & operator-();
 			bool operator==(const Vector &);
 			bool operator<(const Vector &);
 			//Real angleBetween(Vec)

@@ -5,7 +5,7 @@
 #include "CandyWorld.h"
 #include "CandyTeam.h"
 #include <SFML/Graphics.hpp>
-
+#include "CandyShip.h"
 namespace Candy
 {
   class Play : public GameState
@@ -14,8 +14,11 @@ namespace Candy
 	  sf::Sprite  mBackground;
 	  Team * mTeam1;
 	  Team * mTeam2;
+	  Ship * mShip1;
+	  Ship * mShip2;
 	  protected:
-		World mWorld;
+	  World mWorld;
+	  Real mClock;
 	  public:
     Play(Game *mgame, sf::RenderWindow *window);
     ~Play();

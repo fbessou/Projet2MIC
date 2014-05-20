@@ -37,10 +37,11 @@ Vector::operator std::string() const
 	return ss.str();
 }
 
-Vector Vector::operator-() const
+Vector Vector::operator-() const 
 {
 	return Vector(-x,-y);
 }
+
 Vector::operator sf::Vector2f() const
 {
 	return sf::Vector2f(x,y);

@@ -26,6 +26,7 @@ namespace Candy
 			struct ConvexHull
 			{
 				std::vector<Vector> pointList;
+				std::vector<Vector> relativeList;
 
 				// access to the farthest point in a given direction
 				Vector getFarthestPoint(Vector d) const;
@@ -59,6 +60,8 @@ namespace Candy
 				ConvexHull mHull;
 			};
 
+			// regarde si les données du hull sont valides
+			bool mValidate;
 			Vector mCenter;
 			Type mType;
 		public:
@@ -78,6 +81,10 @@ namespace Candy
 			const Rectangle & getRectangle() const ;
 			const Circle & getCircle() const;
 			const ConvexHull & getConvexHull() const;
+
+			const bool & isValidate() const;
+			void prepare(Vector position,Real angle,Math::AngleMode mode=Math::DEGREE);
+			void invalidate();
 	};
 };
 

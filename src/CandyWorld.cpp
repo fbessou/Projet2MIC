@@ -22,6 +22,7 @@ void World::step( const Real & elapsedTime)
 	{
 		if((*itActor1)->update(elapsedTime))
 		{
+			//(*itActor1)->prepareBody();
 			if(!(*itActor1)->isGhost())
 				for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
 				{

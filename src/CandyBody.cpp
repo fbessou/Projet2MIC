@@ -163,3 +163,34 @@ void Body::ConvexHull::remove(const Vector p)
 		}
 	}
 }
+
+const bool & Body::isValidate() const
+{
+	return mValidate;
+}
+
+void Body::invalidate()
+{
+	mValidate=false;
+}
+
+void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
+{
+	if (mValidate)
+	{
+	}else{
+
+		// on efface toutes les valeurs absolues
+		mHull.pointList.clear();
+
+		// retourner tous les vecteurs
+
+		//calculer la position absolue
+		for (auto row:mHull.relativeList)
+		{
+			mHull.pointList.push_back(row+position);
+		}
+
+		mValidate=true;
+	}
+}

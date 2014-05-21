@@ -36,8 +36,9 @@ Vector::operator std::string() const
 	ss<<"( "<<x<<", "<<y<<" )";
 	return ss.str();
 }
-Vector Vector::rotated(const Real & angle, const Math::AngleMode & mode) const
+Vector Vector::rotated(Real angle, const Math::AngleMode & mode) const
 {
+	angle=(mode==Math::DEGREE) ? angle/180*Math::PI : angle;
 	return Vector(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
 }
 
@@ -55,12 +56,6 @@ void Vector::negate()
 {
 	x=-x;
 	y=-y;
-}
-
-void Vector::setVect(const Vector & v)
-{
-	x=v.x;
-	y=v.y;
 }
 
 Vector Vector::operator+(const Vector & v) const {

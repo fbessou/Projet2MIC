@@ -94,6 +94,8 @@ namespace Candy
 
 			virtual void onCollision(Actor * actor);
 
+			void prepare();
+
 		public:
 			friend ActorComparator;
 

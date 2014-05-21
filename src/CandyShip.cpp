@@ -10,14 +10,14 @@ using namespace std;
 Body * createShipBody()
 {
 	Body::ConvexHull hull;
-	hull.pointList.push_back(Vector(10,0));
-	hull.pointList.push_back(Vector(0,10));
-	hull.pointList.push_back(Vector(-10,0));
-	hull.pointList.push_back(Vector(0,-10));
+	hull.relativeList.push_back(Vector(32,0));
+	hull.relativeList.push_back(Vector(0,32));
+	hull.relativeList.push_back(Vector(-32,0));
+	hull.relativeList.push_back(Vector(0,-32));
 	return new Body(hull); 
 }
 
-Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,new Body(Body::Circle{32}),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr)
+Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,createShipBody(),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr)
 
 {
 	mTeam = owner;
@@ -125,5 +125,7 @@ void Ship::onCollision( Actor * actor)
 {
 	if(actor->getType()=="Bullet")
 		mLife-=Math::clamp(2,0,mLife);
+	else
+		cout<<"I'm not a bullet"<<endl;
 		
 }

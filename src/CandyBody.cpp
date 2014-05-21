@@ -20,6 +20,7 @@ Body::Body(const ConvexHull & hull, const Vector & center) : mCenter(center)
 {
 	mType = CONVEX_HULL;
 	new (&mHull) ConvexHull(hull);
+	mValidate=false;
 }
 
 Body::~Body(){
@@ -90,7 +91,7 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 		case Body::CONVEX_HULL:
 			index=0;
 			convex = new sf::ConvexShape(mHull.size());
-			for (auto point:mHull.pointList)
+			for (auto point:mHull.relativeList)
 			{
 				convex->setPoint(index,point);
 				index++;
@@ -176,21 +177,20 @@ void Body::invalidate()
 
 void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
 {
-	if (mValidate)
+		cout<<"We're not in the if!!"<<endl;
+		cout<<mValidate<<endl;
+	if (!mValidate && mType==Body::CONVEX_HULL)
 	{
-	}else{
-
 		// on efface toutes les valeurs absolues
 		mHull.pointList.clear();
 
-		// retourner tous les vecteurs
+		cout<<"We're in the if!!"<<endl;
 
 		//calculer la position absolue
 		for (auto row:mHull.relativeList)
 		{
 			mHull.pointList.push_back(row.rotated(angle)+position);
 		}
-
-		mValidate=true;
 	}
+	mValidate=true;
 }

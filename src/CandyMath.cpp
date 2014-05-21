@@ -38,6 +38,7 @@ Vector::operator std::string() const
 }
 Vector Vector::rotated(const Real & angle, const Math::AngleMode & mode) const
 {
+	a
 	return Vector(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
 }
 

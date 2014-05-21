@@ -188,7 +188,7 @@ void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
 		//calculer la position absolue
 		for (auto row:mHull.relativeList)
 		{
-			mHull.pointList.push_back(row.rotated(angle)+position);
+			mHull.pointList.push_back(row.rotated(angle,Math::RADIAN)+position);
 		}
 
 		mValidate=true;

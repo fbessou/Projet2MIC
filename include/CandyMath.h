@@ -67,7 +67,7 @@ namespace Candy
 
 
 			Real dotProduct(const Vector & ) const;
-			Vector rotated(const Real & , const Math::AngleMode &) const;
+			Vector rotated(Real , const Math::AngleMode & =Math::DEGREE) const;
 			Vector operator-() const;
 			Vector operator+(const Vector & ) const;
 			Vector operator-(const Vector &) const;
@@ -91,7 +91,6 @@ namespace Candy
 			//negate a Vector
 			void negate();
 
-			void setVect(const Vector &);
 		public:
 			static const Vector UNIT_X;
 			static const Vector UNIT_Y;

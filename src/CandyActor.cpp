@@ -88,6 +88,11 @@ void Actor::setPosition(const Vector& position)
 {
 	mPosition = position;
 	mSprite->setPosition(position.x,position.y);
+	if (!isGhost())
+	{
+		mBody->invalidate();
+	}
+
 }
 
 
@@ -116,6 +121,11 @@ void Actor::move(const Vector & translation, const TransformSpace & ts)
 	}
 	tmp = mSprite->getPosition();
 	mPosition= {tmp.x,tmp.y};
+
+	if (!isGhost())
+	{
+		mBody->invalidate();
+	}
 }
 
 void Actor::rotate(const Real & angle,const Math::AngleMode & mode)
@@ -140,8 +150,13 @@ Vector Actor::getDirectionVector()
 void Actor::onCollision(Actor* actor)
 {
 	std::cout<<"collision"<<std::endl;
-	//mSprite->setColor(sf::Color(0,255,255,255));
+	mSprite->setColor(sf::Color(0,255,255,255));
 
+}
+
+void Actor::prepare()
+{
+	mBody->prepare(getPosition(),getRotation());
 }
 
 bool ActorComparator::operator()(const Actor * a1, const Actor * a2)

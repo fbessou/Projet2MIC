@@ -22,12 +22,13 @@ void World::step( const Real & elapsedTime)
 	{
 		if((*itActor1)->update(elapsedTime))
 		{
-			//(*itActor1)->prepareBody();
+			(*itActor1)->prepare();
 			if(!(*itActor1)->isGhost())
 				for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
 				{
 					if(testCollision(**itActor1, **itActor2))
 					{
+						(*itActor2)->prepare();
 						(*itActor1)->onCollision(*itActor2);
 						(*itActor2)->onCollision(*itActor1);
 					}
@@ -120,6 +121,8 @@ Vector support(const Body::ConvexHull & hull1, const Body::ConvexHull & hull2, c
 	const Vector p1 = hull1.getFarthestPoint(d);
 	const Vector p2 = hull2.getFarthestPoint(-d);
 
+	//cout<<p1<<endl<<p2<<endl;
+
 	Vector result = p1-p2;
 	return result;
 }
@@ -163,7 +166,7 @@ bool contains(Body::ConvexHull Simplex,const Vector point, Vector d)
 
 		Vector abPerp = tripleProduct(ab,ap,ab);
 		
-		d.setVect(abPerp);
+		d=abPerp;
 	}
 	return false;
 }
@@ -197,7 +200,6 @@ bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const
 {
 	//on décide d'une direction arbitrairement
 	Vector d={0,1};
-
 	Body::ConvexHull Simplex;
 
 	const Body::ConvexHull hull1 = a1.getBody()->getConvexHull();

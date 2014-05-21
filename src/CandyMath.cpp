@@ -36,6 +36,10 @@ Vector::operator std::string() const
 	ss<<"( "<<x<<", "<<y<<" )";
 	return ss.str();
 }
+Vector Vector::rotated(const Real & angle, const Math::AngleMode & mode) const
+{
+	return Vector(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
+}
 
 Vector Vector::operator-() const 
 {

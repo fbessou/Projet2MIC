@@ -109,9 +109,10 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 
 Vector Body::ConvexHull::getFarthestPoint(Vector d) const
 {
+	Vector result;
 	if(!(pointList.empty()))
 	{
-		Vector result=(*(pointList.begin()));
+		result=(*(pointList.begin()));
 		Real farthestDistance=dot(result,d);
 		Real tmp;
 		for (auto row:pointList)
@@ -123,8 +124,8 @@ Vector Body::ConvexHull::getFarthestPoint(Vector d) const
 				result=row;
 			}
 		}
-		return result;
 	}
+	return result;
 }
 
 void Body::ConvexHull::addPoint(Vector p)

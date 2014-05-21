@@ -28,15 +28,18 @@ namespace Candy
 				std::vector<Vector> pointList;
 
 				// access to the farthest point in a given direction
-				Vector getFarthestPoint(Vector d);
+				Vector getFarthestPoint(Vector d) const;
 
 				// add point to the end of the list
 				void addPoint(Vector p);
 				// get the lastly added point
 				// to use for collision
 				Vector getLast();
+				//get the first one on the list
 				Vector getB();
+				//get the second one
 				Vector getC();
+				int size() const;
 
 				//delete the firstly added point
 				void remove(const Vector p);

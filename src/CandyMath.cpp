@@ -57,6 +57,12 @@ void Vector::negate()
 	y=-y;
 }
 
+void Vector::setVect(const Vector & v)
+{
+	x=v.x;
+	y=v.y;
+}
+
 Vector Vector::operator+(const Vector & v) const {
   return {x+v.x, y+v.y};
 }
@@ -78,6 +84,12 @@ Vector Candy::operator*(const Real & r, const Vector & v)
 Real Candy::dot(const Vector & vect1,const Vector & vect2)
 {
 	return vect1.x*vect2.x+vect1.y*vect2.y;
+}
+
+Vector Candy::tripleProduct(const Vector & a,const Vector & b, const Vector & c)
+{
+	Vector result = b*dot(a,c)-c*dot(a,b);
+	return result;
 }
 
 Vector Vector::operator/(const Real & r) const

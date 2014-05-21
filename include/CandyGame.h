@@ -9,6 +9,7 @@ namespace Candy
 #include "CandyCommon.h"
 #include "CandyGameState.h"
 #include "CandyTextureManager.h"
+#include "CandySettings.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -28,6 +29,8 @@ namespace Candy
     sf::Text mFPSText;
     void updateDebug();
 
+	Settings mSettings;
+
     sf::Clock clock;
   protected:
 	void initResources();
@@ -39,6 +42,7 @@ namespace Candy
     void changeState(GameState * state);
     void quit();
     sf::Font& getFont();
+	const Settings & getSettings() const;
 
     //			World * getWorld();
   };//class Game

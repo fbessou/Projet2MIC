@@ -1,48 +1,32 @@
 #include "CandySettings.h"
+#include <iostream>
+#include <fstream>
 
 using namespace Candy;
-using namespace sf;
+using namespace std;
 
-
-Settings::Settings(Game * game, RenderWindow * window, GameState * previousState):
-  GameState(game,window), returnTxt("Return to main menu",game->getFont(),40)
+Settings::Settings()
 {
+	ifstream myParam;
+	myParam.open("./params.conf");
+	if (myParam.is_open())
+	{
 
-	sf::FloatRect textRect = returnTxt.getLocalBounds();
-	returnTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
-	returnTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f));
-	
-	returnTxt.setColor(Color::White);
+		// TO DO load from file & save from SettingsMenu ?
+		cout<<"Loading Parameters"<<endl;
+	}else{
+		// then load the default profile
+		mBinding1={sf::Keyboard::C,
+				sf::Keyboard::V,
+				sf::Keyboard::D,
+				sf::Keyboard::Q,
+				sf::Keyboard::S};
 
-	mpreviousState = previousState;
+		mBinding2={sf::Keyboard::RShift,
+				sf::Keyboard::LSystem,
+				sf::Keyboard::Left,
+				sf::Keyboard::Right,
+				sf::Keyboard::Up};
 
-	clock.restart();
-
-	keySelection = 0;
-	Selected = RETURN;
-}
-
-Settings::~Settings()
-{
-	mWindow->setTitle("Candy Saga 3 Le Retour des Caries  ~The Empty Menu~");
-}
-
-void Settings::enter(){
-
-}
-void Settings::leave(){}
-
-bool Settings::update(const Real & timeSinceLastFrame){
- 
-  mWindow->clear();
-  mWindow->draw(returnTxt);
-
-  if (Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return))
-    {
-      mWindow->setTitle(mPreviousTitle);
-      mGame->changeState(mpreviousState);
-      delete this;
-    }
-
-  return true;
+	}
 }

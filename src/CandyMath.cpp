@@ -38,7 +38,7 @@ Vector::operator std::string() const
 }
 Vector Vector::rotated(Real angle, const Math::AngleMode & mode) const
 {
-	angle=(mode==Math::DEGREE) ? angle/180*Math::PI : angle;
+	angle=(mode==Math::DEGREE ? angle/180*Math::PI : angle);
 	return Vector(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
 }
 
@@ -83,7 +83,8 @@ Real Candy::dot(const Vector & vect1,const Vector & vect2)
 
 Vector Candy::tripleProduct(const Vector & a,const Vector & b, const Vector & c)
 {
-	Vector result = b*dot(a,c)-c*dot(a,b);
+	//Vector result = b*dot(a,c)-c*dot(a,b);
+	Vector result = b*dot(a,c)-a*dot(c,b);
 	return result;
 }
 

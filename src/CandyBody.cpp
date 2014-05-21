@@ -177,19 +177,17 @@ void Body::invalidate()
 
 void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
 {
-		cout<<"We're not in the if!!"<<endl;
-		cout<<mValidate<<endl;
 	if (!mValidate && mType==Body::CONVEX_HULL)
 	{
 		// on efface toutes les valeurs absolues
 		mHull.pointList.clear();
 
-		cout<<"We're in the if!!"<<endl;
-
 		//calculer la position absolue
 		for (auto row:mHull.relativeList)
 		{
-			mHull.pointList.push_back(row.rotated(angle,Math::RADIAN)+position);
+			Vector vertex = row.rotated(angle,Math::DEGREE)+position;
+			mHull.pointList.push_back(vertex);
+			//cout<<vertex<<endl;
 		}
 	}
 	mValidate=true;

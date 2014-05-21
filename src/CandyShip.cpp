@@ -125,7 +125,7 @@ void Ship::onCollision( Actor * actor)
 {
 	if(actor->getType()=="Bullet")
 		mLife-=Math::clamp(2,0,mLife);
-	else
+	else if(actor->getType()=="Ship")
 		cout<<"I'm not a bullet"<<endl;
 		
 }

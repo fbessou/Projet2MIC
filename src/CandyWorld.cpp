@@ -121,15 +121,16 @@ Vector support(const Body::ConvexHull & hull1, const Body::ConvexHull & hull2, c
 	const Vector p1 = hull1.getFarthestPoint(d);
 	const Vector p2 = hull2.getFarthestPoint(-d);
 
-	//cout<<p1<<endl<<p2<<endl;
+	//cout<<"H1 : "<<p1<<endl<<"H2 : "<<p2<<endl;
 
 	Vector result = p1-p2;
 	return result;
 }
 
 // function that looks if a point is included in a ConvexHull in a given direction
-bool contains(Body::ConvexHull Simplex,const Vector point, Vector d)
+bool contains(Body::ConvexHull & Simplex,const Vector point, Vector & d)
 {
+	cout<<Simplex.size()<<endl;
 	Vector a = Simplex.getLast();
 	Vector ap = point - a;
 
@@ -198,8 +199,11 @@ bool World::_collisionCircleCircle(const Actor & a1,      const Actor & a2)const
 
 bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const 
 {
+	//TODO : Quand on choisi d={0,1}, des collisions sont détectées
+	//TODO : si deux vaisseaux sont parfaitement alignés sur l'axe vertical
+	
 	//on décide d'une direction arbitrairement
-	Vector d={0,1};
+	Vector d={1,1};
 	Body::ConvexHull Simplex;
 
 	const Body::ConvexHull hull1 = a1.getBody()->getConvexHull();
@@ -223,6 +227,5 @@ bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const
 			}
 		}
 
-	return true;
 	}
 }

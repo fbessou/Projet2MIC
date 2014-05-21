@@ -1,35 +1,27 @@
-#ifndef _CANDY_SETTINGS_H_
-#define _CANDY_SETTINGS_H_
-#include <string>
-#include "CandyGameState.h"
-
-#include <SFML/Graphics.hpp>
+#ifndef _CANDY_SETTINGS_
+#define _CANDY_SETTINGS_
+#include <SFML/Window.hpp>
+// ~ where all the settings are hard-coded ~
 
 namespace Candy
 {
-  class Settings: public GameState
-  {
-    const std::string startButton;
-    const std::string exitButton;
-    const std::string highscoreButton;
- 
-  public:
-    Settings(Game * game, sf::RenderWindow * window,GameState* previousState);
-    ~Settings();
-    void enter();
-    bool update(const Real &);
-    void leave();
-  private:
-    //to remember from where the Settings State was called and to go back to it
-    GameState * mpreviousState;
-	std::string mPreviousTitle;
+	struct KeyBinding
+	{
+		sf::Keyboard::Key primary;
+		sf::Keyboard::Key secondary;
+		sf::Keyboard::Key left;
+		sf::Keyboard::Key right;
+		sf::Keyboard::Key forward;
+	};
 
-    enum Choice {RETURN};
-    int keySelection;
-    Choice Selected;
-    sf::Clock clock;
-
-    sf::Text returnTxt;
-  };
+	class Settings
+	{
+		public:
+			Settings();
+			KeyBinding mBinding1;
+			KeyBinding mBinding2;
+			// float mVolume;
+			// bool mMute;
+	};
 };
 #endif

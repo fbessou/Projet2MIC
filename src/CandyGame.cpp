@@ -6,7 +6,7 @@
 
 using namespace Candy;
 
-Game::Game():mCurrentState(nullptr),hasExited(false),mFrameCount(0),mFPSText()
+Game::Game():mCurrentState(nullptr),hasExited(false),mFrameCount(0),mFPSText(),mSettings()
 {
 	assert(mFont.loadFromFile("./font/Transformers_Movie.ttf") && "pad'font");
 	
@@ -61,6 +61,11 @@ void Game::start()
 sf::Font& Game::getFont()
 {
 	return mFont;
+}
+
+const Settings & Game::getSettings() const
+{
+	return mSettings;
 }
 
 void Game::update()

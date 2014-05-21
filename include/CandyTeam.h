@@ -4,7 +4,7 @@
 #include "CandyMath.h"
 namespace Candy
 {
-	struct KeyBinding
+	struct KeyBinding2
 	{
 		sf::Keyboard::Key primary;
 		sf::Keyboard::Key secondary;
@@ -12,7 +12,6 @@ namespace Candy
 		sf::Keyboard::Key right;
 		sf::Keyboard::Key forward;
 	};
-
 	class Team
 	{
 		protected:

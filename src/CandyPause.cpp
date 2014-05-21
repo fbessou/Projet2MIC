@@ -1,5 +1,5 @@
 #include "CandyPause.h"
-#include "CandySettings.h"
+#include "CandySettingsMenu.h"
 #include "CandyMainMenu.h"
 
 using namespace Candy;
@@ -81,7 +81,7 @@ bool Pause::update(const Real & timeSinceLastFrame){
 					mGame->changeState(mGameSession);
 					break;
 				case SETTINGS:
-					mGame->changeState(new Settings(mGame, mWindow,this));
+					mGame->changeState(new SettingsMenu(mGame, mWindow,this));
 					break;
 					//should erase gameSession before quitting
 				case MAINMENU:

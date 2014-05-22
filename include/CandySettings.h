@@ -22,6 +22,8 @@ namespace Candy
 			KeyBinding mBinding2;
 			// float mVolume;
 			// bool mMute;
+			void saveSettings();
+			void loadDefault();
 	};
 };
 #endif

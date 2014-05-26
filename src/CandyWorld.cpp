@@ -11,7 +11,11 @@ World::World(sf::RenderTarget * renderTarget): mRenderTarget(renderTarget)
 
 World::~World()
 {
-
+	for(auto actorPtr : mActors)
+	{
+		delete actorPtr;
+	}
+	mActors.clear();
 	//Destroy all actors remaining
 }
 

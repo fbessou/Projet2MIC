@@ -15,6 +15,7 @@ namespace Candy
 		private:
 			bool mHitBullet;
 			World *mWorld;
+			const Real mAngularVelocity;
 
 
 	};

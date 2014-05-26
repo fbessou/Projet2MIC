@@ -14,6 +14,7 @@ namespace Candy
 		public:
 			Bullet(Team * team,const Vector & position, const Vector & velocity);
 			~Bullet();
+			Team * getTeam();
 			virtual bool update(const Real & ) override;
 			void onCollision(Actor * actor);
 	};

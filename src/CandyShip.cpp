@@ -3,8 +3,8 @@
 #include "CandyMath.h"
 #include "CandyShip.h"
 #include "CandyTeam.h"
-#include "CandyWeapon.h"
 #include "CandyBasicWeapon.h"
+#include "CandyBullet.h"
 #include "CandyWorld.h"
 #include <iostream>
 
@@ -84,7 +84,7 @@ bool Ship::update(const Real & timeSinceLastFrame)
 			mVelocity=Vector(0,0);
 	}
 
-	if(relPosition.y < 250)
+	if(relPosition.y < 400)
 	{
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.right))
 		{
@@ -93,7 +93,7 @@ bool Ship::update(const Real & timeSinceLastFrame)
 		}
 	}
 
-	if(relPosition.y>-250)
+	if(relPosition.y>-400)
 	{
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.left))
 		{
@@ -145,7 +145,13 @@ Vector Ship::getBaseRelativePosition() const
 void Ship::onCollision( Actor * actor)
 {
 	if(actor->getType()=="Bullet")
-		takeDamage(1);
+	{
+		Bullet * blt = static_cast<Bullet*>(actor);
+		if(blt->getTeam()!=mTeam)
+		{
+			takeDamage(1);
+		}
+	}
 	else if(actor->getType()=="Ship")
 		cout<<"I'm not a bullet"<<endl;
 

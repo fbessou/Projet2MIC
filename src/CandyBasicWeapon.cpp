@@ -22,14 +22,21 @@ unsigned int BasicWeapon::fire()
 {
 	Vector dir = mOwner->getDirectionVector();
 	Real shootSpeed = Math::clamp(mLevel*150,0,500);
-	if(mLevel>=1)
+	if(mLevel==1)
 	{
-		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*42,mOwner->getDirectionVector()*shootSpeed*1.10));
+		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*42,dir*shootSpeed*1.10));
 	}
-	if(mLevel>=4)
+	else if(mLevel==2)
 	{
-	mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*42+Vector::UNIT_X*5,mOwner->getDirectionVector().rotated(-10,Math::DEGREE)*shootSpeed));
-	mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*42-Vector::UNIT_X*5,mOwner->getDirectionVector().rotated(10,Math::DEGREE)*shootSpeed));
+		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*30+dir.directOrthogonal()*7,dir*shootSpeed));
+		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*30-dir.directOrthogonal()*7,dir*shootSpeed));
+	}
+	else if(mLevel>=3)
+	{
+		Real shootSpeed = Math::clamp(mLevel*150,0,400);
+		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*42,dir*shootSpeed*1.10));
+		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*30+dir.directOrthogonal()*7,dir.rotated(10,Math::DEGREE)*shootSpeed));
+		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*30-dir.directOrthogonal()*7,dir.rotated(-10,Math::DEGREE)*shootSpeed));
 	}
 	return 0;
 }
@@ -45,7 +52,7 @@ void BasicWeapon::improve()
 	mCurrentLevelScore=mNextLevelScore;
 	mNextLevelScore=2.25*mCurrentLevelScore;
 	mLevel++;
-	mFireRate = Math::clamp(mLevel+1,2,10);
+	mFireRate = Math::clamp((mLevel)%3+1,2,10);
 	std::cout<<mNextLevelScore<<" : "<<mLevel<<std::endl;
 }
 

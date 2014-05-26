@@ -114,7 +114,7 @@ void Play::asteroidGeneration(const Real & timeSinceLastFrame)
 			velocity=Vector(-50,0);
 		}
 		mWorld.addActor(new Asteroid(&mWorld,pos,velocity));
-		mNextAsteroidPopDate=mClock+Math::RealURNG::normalised()*5;
+		mNextAsteroidPopDate=mClock+Math::RealURNG::normalised()*2;
 	}
 
 }

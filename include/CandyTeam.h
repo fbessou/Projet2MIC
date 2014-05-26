@@ -2,6 +2,7 @@
 #define _CANDY_TEAM_H_
 #include <SFML/Window.hpp>
 #include "CandyMath.h"
+#include "CandySettings.h"
 namespace Candy
 {
 	struct KeyBinding2

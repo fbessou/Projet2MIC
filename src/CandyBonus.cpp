@@ -1,4 +1,5 @@
 #include "CandyBonus.h"
+#include "CandyBody.h"
 #include "CandyTextureManager.h"
 using namespace Candy;
 Bonus::Bonus(const Vector & position, const sf::Color & color):Actor("Bonus",position,new Body(Body::Circle{16}),Vector(0,0),BONUS_LAYER),mTimeToLive(5)

@@ -13,8 +13,6 @@ class ActorComparator
 	bool operator()(const Actor * a1, const Actor * a2);
 };
 };
-#include "CandyBody.h"
-#include "CandyWorld.h"
 namespace Candy
 {
 	/*
@@ -53,6 +51,8 @@ namespace Candy
 			//bool mSameTypeCollision;
 
 			void setTexture(const sf::Texture & texture);
+			void setTextureColor(const sf::Color & color);
+			const sf::Color & getTextureColor() const;
 			inline sf::Sprite * getSprite(){return mSprite;}
 
 			/* public attributes*/
@@ -81,6 +81,9 @@ namespace Candy
 
 			const Vector& getPosition() const;
 			void setPosition(const Vector& );
+
+			Real getScale() const;
+			void setScale(const Real& );
 
 			const Vector& getVelocity() const;
 			void setVelocity(const Vector&);

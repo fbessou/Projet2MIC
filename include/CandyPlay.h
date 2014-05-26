@@ -1,10 +1,10 @@
 #ifndef _CANDY_PLAY_H_
 #define _CANDY_PLAY_H_
 
+#include <SFML/Graphics.hpp>
 #include "CandyGameState.h"
 #include "CandyWorld.h"
 #include "CandyTeam.h"
-#include <SFML/Graphics.hpp>
 #include "CandyShip.h"
 namespace Candy
 {
@@ -19,6 +19,8 @@ namespace Candy
 	  protected:
 	  World mWorld;
 	  Real mClock;
+	  
+	  void showOverlays() const;
 	  public:
     Play(Game *mgame, sf::RenderWindow *window);
     ~Play();

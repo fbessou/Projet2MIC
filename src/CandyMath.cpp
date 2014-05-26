@@ -178,9 +178,5 @@ int Math::max(int val1, int val2)
   return val1>val2 ? val1 : val2;
 }
 
-int Math::clamp(int val, int min, int max)
-{
-  return Math::max(Math::min(val,max),min);
-}
 Math::IntURNG Math::IntURNG::random0_255(0,255);
 Math::RealURNG Math::RealURNG::random0_1(0,1);

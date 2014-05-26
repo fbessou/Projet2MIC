@@ -22,10 +22,13 @@ void World::step( const Real & elapsedTime)
 	{
 		if((*itActor1)->update(elapsedTime))
 		{
-			(*itActor1)->prepare();
 			if(!(*itActor1)->isGhost())
+			{
+				(*itActor1)->prepare();
 				for(auto itActor2 = itActor1; ++itActor2 != mActors.end();)
 				{
+					if((*itActor2)->isGhost())
+						continue;
 					if(testCollision(**itActor1, **itActor2))
 					{
 						(*itActor2)->prepare();
@@ -33,6 +36,7 @@ void World::step( const Real & elapsedTime)
 						(*itActor2)->onCollision(*itActor1);
 					}
 				}
+			}
 			itActor1++;
 		}
 		else
@@ -105,7 +109,7 @@ bool World::testCollision(const Actor& actor1,const Actor & actor2)
 				case Body::RECTANGLE:
 					return _collisionRectangleConvex(actor2,actor1);
 				case Body::CIRCLE:
-					return _collisionCircleConvex(actor1,actor2);
+					return _collisionCircleConvex(actor2,actor1);
 				case Body::CONVEX_HULL:
 					return _collisionConvexConvex(actor1,actor2);
 			}
@@ -130,7 +134,6 @@ Vector support(const Body::ConvexHull & hull1, const Body::ConvexHull & hull2, c
 // function that looks if a point is included in a ConvexHull in a given direction
 bool contains(Body::ConvexHull & Simplex,const Vector point, Vector & d)
 {
-	cout<<Simplex.size()<<endl;
 	Vector a = Simplex.getLast();
 	Vector ap = point - a;
 
@@ -186,7 +189,10 @@ bool World::_collisionRectangleCircle(const Actor & a1,   const Actor & a2)const
 }
 bool World::_collisionCircleConvex(const Actor & a1,      const Actor & a2)const 
 {
-	return true;
+	Real sqDist = (a1.getPosition()-a2.getPosition()).squaredLength();
+	Real sqSumOfRadius = a1.getBody()->getCircle().radius+a2.getBody()->getConvexHull().radius;
+	sqSumOfRadius*=sqSumOfRadius;
+	return sqDist<=sqSumOfRadius;
 }
 bool World::_collisionCircleCircle(const Actor & a1,      const Actor & a2)const 
 {
@@ -203,7 +209,7 @@ bool World::_collisionConvexConvex(const Actor & a1, const Actor & a2)const
 	//TODO : si deux vaisseaux sont parfaitement alignés sur l'axe vertical
 	
 	//on décide d'une direction arbitrairement
-	Vector d={1,1};
+	Vector d={0,1};
 	Body::ConvexHull Simplex;
 
 	const Body::ConvexHull hull1 = a1.getBody()->getConvexHull();

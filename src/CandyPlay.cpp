@@ -16,12 +16,12 @@ Play::Play(Game * game, RenderWindow * window):
 	mBackground.setTextureRect(IntRect(0,0,800,600));
 
 	/*On cree chaque equipe*/
-	mTeam1 = new Team(Vector(400,100),Vector::UNIT_Y,game->getSettings().mBinding1);
-	mTeam2 = new Team(Vector(400,500),-Vector::UNIT_Y,game->getSettings().mBinding2);
+	mTeam1 = new Team(sf::Color::Red,Vector(400,50),Vector::UNIT_Y,game->getSettings().mBinding1);
+	mTeam2 = new Team(sf::Color(100,200,255,255),Vector(400,550),-Vector::UNIT_Y,game->getSettings().mBinding2);
 	/*On rajoute les vaisseaux*/
-
-	mWorld.addActor(mShip1 = new Ship(mTeam1,100));
-	mWorld.addActor(mShip2 = new Ship(mTeam2,100));
+	
+	mWorld.addActor( mTeam1->getShip());
+	mWorld.addActor( mTeam2->getShip());
 }
 
 Play::~Play(){
@@ -35,6 +35,12 @@ void Play::enter(){
 }
 
 void Play::leave(){}
+
+void Play::showOverlays() const
+{
+	mWindow->draw(mTeam1->getShip()->getLifeBar());
+	mWindow->draw(mTeam2->getShip()->getLifeBar());
+}
 
 bool Play::update(const Real & timeSinceLastFrame)
 {
@@ -61,12 +67,17 @@ bool Play::update(const Real & timeSinceLastFrame)
 	mWorld.step(timeSinceLastFrame);
 	}
 	mWindow->draw(mBackground);
+	//On affiche la scene
 	mWorld.render();
+	//On affiche les overlays
+	showOverlays();
 
-	if(mShip1->getLife()==0)
-		std::cout<<"Team 2 win"<<std::endl;
-	else if(mShip2->getLife()==0)
-		std::cout<<"Team 1 win"<<std::endl;
+	if(mTeam1->getShip()->getLife()==0)
+		1;
+		//std::cout<<"Team 2 win"<<std::endl;
+	else if(mTeam2->getShip()->getLife()==0)
+		2;
+		//std::cout<<"Team 1 win"<<std::endl;
 	return true;
 }
 

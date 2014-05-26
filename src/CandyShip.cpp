@@ -45,7 +45,6 @@ Ship::~Ship()
 	if(mSecondaryWeapon != nullptr)
 		delete mSecondaryWeapon;
 	delete mPrimaryWeapon;
-	delete mTexture;
 }
 
 void Ship::setLife(unsigned int life)

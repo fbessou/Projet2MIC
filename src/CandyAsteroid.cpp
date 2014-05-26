@@ -32,5 +32,6 @@ void Asteroid::onCollision(Actor * actor)
 	if(actor->getType()=="Bullet")
 	{
 		mHitBullet=true;
+		setGhost(true);
 	}
 }

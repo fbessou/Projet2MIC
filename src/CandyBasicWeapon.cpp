@@ -21,7 +21,7 @@ BasicWeapon::~BasicWeapon()
 unsigned int BasicWeapon::fire()
 {
 	Vector dir = mOwner->getDirectionVector();
-	Real shootSpeed = Math::clamp(mLevel*150,0,500);
+	Real shootSpeed = Math::clamp(mLevel*50 + mStep*mLevel*150+100,0,450);
 	if(mLevel==1)
 	{
 		mOwner->getWorld()->addActor(new Bullet(mOwner->getTeam(),mOwner->getPosition()+dir*42,dir*shootSpeed*1.10));
@@ -52,7 +52,10 @@ void BasicWeapon::improve()
 	mCurrentLevelScore=mNextLevelScore;
 	mNextLevelScore=2.25*mCurrentLevelScore;
 	mLevel++;
-	mFireRate = Math::clamp((mLevel)%3+1,2,10);
+	if(mLevel<4)
+		mFireRate = mFireRate*1.5;
+	else
+		mFireRate = 3;
 	std::cout<<mNextLevelScore<<" : "<<mLevel<<std::endl;
 }
 

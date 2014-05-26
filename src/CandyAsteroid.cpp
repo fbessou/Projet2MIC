@@ -5,7 +5,7 @@
 using namespace Candy;
 
 Asteroid::Asteroid(World * world,const Vector & position,const Vector & velocity):
-	Actor("Asteroid",position,new Body(Body::Circle({20})),velocity,BULLET_LAYER),mHitBullet(false),mWorld(world)
+	Actor("Asteroid",position,new Body(Body::Circle({30})),velocity,BULLET_LAYER),mHitBullet(false),mWorld(world)
 {
 	setTexture(TextureManager::getInstance().getTexture("Asteroid"));
 }

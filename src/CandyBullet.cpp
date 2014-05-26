@@ -26,9 +26,14 @@ bool Bullet::update( const Real & t)
 
 void Bullet::onCollision(Actor * actor)
 {
-	if(actor->getType()=="Ship")
+	std::string type = actor->getType();
+	if(type=="Ship")
+	{
+		mTeam->score(5);
+		mHitObstacle = true;
+	}
+	else if(type=="Asteroid")
 	{
 		mTeam->score(10);
-		mHitObstacle = true;
 	}
 }

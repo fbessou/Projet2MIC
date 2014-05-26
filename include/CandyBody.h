@@ -27,7 +27,6 @@ namespace Candy
 			{
 				std::vector<Vector> pointList;
 				std::vector<Vector> relativeList;
-
 				// access to the farthest point in a given direction
 				Vector getFarthestPoint(Vector d) const;
 
@@ -42,6 +41,7 @@ namespace Candy
 				Vector getC();
 				int size() const;
 
+				Real radius;
 				//delete the firstly added point
 				void remove(const Vector p);
 			};

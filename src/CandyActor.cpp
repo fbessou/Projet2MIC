@@ -1,6 +1,7 @@
 #include "CandyActor.h"
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "CandyBody.h"
 using namespace Candy;
 
 Actor::Actor(const std::string type, const Vector & position,Body * body, const Vector & velocity, const unsigned int & layer, const bool & ghost,const bool & visible):
@@ -32,12 +33,12 @@ bool Actor::update(const Real &  step)
 void Actor::draw(sf::RenderTarget & target)
 {
 	target.draw(*getSprite(),sf::RenderStates::Default);
-	if(!isGhost())
+	/*if(!isGhost())
 	{
 		sf::Drawable * hullShape = getBody()->getAsDrawable(mPosition,getRotation());
 		target.draw(*hullShape);
 		delete hullShape;
-	}
+	}*/
 }
 
 const Body * Actor::getBody() const {
@@ -55,9 +56,15 @@ void Actor::setTexture(const sf::Texture & texture)
 	sf::FloatRect rect = mSprite->getLocalBounds();
 	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
 	mSprite->setOrigin(center);
+}
 
-
-
+void Actor::setTextureColor(const sf::Color & color )
+{
+	mSprite->setColor(color);
+}
+const sf::Color & Actor::getTextureColor() const
+{
+	return mSprite->getColor();
 }
 const bool& Actor::isVisible() const
 {
@@ -95,6 +102,19 @@ void Actor::setPosition(const Vector& position)
 
 }
 
+Real Actor::getScale() const
+{
+	return mSprite->getScale().x;
+}
+
+void Actor::setScale(const Real & scale)
+{
+	mSprite->setScale(Vector(scale,scale));
+	if (!isGhost())
+	{
+		mBody->invalidate();
+	}
+}
 
 const Vector& Actor::getVelocity() const
 {
@@ -150,7 +170,6 @@ Vector Actor::getDirectionVector()
 void Actor::onCollision(Actor* actor)
 {
 	std::cout<<"collision"<<std::endl;
-	mSprite->setColor(sf::Color(0,255,255,255));
 
 }
 
@@ -161,5 +180,8 @@ void Actor::prepare()
 
 bool ActorComparator::operator()(const Actor * a1, const Actor * a2)
 {
-	return (a1->mLayer<a2->mLayer ? 0: (a1->mLayer>a2->mLayer?1:a1<a2));
+	bool la1_inf_la2 = a1->mLayer < a2->mLayer;
+	bool la1_eq_la2 = a1->mLayer == a2->mLayer;
+	bool a1_inf_a2 = la1_eq_la2 ? a1<a2 : la1_inf_la2;
+	return a1_inf_a2;
 }

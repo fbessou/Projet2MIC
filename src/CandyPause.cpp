@@ -85,6 +85,7 @@ bool Pause::update(const Real & timeSinceLastFrame){
 					break;
 					//should erase gameSession before quitting
 				case MAINMENU:
+					delete mGameSession;
 					mGame->changeState(new MainMenu(mGame,mWindow));
 					break;
 					//here as well

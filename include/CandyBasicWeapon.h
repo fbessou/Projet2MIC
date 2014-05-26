@@ -1,15 +1,23 @@
 #ifndef _CANDY_BASIC_WEAPON_H_
 #define _CANDY_BASIC_WEAPON_H_
+#include "CandyCommon.h"
 #include "CandyWeapon.h"
 namespace Candy
 {
 	class BasicWeapon : public Weapon
 	{
 		protected:
+			unsigned int mLevel;
+			Real  mStep;
+			unsigned int mNextLevelScore;
+			unsigned int mCurrentLevelScore;
+			void improve();
 			unsigned int fire();
 		public:
 		BasicWeapon(Ship * );
+		void onScore(const Real & );
 		~BasicWeapon();
+
 		friend Ship;
 		
 	};

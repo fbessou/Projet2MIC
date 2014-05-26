@@ -10,6 +10,8 @@ const Vector Vector::UNIT_Y(0.0, 1.0);
 
 Vector::Vector(): x(0), y(0){}
 Vector::Vector(const Real & _x, const Real & _y): x(_x), y(_y){}
+Vector::Vector(const sf::Vector2f & v): x(v.x), y(v.y){}
+Vector::Vector(const sf::Vector2u & v): x(v.x), y(v.y){}
 Vector::~Vector(){}
 bool Vector::isNormalised() const {
   return length()==1;
@@ -178,9 +180,5 @@ int Math::max(int val1, int val2)
   return val1>val2 ? val1 : val2;
 }
 
-int Math::clamp(int val, int min, int max)
-{
-  return Math::max(Math::min(val,max),min);
-}
 Math::IntURNG Math::IntURNG::random0_255(0,255);
 Math::RealURNG Math::RealURNG::random0_1(0,1);

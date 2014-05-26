@@ -2,14 +2,7 @@
 #define _CANDY_SHIP_H_ 
 #include "CandyCommon.h"
 #include "CandyActor.h"
-#include "CandyGame.h"
-#include "CandyTeam.h"
-namespace Candy
-{
-	class Ship;
-}
-#include "CandyWeapon.h"
-
+#include "CandyMeasureBar.h"
 namespace Candy
 {
 	class Ship : public Actor
@@ -24,22 +17,41 @@ namespace Candy
 			virtual bool update(const Real & ) override ;
 			void forwardImpulse();
 			void setSecondaryWeapon(Weapon * );
-			void setPrimaryWeapon(Weapon * );
+			void setPrimaryWeapon(BasicWeapon * );
 			World * getWorld(){return mWorld;}
 			
 			void onCollision(Actor * actor);
+			void onScore(const unsigned int & points);
+			bool takeDamage(const Real & damages);
+			const MeasureBar & getLifeBar() const;
+			const Team * getTeam()const {return mTeam;}
+			Team * getTeam() {return mTeam;}
 		protected:
 			Real mMaxSpeed;
 			Real mPeakTime;
-			unsigned int mLife;
-			unsigned int mMaxLife;
+			//Life management
+			Real mLife;
+			Real mMaxLife;
 			sf::Texture * mTexture;
 			Team * mTeam;
-			Weapon * mPrimaryWeapon;		
+			BasicWeapon * mPrimaryWeapon;		
 			Weapon * mSecondaryWeapon;		
+			//Life HUD
+			MeasureBar mLifeBar;
 		private :
 			Vector getBaseRelativePosition() const;
 			const Vector mLateralDirection;
 	};
+
+	class Particle : public Actor
+	{
+		public:
+			Particle(const sf::Color & , const Vector & position, const Vector & velocity);
+			virtual bool update(const Real & ) override;
+		private:
+			Real mTimeToLive;
+	};
 };
+
+
 #endif 

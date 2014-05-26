@@ -111,12 +111,12 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 Vector Body::ConvexHull::getFarthestPoint(Vector d) const
 {
 	Vector result;
-	if(!(pointList.empty()))
+	if(!(relativeList.empty()))
 	{
-		result=(*(pointList.begin()));
+		result=(*(relativeList.begin()));
 		Real farthestDistance=dot(result,d);
 		Real tmp;
-		for (auto row:pointList)
+		for (auto row:relativeList)
 		{
 			tmp=dot(row,d);
 			if (tmp>farthestDistance)
@@ -131,36 +131,41 @@ Vector Body::ConvexHull::getFarthestPoint(Vector d) const
 
 void Body::ConvexHull::addPoint(Vector p)
 {
-	pointList.push_back(p);
+	if(size()==0)
+		radius = 0;
+	relativeList.push_back(p);
+	Real l = p.length();
+	if(radius<l)
+		radius=l;
 }
 
 Vector Body::ConvexHull::getLast()
 {
-	return pointList.back();
+	return relativeList.back();
 }
 
 Vector Body::ConvexHull::getB()
 {
-	return pointList.front();
+	return relativeList.front();
 }
 
 Vector Body::ConvexHull::getC()
 {
-	return pointList.at(1);
+	return relativeList.at(1);
 }
 
 int Body::ConvexHull::size() const
 {
-	return pointList.size();
+	return relativeList.size();
 }
 
 void Body::ConvexHull::remove(const Vector p)
 {
-	for (auto row=pointList.begin(); row!=pointList.end(); row++)
+	for (auto row=relativeList.begin(); row!=relativeList.end(); row++)
 	{
 		if (*row==p)
 		{
-			row=pointList.erase(row);
+			row=relativeList.erase(row);
 		}
 	}
 }
@@ -179,16 +184,19 @@ void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
 {
 	if (!mValidate && mType==Body::CONVEX_HULL)
 	{
-		// on efface toutes les valeurs absolues
+		// on efface toutes les valeurs en coords absolues
 		mHull.pointList.clear();
-
+		
 		//calculer la position absolue
 		for (auto row:mHull.relativeList)
 		{
 			Vector vertex = row.rotated(angle,Math::DEGREE)+position;
 			mHull.pointList.push_back(vertex);
-			//cout<<vertex<<endl;
 		}
+	}
+	else if(!mValidate && mType==Body::CIRCLE)
+	{
+
 	}
 	mValidate=true;
 }

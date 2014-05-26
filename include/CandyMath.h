@@ -58,6 +58,8 @@ namespace Candy
 		public:
 			Vector();
 			Vector(const Real & ,const Real &);
+			Vector(const sf::Vector2f &);
+			Vector(const sf::Vector2u &);
 			~Vector();
 
 			bool isNormalised() const;

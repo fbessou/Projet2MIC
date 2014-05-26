@@ -114,6 +114,7 @@ void Game::initResources()
 	mTextureManager->addTexture("Bullet","media/projectile.png");
 	mTextureManager->addTexture("BonusM","media/bonusM.png");
 	mTextureManager->addTexture("Flare","media/flare.png");
+	mTextureManager->addTexture("Asteroid","media/asteroid.png");
 }
 
 void Game::quit()

@@ -43,7 +43,7 @@ Settings::Settings()
 
 void Settings::loadDefault()
 {
-		mBinding1={sf::Keyboard::C,
+		mBinding1={sf::Keyboard::LShift,
 				sf::Keyboard::V,
 				sf::Keyboard::D,
 				sf::Keyboard::Q,

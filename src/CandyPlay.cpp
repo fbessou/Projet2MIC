@@ -3,14 +3,15 @@
 #include "CandyShip.h"
 #include "CandyBonus.h"
 #include "CandyWorld.h"
-
+#include "CandyAsteroid.h"
 
 using namespace Candy;
 using namespace sf;
 
 Play::Play(Game * game, RenderWindow * window):
-	GameState(game,window),mWorld(window),mClock(0)
+	GameState(game,window),mNextAsteroidPopDate(2),mWorld(window),mClock(0)
 {
+	
 	/* On met une jolie texture de ciel etoile*/
 	mBackground.setTexture(TextureManager::getInstance().getTexture("NightSky"));
 	mBackground.setTextureRect(IntRect(0,0,800,600));
@@ -44,27 +45,33 @@ void Play::showOverlays() const
 
 bool Play::update(const Real & timeSinceLastFrame)
 {
-	mClock+=timeSinceLastFrame;	
+	mClock+=timeSinceLastFrame;
+	//update background
 	auto rect = mBackground.getTextureRect();
 	rect.left= 1000*sin(mClock/5);
 	rect.top = 10000*sin(mClock/50);
 	mBackground.setTextureRect(rect);
-	
 
+	//update only if we are not in pause state
 	if(timeSinceLastFrame!=0)
 	{
-	mWindow->clear();
+		mWindow->clear();
 
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
-	{
-		mGame->changeState(new Pause(mGame,mWindow,this));
-	}
-	else if(Keyboard::isKeyPressed(Keyboard::A))
-	{
-		auto func = Math::IntURNG::randomByte;
-		mWorld.addActor(new Bonus(Vector(func(),func()),sf::Color((*func)(),(*func)(),(*func)(),255)));
-	}
-	mWorld.step(timeSinceLastFrame);
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			mGame->changeState(new Pause(mGame,mWindow,this));
+		}
+		else if(Keyboard::isKeyPressed(Keyboard::A))
+		{
+			auto func = Math::IntURNG::randomByte;
+			mWorld.addActor(new Bonus(Vector(func(),func()),sf::Color((*func)(),(*func)(),(*func)(),255)));
+		}
+		else
+		{
+		//update logic
+		asteroidGeneration(timeSinceLastFrame);
+		}
+		mWorld.step(timeSinceLastFrame);
 	}
 	mWindow->draw(mBackground);
 	//On affiche la scene
@@ -73,15 +80,40 @@ bool Play::update(const Real & timeSinceLastFrame)
 	showOverlays();
 
 	if(mTeam1->getShip()->getLife()==0)
-		1;
-		//std::cout<<"Team 2 win"<<std::endl;
+		mClock+=0;
+	//std::cout<<"Team 2 win"<<std::endl;
 	else if(mTeam2->getShip()->getLife()==0)
-		2;
-		//std::cout<<"Team 1 win"<<std::endl;
+		mClock+=0;
+	//std::cout<<"Team 1 win"<<std::endl;
 	return true;
 }
 
 void Play::onLostFocus()
 {
-		mGame->changeState(new Pause(mGame,mWindow,this));
+	mGame->changeState(new Pause(mGame,mWindow,this));
+}
+
+void Play::asteroidGeneration(const Real & timeSinceLastFrame)
+{
+	if(mClock>mNextAsteroidPopDate)
+	{
+		bool screenPart = Math::IntURNG::randomByte()%2;
+		
+		Vector w = mWindow->getSize();
+		Vector pos = Vector(Math::RealURNG::normalised()*50,
+						Math::RealURNG::normalised()*w.y);
+		Vector velocity;
+		if(screenPart)
+		{
+			pos-=Vector(50,0);
+			velocity=Vector(50,0);
+		}else
+		{
+			pos+=Vector(w.x,0);
+			velocity=Vector(-50,0);
+		}
+		mWorld.addActor(new Asteroid(&mWorld,pos,velocity));
+		mNextAsteroidPopDate=mClock+Math::RealURNG::normalised()*5;
+	}
+
 }

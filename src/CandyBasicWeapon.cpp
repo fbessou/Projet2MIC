@@ -6,7 +6,7 @@
 #define MAX_WEAPON_LEVEL 5
 using namespace Candy;
 
-BasicWeapon::BasicWeapon(Ship * owner):Weapon(owner,1,1),
+BasicWeapon::BasicWeapon(Ship * owner):Weapon(owner,1,2),
 	mLevel(1),
 	mStep(0),
 	mNextLevelScore(100),
@@ -45,7 +45,7 @@ void BasicWeapon::improve()
 	mCurrentLevelScore=mNextLevelScore;
 	mNextLevelScore=2.25*mCurrentLevelScore;
 	mLevel++;
-	mFireRate = Math::clamp(mLevel,0,10);
+	mFireRate = Math::clamp(mLevel+1,2,10);
 	std::cout<<mNextLevelScore<<" : "<<mLevel<<std::endl;
 }
 

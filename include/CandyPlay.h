@@ -16,10 +16,13 @@ namespace Candy
 	  Team * mTeam2;
 	  Ship * mShip1;
 	  Ship * mShip2;
+	  Real mNextAsteroidPopDate;
 	  protected:
 	  World mWorld;
 	  Real mClock;
+
 	  
+	  void asteroidGeneration( const Real &);
 	  void showOverlays() const;
 	  public:
     Play(Game *mgame, sf::RenderWindow *window);
@@ -27,9 +30,8 @@ namespace Candy
     void enter() override;
     bool update(const Real &) override;
     void leave() override;
-
-	void onLostFocus() override;
 	
+	void onLostFocus() override;
   };
 }
 

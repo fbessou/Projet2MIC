@@ -112,9 +112,12 @@ void Game::initResources()
 
 	mTextureManager->addTexture("BlueShip","media/test.png");
 	mTextureManager->addTexture("Bullet","media/projectile.png");
+	mTextureManager->addTexture("Rocket","media/rocket.png");
 	mTextureManager->addTexture("BonusM","media/bonusM.png");
 	mTextureManager->addTexture("Flare","media/flare.png");
-	mTextureManager->addTexture("Asteroid","media/asteroid.png");
+	mTextureManager->addTexture("AsteroidDefault","media/asteroid.png");
+	mTextureManager->addTexture("AsteroidLife","media/asteroidLife.png");
+	mTextureManager->addTexture("AsteroidRocket","media/asteroidRocket.png");
 }
 
 void Game::quit()

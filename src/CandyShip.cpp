@@ -5,6 +5,7 @@
 #include "CandyTeam.h"
 #include "CandyBasicWeapon.h"
 #include "CandyBullet.h"
+#include "CandyRocketLauncher.h"
 #include "CandyWorld.h"
 #include <iostream>
 
@@ -50,6 +51,7 @@ Ship::~Ship()
 void Ship::setLife(unsigned int life)
 {
 	mLife = Math::clamp(life,0.,mMaxLife);
+	mLifeBar.setValue(mLife/mMaxLife);
 }
 
 unsigned int Ship::getLife() const
@@ -57,17 +59,30 @@ unsigned int Ship::getLife() const
 	return mLife;
 }
 
-void Ship::forwardImpulse()
-{
-}
-
 void Ship::setMaxLife(unsigned int newMax)
 {
 	mMaxLife = newMax;
 }
 
+void Ship::addLife(unsigned int life)
+{
+	setLife(mLife+life);
+}
+
+const MeasureBar & Ship::getLifeBar() const
+{
+	return mLifeBar;
+}
+
+void Ship::forwardImpulse()
+{
+}
+
+
+
 bool Ship::update(const Real & timeSinceLastFrame)
 {
+	mAimDirection = getDirectionVector();
 	Vector relPosition = getBaseRelativePosition();
 	Vector startPosition = getPosition();
 	if(sf::Keyboard::isKeyPressed(mTeam->keys.forward) && relPosition.x < 150)
@@ -88,6 +103,7 @@ bool Ship::update(const Real & timeSinceLastFrame)
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.right))
 		{
 			move(Vector(0,timeSinceLastFrame*400),TS_LOCAL);
+			mAimDirection.rotate(20,Math::DEGREE);
 			//rotate(-timeSinceLastFrame*360);
 		}
 	}
@@ -97,6 +113,7 @@ bool Ship::update(const Real & timeSinceLastFrame)
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.left))
 		{
 			move(Vector(0,-timeSinceLastFrame*400),TS_LOCAL);
+			mAimDirection.rotate(-20,Math::DEGREE);
 			//rotate(timeSinceLastFrame*360);
 		}
 	}
@@ -148,27 +165,37 @@ void Ship::onCollision( Actor * actor)
 		Bullet * blt = static_cast<Bullet*>(actor);
 		if(blt->getTeam()!=mTeam)
 		{
-			takeDamage(1);
+			takeDamage(5);
 		}
 	}
-	else if(actor->getType()=="Ship")
-		cout<<"I'm not a bullet"<<endl;
+	else if(actor->getType()=="Rocket")
+	{
+		Rocket * blt = static_cast<Rocket*>(actor);
+		if(blt->getTeam()!=mTeam)
+		{
+			takeDamage(5);
+		}
+	}
+	else if(actor->getType()=="Asteroid")
+	{
+			takeDamage(10);
+	}
 
 }
 
 bool Ship::takeDamage(const Real & damages)
 {
-	mLife-=Math::clamp(2.,0.,mLife);
-	mLifeBar.setValue(mLife/mMaxLife);
-	if(mLife==0)
+	setLife(mLife-Math::clamp(damages,0,mLife));
+	if(getLife()==0)
 		return false;
 	return true;
 }
 
-const MeasureBar & Ship::getLifeBar() const
+const Vector & Ship::getAimDirection()
 {
-	return mLifeBar;
+	return mAimDirection;
 }
+
 
 // class Particle
 

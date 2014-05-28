@@ -17,6 +17,12 @@ bool Vector::isNormalised() const {
   return length()==1;
 }
 
+Vector Vector::normalisedCopy() const
+{
+	Vector ret(x,y);
+	ret.normalise();
+	return ret;
+}
 
 void Vector::normalise(){
   Real norme = length();
@@ -38,10 +44,20 @@ Vector::operator std::string() const
 	ss<<"( "<<x<<", "<<y<<" )";
 	return ss.str();
 }
+
 Vector Vector::rotated(Real angle, const Math::AngleMode & mode) const
 {
 	angle=(mode==Math::DEGREE ? angle/180*Math::PI : angle);
 	return Vector(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
+}
+
+const Vector & Vector::rotate(Real angle, const Math::AngleMode & mode)
+{
+	angle=(mode==Math::DEGREE ? angle/180*Math::PI : angle);
+	Vector tmp(*this);
+	x=tmp.x*cos(angle)-tmp.y*sin(angle);
+	y=tmp.x*sin(angle)+tmp.y*cos(angle);
+	return *this;
 }
 
 Vector Vector::operator-() const 

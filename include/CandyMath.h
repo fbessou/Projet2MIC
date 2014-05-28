@@ -68,6 +68,7 @@ namespace Candy
 
 
 			Real dotProduct(const Vector & ) const;
+			const Vector & rotate(Real , const Math::AngleMode & =Math::DEGREE);
 			Vector rotated(Real , const Math::AngleMode & =Math::DEGREE) const;
 			Vector operator-() const;
 			Vector operator+(const Vector & ) const;

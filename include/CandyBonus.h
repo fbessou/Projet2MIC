@@ -13,6 +13,8 @@ namespace Candy
 			~Bonus();
 			enum Type
 			{
+				None,
+				Rocket,
 				Mega,
 				Life
 			};

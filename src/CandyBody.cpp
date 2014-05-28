@@ -91,12 +91,11 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 		case Body::CONVEX_HULL:
 			index=0;
 			convex = new sf::ConvexShape(mHull.size());
-			for (auto point:mHull.relativeList)
+			for (auto point:mHull.pointList)
 			{
 				convex->setPoint(index,point);
 				index++;
 			}
-			convex->setPosition(position);
 			convex->setFillColor(sf::Color::Transparent);
 			convex->setOutlineColor(sf::Color::Red);
 			convex->setOutlineThickness(1);
@@ -180,7 +179,7 @@ void Body::invalidate()
 	mValidate=false;
 }
 
-void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
+void Body::prepare(Vector position,Real scale, Real angle, Math::AngleMode mode)
 {
 	if (!mValidate && mType==Body::CONVEX_HULL)
 	{
@@ -190,13 +189,13 @@ void Body::prepare(Vector position, Real angle, Math::AngleMode mode)
 		//calculer la position absolue
 		for (auto row:mHull.relativeList)
 		{
-			Vector vertex = row.rotated(angle,Math::DEGREE)+position;
+			Vector vertex = row.rotated(angle,Math::DEGREE)*scale+position;
 			mHull.pointList.push_back(vertex);
 		}
 	}
 	else if(!mValidate && mType==Body::CIRCLE)
 	{
-
+		mCircle.radius = mCircle.baseRadius*scale;
 	}
 	mValidate=true;
 }

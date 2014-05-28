@@ -11,7 +11,9 @@ namespace Candy
 			Real  mStep;
 			unsigned int mNextLevelScore;
 			unsigned int mCurrentLevelScore;
+			Real mShotSpeed;
 			void improve();
+			void changeFireRate();
 			unsigned int fire();
 		public:
 		BasicWeapon(Ship * );

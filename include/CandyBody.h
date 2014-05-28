@@ -20,6 +20,7 @@ namespace Candy
 
 			struct Circle
 			{
+				Real baseRadius;
 				Real radius;
 			};
 
@@ -83,7 +84,7 @@ namespace Candy
 			const ConvexHull & getConvexHull() const;
 
 			const bool & isValidate() const;
-			void prepare(Vector position,Real angle,Math::AngleMode mode=Math::DEGREE);
+			void prepare(Vector position,Real scale, Real angle,Math::AngleMode mode=Math::DEGREE);
 			void invalidate();
 	};
 };

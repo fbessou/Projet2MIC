@@ -17,8 +17,10 @@ Play::Play(Game * game, RenderWindow * window):
 	mBackground.setTextureRect(IntRect(0,0,800,600));
 
 	/*On cree chaque equipe*/
-	mTeam1 = new Team(sf::Color::Red,Vector(400,50),Vector::UNIT_Y,game->getSettings().mBinding1);
-	mTeam2 = new Team(sf::Color(0,255,255,255),Vector(400,550),-Vector::UNIT_Y,game->getSettings().mBinding2);
+	mTeam1 = new Team(sf::Color(250,50,210,255),Vector(400,70),Vector::UNIT_Y,game->getSettings().mBinding1);
+	mTeam2 = new Team(sf::Color(220,10,20,255),Vector(400,530),-Vector::UNIT_Y,game->getSettings().mBinding2);
+	mTeam1->setOpponent(mTeam2);
+	mTeam2->setOpponent(mTeam1);
 	/*On rajoute les vaisseaux*/
 	
 	mWorld.addActor( mTeam1->getShip());
@@ -100,7 +102,7 @@ void Play::asteroidGeneration(const Real & timeSinceLastFrame)
 		bool screenPart = Math::IntURNG::randomByte()%2;
 		
 		Vector w = mWindow->getSize();
-		Vector pos = Vector(Math::RealURNG::normalised()*50,
+		Vector pos = Vector(0,
 						Math::RealURNG::normalised()*400-200);
 		pos+=Vector(0,w.y/2);
 		Vector velocity;
@@ -110,7 +112,7 @@ void Play::asteroidGeneration(const Real & timeSinceLastFrame)
 			velocity=Vector(50,0);
 		}else
 		{
-			pos+=Vector(w.x,0);
+			pos+=Vector(w.x+50,0);
 			velocity=Vector(-50,0);
 		}
 		mWorld.addActor(new Asteroid(&mWorld,pos,velocity));

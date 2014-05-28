@@ -92,8 +92,11 @@ namespace Candy
 			void rotate(const Real & angle, const Math::AngleMode & = Math::DEGREE);
 
 			Real getRotation(const Math::AngleMode & = Math::DEGREE);
+			void setRotation(const Real & angle, const Math::AngleMode & = Math::DEGREE);
 
-			Vector  getDirectionVector();
+			Vector getDirectionVector();
+			void setDirectionVector(const Vector & direction);
+			void lookAt(const Vector & position);
 
 			virtual void onCollision(Actor * actor);
 

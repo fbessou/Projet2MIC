@@ -152,6 +152,8 @@ void Actor::rotate(const Real & angle,const Math::AngleMode & mode)
 {
 
 	mSprite->rotate(mode == Math::DEGREE ? angle : angle *180./Math::PI);
+	if(!isGhost())
+		mBody->invalidate();
 }
 
 Real Actor::getRotation(const Math::AngleMode & mode)
@@ -159,12 +161,29 @@ Real Actor::getRotation(const Math::AngleMode & mode)
 	return (mode == Math::DEGREE ? mSprite->getRotation(): mSprite->getRotation()*Math::PI/180);
 }
 
+void Actor::setRotation(const Real & angle, const Math::AngleMode & mode)
+{
+	mSprite->setRotation(mode==Math::DEGREE?angle:angle*180/Math::PI);
+	if(!isGhost())
+		mBody->invalidate();
+}
+
 Vector Actor::getDirectionVector()
 {
 	Real rot = getRotation(Math::RADIAN);
 	Vector v(cos(rot),sin(rot));
 	return v;
-};
+}
+
+void Actor::setDirectionVector(const Vector & direction)
+{
+	setRotation(Math::atan2(direction.y,direction.x),Math::RADIAN);
+}
+
+void Actor::lookAt(const Vector & position)
+{
+	setDirectionVector(getPosition()-position);
+}
 
 
 void Actor::onCollision(Actor* actor)
@@ -175,7 +194,7 @@ void Actor::onCollision(Actor* actor)
 
 void Actor::prepare()
 {
-	mBody->prepare(getPosition(),getRotation());
+	mBody->prepare(getPosition(),getScale(),getRotation());
 }
 
 bool ActorComparator::operator()(const Actor * a1, const Actor * a2)

@@ -246,7 +246,7 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 				SelectedMenu=MENU2;
 			}else{
 				sf::Event event;
-				//mWindow->pollEvent(event);
+				mWindow->pollEvent(event);
 				while (mWindow->isOpen() && mWindow->pollEvent(event))
 				{
 					switch (event.type)

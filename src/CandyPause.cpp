@@ -53,7 +53,9 @@ Pause::~Pause()
 void Pause::enter(){
 	mWindow->setTitle("Candy Saga ~Pause~");
 }
-void Pause::leave(){}
+void Pause::leave(){
+	mGameSession->updateSettings();
+}
 
 bool Pause::update(const Real & timeSinceLastFrame){
 	mWindow->clear();

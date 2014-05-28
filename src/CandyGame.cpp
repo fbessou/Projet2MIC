@@ -68,6 +68,11 @@ const Settings & Game::getSettings() const
 	return mSettings;
 }
 
+void Game::setSettings(Settings s)
+{
+	mSettings=s;
+}
+
 void Game::update()
 {
 		sf::Event event;

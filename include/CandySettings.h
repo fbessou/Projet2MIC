@@ -24,6 +24,7 @@ namespace Candy
 			// bool mMute;
 			void saveSettings();
 			void loadDefault();
+			std::string keyToString(sf::Keyboard::Key k);
 	};
 };
 #endif

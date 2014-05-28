@@ -43,6 +43,7 @@ namespace Candy
     void quit();
     sf::Font& getFont();
 	const Settings & getSettings() const;
+	void setSettings(Settings s);
 
     //			World * getWorld();
   };//class Game

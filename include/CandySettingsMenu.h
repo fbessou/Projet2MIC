@@ -2,7 +2,7 @@
 #define _CANDY_SETTINGSMENU_H_
 #include <string>
 #include "CandyGameState.h"
-
+#include "CandySettings.h"
 #include <SFML/Graphics.hpp>
 
 namespace Candy
@@ -23,6 +23,7 @@ namespace Candy
     //to remember from where the SettingsMenu State was called and to go back to it
     GameState * mpreviousState;
 	std::string mPreviousTitle;
+	Settings mCurrentSettings;
 
     enum Choice {KEYBOARD=0, VOLUME, DISPLAY, RETURN};
 	enum Menu {MENU1=0, MENU2};
@@ -40,16 +41,26 @@ namespace Candy
 	sf::Text keyboardTxt;
 	sf::Text player1Txt;
 	sf::Text primary1Txt;
+	sf::Text p1ValueTxt;
 	sf::Text secondary1Txt;
+	sf::Text s1ValueTxt;
 	sf::Text left1Txt;
+	sf::Text l1ValueTxt;
 	sf::Text right1Txt;
+	sf::Text r1ValueTxt;
 	sf::Text forward1Txt;
+	sf::Text f1ValueTxt;
 	sf::Text player2Txt;
 	sf::Text primary2Txt;
+	sf::Text p2ValueTxt;
 	sf::Text secondary2Txt;
+	sf::Text s2ValueTxt;
 	sf::Text left2Txt;
+	sf::Text l2ValueTxt;
 	sf::Text right2Txt;
+	sf::Text r2ValueTxt;
 	sf::Text forward2Txt;
+	sf::Text f2ValueTxt;
 
 	sf::Text volumeTxt;
 	sf::Text volTxt;

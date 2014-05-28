@@ -30,6 +30,7 @@ namespace Candy
     void enter() override;
     bool update(const Real &) override;
     void leave() override;
+	void updateSettings();
 	
 	void onLostFocus() override;
   };

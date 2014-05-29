@@ -3,13 +3,14 @@
 #include "CandyBullet.h"
 #include "CandyWorld.h"
 #include "CandyTextureManager.h"
+#include "CandyRocketLauncher.h"
 #define MAX_WEAPON_LEVEL 5
 using namespace Candy;
 
 BasicWeapon::BasicWeapon(Ship * owner):Weapon(owner,1,3),
 	mLevel(1),
 	mStep(0),
-	mNextLevelScore(500),
+	mNextLevelScore(150),
 	mCurrentLevelScore(0),
 	mShotSpeed(200)
 
@@ -23,6 +24,7 @@ BasicWeapon::~BasicWeapon()
 
 unsigned int BasicWeapon::fire()
 {
+	mCounter++;
 	Team * team = mOwner->getTeam();
 	Vector shipDir = mOwner->getDirectionVector();
 	Vector aimDir = mOwner->getAimDirection();
@@ -47,12 +49,20 @@ unsigned int BasicWeapon::fire()
 		mOwner->getWorld()->addActor(new Bullet(team,source-left*7,aimDir.rotated(-10,Math::DEGREE)*mShotSpeed));
 
 	}
-	else if(mLevel>=4)
+	else if(mLevel==4)
 	{
 		mOwner->getWorld()->addActor(new Bullet(team,source+left*7,aimDir*mShotSpeed));
 		mOwner->getWorld()->addActor(new Bullet(team,source-left*7,aimDir*mShotSpeed));
 		mOwner->getWorld()->addActor(new Bullet(team,source+left*7,aimDir.rotated(10,Math::DEGREE)*mShotSpeed));
 		mOwner->getWorld()->addActor(new Bullet(team,source-left*7,aimDir.rotated(-10,Math::DEGREE)*mShotSpeed));
+	}
+	else
+	{
+		Real mul = (mCounter%8+3);
+		mOwner->getWorld()->addActor(new Bullet(team,source+left*7,aimDir*mShotSpeed*1.5));
+		mOwner->getWorld()->addActor(new Bullet(team,source-left*7,aimDir*mShotSpeed*1.5));
+		mOwner->getWorld()->addActor(new Bullet(team,source+left*7,aimDir.rotated(5*mul,Math::DEGREE)*mShotSpeed*(1+mul/10)));
+		mOwner->getWorld()->addActor(new Bullet(team,source-left*7,aimDir.rotated(-5*mul,Math::DEGREE)*mShotSpeed*(1+mul/10)));
 	}
 	return 0;
 }
@@ -84,17 +94,17 @@ void BasicWeapon::changeFireRate()
 		mShotSpeed = (450 - 350 )*mStep + 350;
 		mFireRate =  (4. - 2.)*mStep + 2.;
 	}
-	else
+	else if(mLevel == 4)
 	{
-		mShotSpeed = (500 - 400 )*mStep + 400;
-		mFireRate =  (3. - 2.)*mStep + 2.;
+		mShotSpeed = (450 - 300 )*mStep + 300;
+		mFireRate =  (5. - 2.)*mStep + 2.;
 	}
 }
 
 void BasicWeapon::improve()
 {
 	mCurrentLevelScore=mNextLevelScore;
-	mNextLevelScore=2.25*mCurrentLevelScore;
+	mNextLevelScore=2.10*mCurrentLevelScore;
 	mLevel++;
 	std::cout<<mNextLevelScore<<" : "<<mLevel<<std::endl;
 }

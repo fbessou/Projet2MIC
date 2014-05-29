@@ -18,9 +18,11 @@ namespace Candy
 	  Ship * mShip2;
 	  Real mNextAsteroidPopDate;
 	  protected:
+	  bool mEnded;
+	  sf::Text mGameOverText;
+	  sf::Text mGameOverSubText;
 	  World mWorld;
 	  Real mClock;
-
 	  
 	  void asteroidGeneration( const Real &);
 	  void showOverlays() const;

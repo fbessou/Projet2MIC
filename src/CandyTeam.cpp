@@ -30,3 +30,8 @@ Team * Team::getOpponent()
 {
 	return mOpponent;
 }
+
+const unsigned int & Team::getScore() const
+{
+	return mScore;
+}

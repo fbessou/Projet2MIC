@@ -30,6 +30,8 @@ Game::~Game()
 		delete mCurrentState;
 
 	delete mWindow;
+	delete mTextureManager;
+	delete mSoundManager;
 }
 
 void Game::start()
@@ -106,6 +108,7 @@ void Game::updateDebug()
 void Game::initResources()
 {
 	mTextureManager = new TextureManager();
+	mSoundManager = new SoundManager();
 	sf::Texture * tex;
 	tex = mTextureManager->addTexture("NightSky","media/sky.png");
 	tex->setRepeated(true);
@@ -118,6 +121,15 @@ void Game::initResources()
 	mTextureManager->addTexture("AsteroidDefault","media/asteroid.png");
 	mTextureManager->addTexture("AsteroidLife","media/asteroidLife.png");
 	mTextureManager->addTexture("AsteroidRocket","media/asteroidRocket.png");
+	mSoundManager->addSound("0","media/do.ogg");
+	mSoundManager->addSound("1","media/re.ogg");
+	mSoundManager->addSound("2","media/fa.ogg");
+	mSoundManager->addSound("3","media/sol.ogg");
+	mSoundManager->addSound("4","media/la.ogg");
+	mSoundManager->addSound("5","media/do2.ogg");
+	mSoundManager->addSound("6","media/re2.ogg");
+	mSoundManager->addSound("LifeUp","media/lifeup.ogg");
+	mSoundManager->addSound("LifeDown","media/lifedown.ogg");
 }
 
 void Game::quit()

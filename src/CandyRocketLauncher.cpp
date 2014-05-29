@@ -5,24 +5,31 @@
 #include "CandyWorld.h"
 
 using namespace Candy;
-Rocket::Rocket(Team * team, const Vector & position, const Vector & velocity,const Actor * target): Actor("Rocket",position,new Body(Body::Circle{5}),velocity,BULLET_LAYER),mTarget(target),mTimeToLive(7),mDestroyed(false),mTeam(team)
+Rocket::Rocket(Team * team, const Vector & position, const Vector & velocity,const Actor * target):
+   	Actor("Rocket",position,new Body(Body::Circle{12}),
+			velocity,BULLET_LAYER),
+	mTarget(target),
+	mTimeToLive(7),mDestroyed(false),mTeam(team),
+	mMaxScale(0.8),
+	mDamagesInflicted(30),
+	mAnimate(true)
 {
-	setTexture(TextureManager::getInstance().getTexture("Bullet"));
+	setTexture(TextureManager::getInstance().getTexture("Rocket"));
 	setTextureColor(mTeam->color);
 	setDirectionVector(velocity);
-	setScale(3);
+	setScale(mMaxScale);
 }
 
 bool Rocket::update(const Real & timeSinceLastFrame)
 {
-
 	mTimeToLive -= timeSinceLastFrame;
-	if(mTimeToLive < 1)
+	//start to decrease the scale of the bullet
+	if(mTimeToLive < 0.3 && mAnimate)
 	{
 		sf::Color col = getTextureColor();
-		col.a = 255*(mTimeToLive);
+		col.a = 255*(mTimeToLive/0.3);
 		setTextureColor(col);
-		setScale(3*mTimeToLive);
+		setScale(mMaxScale*mTimeToLive/0.3);
 	}
 	if(mDestroyed == true || mTimeToLive<0)
 		return false;
@@ -45,12 +52,15 @@ void Rocket::onCollision(Actor * actor)
 	if(actor->getType() == "Ship" )
 	{
 		if(static_cast<Ship*>(actor)->getTeam() != mTeam)
+		{
+			mTeam->score(20);
 			mDestroyed = true;
+		}
 	}
 
 }
 
-RocketLauncher::RocketLauncher(Ship * owner):Weapon(owner,5,3)
+RocketLauncher::RocketLauncher(Ship * owner):Weapon(owner,2,3)
 {
 
 }
@@ -62,7 +72,7 @@ RocketLauncher::~RocketLauncher()
 
 unsigned int RocketLauncher::fire()
 {
-	mOwner->getWorld()->addActor(new Rocket(mOwner->getTeam(),mOwner->getPosition(),mOwner->getAimDirection()*500,mOwner->getTeam()->getOpponent()->getShip()));
+	mOwner->getWorld()->addActor(new Rocket(mOwner->getTeam(),mOwner->getPosition()+mOwner->getDirectionVector()*30,mOwner->getAimDirection()*500,mOwner->getTeam()->getOpponent()->getShip()));
 	return 1;
 }
 

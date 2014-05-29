@@ -12,6 +12,7 @@ namespace Candy
 			Rocket(Team * owner, const Vector & position, const Vector & direction, const Actor * target);
 			bool update(const Real & timeSinceLastFrame) override;
 			void onCollision(Actor * actor) override;
+			const unsigned int & getDamages()const {return mDamagesInflicted;}
 			
 			Team * getTeam();
 		protected:
@@ -19,6 +20,9 @@ namespace Candy
 			Real mTimeToLive;
 			bool mDestroyed;
 			Team * mTeam;
+			Real mMaxScale;
+			unsigned int mDamagesInflicted;
+			bool mAnimate;
 		
 	};
 

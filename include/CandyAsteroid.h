@@ -17,6 +17,7 @@ namespace Candy
 			bool mHit;
 			World *mWorld;
 			const Real mAngularVelocity;
+			Real mImplodeAnimationTime;
 			Bonus::Type mBonus;
 
 

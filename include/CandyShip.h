@@ -42,6 +42,7 @@ namespace Candy
 			//Life HUD
 			MeasureBar mLifeBar;
 			Vector mAimDirection;
+			Real mRecoveryTime;
 		private :
 			Vector getBaseRelativePosition() const;
 	};

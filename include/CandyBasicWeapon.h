@@ -7,6 +7,7 @@ namespace Candy
 	class BasicWeapon : public Weapon
 	{
 		protected:
+			unsigned short mCounter;
 			unsigned int mLevel;
 			Real  mStep;
 			unsigned int mNextLevelScore;

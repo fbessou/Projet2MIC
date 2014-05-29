@@ -1,4 +1,5 @@
 #include "CandyTextureManager.h"
+#include "CandySoundManager.h"
 #include "CandyBody.h"
 #include "CandyMath.h"
 #include "CandyShip.h"
@@ -23,7 +24,7 @@ Body * createShipBody()
 	return new Body(hull); 
 }
 
-Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,createShipBody(),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr),mLifeBar(sf::Color(0,255,0,125),sf::Color(255,0,0,125),{50,5},1)
+Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,createShipBody(),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr),mLifeBar(sf::Color(0,255,0,125),sf::Color(255,0,0,125),{50,5},1),mRecoveryTime(-1)
 
 {
 	mTeam = owner;
@@ -82,6 +83,13 @@ void Ship::forwardImpulse()
 
 bool Ship::update(const Real & timeSinceLastFrame)
 {
+	if(mRecoveryTime>0)
+	{
+		setTextureColor(sf::Color(255,20,20,255));
+		mRecoveryTime-=timeSinceLastFrame;
+	}
+	else
+		setTextureColor(sf::Color(255,255,255,255));
 	mAimDirection = getDirectionVector();
 	Vector relPosition = getBaseRelativePosition();
 	Vector startPosition = getPosition();
@@ -98,7 +106,7 @@ bool Ship::update(const Real & timeSinceLastFrame)
 			mVelocity=Vector(0,0);
 	}
 
-	if(relPosition.y < 400)
+	if(relPosition.y < 360)
 	{
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.right))
 		{
@@ -108,7 +116,7 @@ bool Ship::update(const Real & timeSinceLastFrame)
 		}
 	}
 
-	if(relPosition.y>-400)
+	if(relPosition.y>-360)
 	{
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.left))
 		{
@@ -170,21 +178,22 @@ void Ship::onCollision( Actor * actor)
 	}
 	else if(actor->getType()=="Rocket")
 	{
-		Rocket * blt = static_cast<Rocket*>(actor);
-		if(blt->getTeam()!=mTeam)
+		Rocket * rckt = static_cast<Rocket*>(actor);
+		if(rckt->getTeam()!=mTeam)
 		{
-			takeDamage(5);
+			takeDamage(rckt->getDamages());
 		}
 	}
 	else if(actor->getType()=="Asteroid")
 	{
-			takeDamage(10);
+			takeDamage(20);
 	}
 
 }
 
 bool Ship::takeDamage(const Real & damages)
 {
+	mRecoveryTime=0.08;
 	setLife(mLife-Math::clamp(damages,0,mLife));
 	if(getLife()==0)
 		return false;

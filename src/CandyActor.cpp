@@ -35,7 +35,7 @@ void Actor::draw(sf::RenderTarget & target)
 	target.draw(*getSprite(),sf::RenderStates::Default);
 	if(!isGhost())
 	{
-		sf::Drawable * hullShape = getBody()->getAsDrawable(mPosition,getRotation());
+		sf::Drawable * hullShape = getBody()->getAsDrawable(mPosition,getRotation(Math::DEGREE));
 		target.draw(*hullShape);
 		delete hullShape;
 	}

@@ -16,19 +16,19 @@ using namespace std;
 Body * createShipBody()
 {
 	Body::ConvexHull hull;
-	hull.addPoint(Vector(0,32));
+	hull.addPoint(Vector(32,0));
 	//hull.addPoint(Vector(5,25));
-	hull.addPoint(Vector(25,15));
+	hull.addPoint(Vector(15,25));
 	//hull.addPoint(Vector(32,0));
-	hull.addPoint(Vector(30,0));
+	hull.addPoint(Vector(0,30));
 	//hull.addPoint(Vector(15,-5));
 	//hull.addPoint(Vector(16,-12));
-	hull.addPoint(Vector(8,-32));
-	hull.addPoint(Vector(-8,-32));
+	hull.addPoint(Vector(-32,8));
+	hull.addPoint(Vector(-32,-8));
 	//hull.addPoint(Vector(-16,-12));
 	//hull.addPoint(Vector(-15,-5));
-	hull.addPoint(Vector(-30,0));
-	hull.addPoint(Vector(-25,15));
+	hull.addPoint(Vector(0,-30));
+	hull.addPoint(Vector(15,-25));
 	//hull.addPoint(Vector(-5,25));
 	//hull.addPoint(Vector(0,-32));
 	//hull.addPoint(Vector(-32,0));

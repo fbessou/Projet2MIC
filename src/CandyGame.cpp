@@ -63,7 +63,7 @@ sf::Font& Game::getFont()
 	return mFont;
 }
 
-const Settings & Game::getSettings() const
+Settings Game::getSettings()
 {
 	return mSettings;
 }

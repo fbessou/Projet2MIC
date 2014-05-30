@@ -27,7 +27,7 @@ namespace Candy
 
     enum Choice {KEYBOARD=0, VOLUME, DISPLAY, RETURN};
 	enum Menu {MENU1=0, MENU2};
-	enum keyMenu {PRIMARY1=0,SECONDARY1,LEFT1,RIGHT1,FORWARD1,PRIMARY2,SECONDARY2,LEFT2,RIGHT2,FORWARD2};
+	enum keyMenu {PRIMARY1=0,SECONDARY1,LEFT1,RIGHT1,FORWARD1,PRIMARY2,SECONDARY2,LEFT2,RIGHT2,FORWARD2,SAVE,RESTORE};
     Choice Selected;
 	Menu SelectedMenu;
 	keyMenu SelectedKey;
@@ -61,6 +61,8 @@ namespace Candy
 	sf::Text r2ValueTxt;
 	sf::Text forward2Txt;
 	sf::Text f2ValueTxt;
+	sf::Text saveTxt;
+	sf::Text restoreTxt;
 
 	sf::Text volumeTxt;
 	sf::Text volTxt;

@@ -29,7 +29,7 @@ namespace Candy
     sf::Text mFPSText;
     void updateDebug();
 
-	Settings mSettings;
+	Settings *mSettings;
 
     sf::Clock clock;
   protected:
@@ -42,7 +42,7 @@ namespace Candy
     void changeState(GameState * state);
     void quit();
     sf::Font& getFont();
-	const Settings & getSettings() const;
+	Settings getSettings();
 	void setSettings(Settings s);
 
     //			World * getWorld();

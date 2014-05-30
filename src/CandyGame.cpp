@@ -65,7 +65,7 @@ sf::Font& Game::getFont()
 	return mFont;
 }
 
-Settings Game::getSettings()
+Settings & Game::getSettings()
 {
 	return mSettings;
 }

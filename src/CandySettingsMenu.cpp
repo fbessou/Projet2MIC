@@ -251,16 +251,32 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 		}
 		bool test=false;
 		//tests for changing parameters
-		if ((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::Return)) && Selected!=RETURN)
+		if (((Keyboard::isKeyPressed(Keyboard::Right) && SelectedMenu == MENU1) || Keyboard::isKeyPressed(Keyboard::Return)) && Selected!=RETURN)
 		{
 			if (SelectedMenu==MENU1)
 			{
 				SelectedMenu=MENU2;
-			}else{
+			}else if(SelectedKey != RESTORE){
 				test=true;
 			}
+			else
+			{
+				mGame->getSettings().loadDefault();
+				mCurrentSettings= mGame->getSettings();
+				p1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary));
+				s1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.secondary));
+				l1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.left));
+				r1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.right));
+				f1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.forward));
+				p2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.primary));
+				s2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.secondary));
+				l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
+				r2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.right));
+				f2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.forward));
+				cout<<mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary)<<endl;
+			}
 		}
-		
+
 		if (test)
 		{
 			bool fini=false;
@@ -330,19 +346,6 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 									fini=true;
 									break;
 								case RESTORE:
-									mGame->getSettings().loadDefault();
-									p1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary));
-									s1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.secondary));
-									l1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.left));
-									r1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.right));
-									f1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.forward));
-									p2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.primary));
-									s2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.secondary));
-									l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
-									l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
-									l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
-									cout<<mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary)<<endl;
-									fini=true;
 									break;
 								default:
 									fini=true;
@@ -390,7 +393,7 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 			returnTxt.setColor(mActiveColor);
 			break;
 	}
-	
+
 	switch (SelectedKey)
 	{
 		case PRIMARY1:
@@ -731,10 +734,10 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 	mWindow->draw(returnTxt);
 
 	if ((Keyboard::isKeyPressed(Keyboard::Space) || Keyboard::isKeyPressed(Keyboard::Return)) && (Selected == RETURN) && (SelectedMenu == MENU1))
-    {
-      mWindow->setTitle(mPreviousTitle);
-      mGame->changeState(mpreviousState);
-      delete this;
+	{
+		mWindow->setTitle(mPreviousTitle);
+		mGame->changeState(mpreviousState);
+		delete this;
 	}
 
 	return true;

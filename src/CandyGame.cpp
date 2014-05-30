@@ -114,7 +114,7 @@ void Game::initResources()
 	tex = mTextureManager->addTexture("NightSky","media/sky.png");
 	tex->setRepeated(true);
 
-	mTextureManager->addTexture("BlueShip","media/test.png");
+	mTextureManager->addTexture("BlueShip","media/ship.png");
 	mTextureManager->addTexture("Bullet","media/projectile.png");
 	mTextureManager->addTexture("Rocket","media/rocket.png");
 	mTextureManager->addTexture("BonusM","media/bonusM.png");

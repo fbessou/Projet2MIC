@@ -22,7 +22,7 @@ namespace Candy
     int keySelection;
     Choice Selected;
 
-    GameState *mGameSession;
+    Play *mGameSession;
 	std::string mPreviousTitle;
     
 	sf::RectangleShape  mTransparentLayer;

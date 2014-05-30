@@ -54,7 +54,9 @@ void Pause::enter(){
 	mWindow->setTitle("Candy Saga ~Pause~");
 	SoundManager::getInstance().fadeIn("MenuMusic");
 }
-void Pause::leave(){}
+void Pause::leave(){
+	mGameSession->updateSettings();
+}
 
 bool Pause::update(const Real & timeSinceLastFrame){
 	mWindow->clear();

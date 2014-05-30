@@ -118,6 +118,12 @@ bool Play::update(const Real & timeSinceLastFrame)
 	return true;
 }
 
+void Play::updateSettings()
+{
+	mTeam1->keys=mGame->getSettings().mBinding1;
+	mTeam2->keys=mGame->getSettings().mBinding2;
+}
+
 void Play::onLostFocus()
 {
 	mGame->changeState(new Pause(mGame,mWindow,this));

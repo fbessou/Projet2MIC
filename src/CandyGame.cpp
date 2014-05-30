@@ -30,6 +30,8 @@ Game::~Game()
 		delete mCurrentState;
 
 	delete mWindow;
+	delete mTextureManager;
+	delete mSoundManager;
 }
 
 void Game::start()
@@ -72,6 +74,7 @@ void Game::update()
 {
 		sf::Event event;
 		
+		mSoundManager->update(mSPF);
 		mCurrentState->update(mSPF);
 
 		while (mWindow->isOpen() && mWindow->pollEvent(event) && !hasExited){
@@ -106,15 +109,31 @@ void Game::updateDebug()
 void Game::initResources()
 {
 	mTextureManager = new TextureManager();
+	mSoundManager = new SoundManager();
 	sf::Texture * tex;
 	tex = mTextureManager->addTexture("NightSky","media/sky.png");
 	tex->setRepeated(true);
 
-	mTextureManager->addTexture("BlueShip","media/test.png");
+	mTextureManager->addTexture("BlueShip","media/ship.png");
 	mTextureManager->addTexture("Bullet","media/projectile.png");
+	mTextureManager->addTexture("Rocket","media/rocket.png");
 	mTextureManager->addTexture("BonusM","media/bonusM.png");
 	mTextureManager->addTexture("Flare","media/flare.png");
-	mTextureManager->addTexture("Asteroid","media/asteroid.png");
+	mTextureManager->addTexture("AsteroidDefault","media/asteroid.png");
+	mTextureManager->addTexture("AsteroidLife","media/asteroidLife.png");
+	mTextureManager->addTexture("AsteroidRocket","media/asteroidRocket.png");
+	mSoundManager->addSound("0","media/do.ogg");
+	mSoundManager->addSound("1","media/re.ogg");
+	mSoundManager->addSound("2","media/fa.ogg");
+	mSoundManager->addSound("3","media/sol.ogg");
+	mSoundManager->addSound("4","media/la.ogg");
+	mSoundManager->addSound("5","media/do2.ogg");
+	mSoundManager->addSound("6","media/re2.ogg");
+	mSoundManager->addSound("LifeUp","media/lifeup.ogg");
+	mSoundManager->addSound("Damage1","media/action1.ogg");
+	mSoundManager->addSound("Damage2","media/action2.ogg");
+	mSoundManager->addSound("Damage3","media/action3.ogg");
+	mSoundManager->addMusic("MenuMusic","media/menu.ogg");
 }
 
 void Game::quit()

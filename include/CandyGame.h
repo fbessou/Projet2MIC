@@ -9,6 +9,7 @@ namespace Candy
 #include "CandyCommon.h"
 #include "CandyGameState.h"
 #include "CandyTextureManager.h"
+#include "CandySoundManager.h"
 #include "CandySettings.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -23,6 +24,7 @@ namespace Candy
     bool hasExited;
     sf::Font mFont;
 	TextureManager * mTextureManager;
+	SoundManager * mSoundManager;
     sf::Clock mClock;
     unsigned int mFrameCount;
     Real mSPF;

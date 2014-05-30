@@ -3,6 +3,7 @@
 
 #include "CandyCommon.h"
 #include "CandyActor.h"
+#include "CandyBonus.h"
 namespace Candy
 {
 	class Asteroid : public Actor
@@ -13,9 +14,11 @@ namespace Candy
 			bool update(const Real & timeSinceLastFrame);
 			void onCollision(Actor * actor);
 		private:
-			bool mHitBullet;
+			bool mHit;
 			World *mWorld;
 			const Real mAngularVelocity;
+			Real mImplodeAnimationTime;
+			Bonus::Type mBonus;
 
 
 	};

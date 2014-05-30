@@ -14,7 +14,7 @@ Pause::Pause(Game *game, RenderWindow * window,Play * gameSession):
 	mDisabledColor=Color(90,90,90);
 
 	mTransparentLayer = RectangleShape(Vector(mWindow->getSize().x,mWindow->getSize().y));
-	mTransparentLayer.setFillColor(sf::Color(0,0,0,125));
+	mTransparentLayer.setFillColor(sf::Color(0,0,0,180));
 	sf::FloatRect textRect = titleTxt.getLocalBounds();
 	titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
@@ -52,6 +52,7 @@ Pause::~Pause()
 
 void Pause::enter(){
 	mWindow->setTitle("Candy Saga ~Pause~");
+	SoundManager::getInstance().fadeIn("MenuMusic");
 }
 void Pause::leave(){}
 
@@ -79,6 +80,7 @@ bool Pause::update(const Real & timeSinceLastFrame){
 				case PLAY:
 					mWindow->setTitle(mPreviousTitle);
 					mGame->changeState(mGameSession);
+					SoundManager::getInstance().fadeOut("MenuMusic");
 					break;
 				case SETTINGS:
 					mGame->changeState(new SettingsMenu(mGame, mWindow,this));

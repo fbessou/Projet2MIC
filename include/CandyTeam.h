@@ -16,12 +16,15 @@ namespace Candy
 		protected:
 			unsigned int mScore;
 			Ship * mShip;
+			Team * mOpponent;
 		public:
 			Team(const sf::Color &,const Vector &, const Vector &, const KeyBinding & );
 
 			const unsigned int & getScore() const;
 			void score (const unsigned int &);
 			Ship * getShip(){return mShip;}
+			void setOpponent(Team * team);
+			Team * getOpponent();
 
 	};
 };

@@ -1,10 +1,12 @@
 #include "CandyTextureManager.h"
+#include "CandySoundManager.h"
 #include "CandyBody.h"
 #include "CandyMath.h"
 #include "CandyShip.h"
 #include "CandyTeam.h"
 #include "CandyBasicWeapon.h"
 #include "CandyBullet.h"
+#include "CandyRocketLauncher.h"
 #include "CandyWorld.h"
 #include <iostream>
 
@@ -34,7 +36,7 @@ Body * createShipBody()
 	return new Body(hull); 
 }
 
-Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,createShipBody(),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr),mLifeBar(sf::Color(0,255,0,125),sf::Color(255,0,0,125),{50,5},1)
+Ship::Ship(Team * owner, unsigned int maxLife) : Actor("Ship",owner->shipBase,createShipBody(),Vector(0,0),SHIP_LAYER),mPrimaryWeapon(nullptr),mSecondaryWeapon(nullptr),mLifeBar(sf::Color(0,255,0,125),sf::Color(255,0,0,125),{50,5},1),mRecoveryTime(-1)
 
 {
 	mTeam = owner;
@@ -62,6 +64,7 @@ Ship::~Ship()
 void Ship::setLife(unsigned int life)
 {
 	mLife = Math::clamp(life,0.,mMaxLife);
+	mLifeBar.setValue(mLife/mMaxLife);
 }
 
 unsigned int Ship::getLife() const
@@ -69,17 +72,37 @@ unsigned int Ship::getLife() const
 	return mLife;
 }
 
-void Ship::forwardImpulse()
-{
-}
-
 void Ship::setMaxLife(unsigned int newMax)
 {
 	mMaxLife = newMax;
 }
 
+void Ship::addLife(unsigned int life)
+{
+	setLife(mLife+life);
+}
+
+const MeasureBar & Ship::getLifeBar() const
+{
+	return mLifeBar;
+}
+
+void Ship::forwardImpulse()
+{
+}
+
+
+
 bool Ship::update(const Real & timeSinceLastFrame)
 {
+	if(mRecoveryTime>0)
+	{
+		setTextureColor(sf::Color(255,20,20,255));
+		mRecoveryTime-=timeSinceLastFrame;
+	}
+	else
+		setTextureColor(sf::Color(255,255,255,255));
+	mAimDirection = getDirectionVector();
 	Vector relPosition = getBaseRelativePosition();
 	Vector startPosition = getPosition();
 	if(sf::Keyboard::isKeyPressed(mTeam->keys.forward) && relPosition.x < 150)
@@ -95,20 +118,22 @@ bool Ship::update(const Real & timeSinceLastFrame)
 			mVelocity=Vector(0,0);
 	}
 
-	if(relPosition.y < 400)
+	if(relPosition.y < 360)
 	{
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.right))
 		{
 			move(Vector(0,timeSinceLastFrame*400),TS_LOCAL);
+			mAimDirection.rotate(20,Math::DEGREE);
 			//rotate(-timeSinceLastFrame*360);
 		}
 	}
 
-	if(relPosition.y>-400)
+	if(relPosition.y>-360)
 	{
 		if(sf::Keyboard::isKeyPressed(mTeam->keys.left))
 		{
 			move(Vector(0,-timeSinceLastFrame*400),TS_LOCAL);
+			mAimDirection.rotate(-20,Math::DEGREE);
 			//rotate(timeSinceLastFrame*360);
 		}
 	}
@@ -160,27 +185,40 @@ void Ship::onCollision( Actor * actor)
 		Bullet * blt = static_cast<Bullet*>(actor);
 		if(blt->getTeam()!=mTeam)
 		{
-			takeDamage(1);
+			takeDamage(5);
 		}
 	}
-	else if(actor->getType()=="Ship")
-		cout<<"I'm not a bullet"<<endl;
+	else if(actor->getType()=="Rocket")
+	{
+		Rocket * rckt = static_cast<Rocket*>(actor);
+		if(rckt->getTeam()!=mTeam)
+		{
+			takeDamage(rckt->getDamages());
+		}
+	}
+	else if(actor->getType()=="Asteroid")
+	{
+			takeDamage(20);
+	}
 
 }
 
 bool Ship::takeDamage(const Real & damages)
 {
-	mLife-=Math::clamp(2.,0.,mLife);
-	mLifeBar.setValue(mLife/mMaxLife);
-	if(mLife==0)
+	short soundId = Math::IntURNG::randomByte()%3+1;
+	SoundManager::getInstance().playSound("Damage"+std::to_string(soundId));
+	mRecoveryTime=0.08;
+	setLife(mLife-Math::clamp(damages,0,mLife));
+	if(getLife()==0)
 		return false;
 	return true;
 }
 
-const MeasureBar & Ship::getLifeBar() const
+const Vector & Ship::getAimDirection()
 {
-	return mLifeBar;
+	return mAimDirection;
 }
+
 
 // class Particle
 

@@ -12,8 +12,10 @@ namespace Candy
 			~Ship();
 			void setLife(unsigned int life);
 			unsigned int getLife() const;
-			
 			void setMaxLife(unsigned int newMax);
+			void addLife(unsigned int life);
+			const MeasureBar & getLifeBar() const;
+
 			virtual bool update(const Real & ) override ;
 			void forwardImpulse();
 			void setSecondaryWeapon(Weapon * );
@@ -23,9 +25,10 @@ namespace Candy
 			void onCollision(Actor * actor);
 			void onScore(const unsigned int & points);
 			bool takeDamage(const Real & damages);
-			const MeasureBar & getLifeBar() const;
 			const Team * getTeam()const {return mTeam;}
 			Team * getTeam() {return mTeam;}
+			const Vector & getAimDirection();
+			
 		protected:
 			Real mMaxSpeed;
 			Real mPeakTime;
@@ -38,9 +41,10 @@ namespace Candy
 			Weapon * mSecondaryWeapon;		
 			//Life HUD
 			MeasureBar mLifeBar;
+			Vector mAimDirection;
+			Real mRecoveryTime;
 		private :
 			Vector getBaseRelativePosition() const;
-			const Vector mLateralDirection;
 	};
 
 	class Particle : public Actor

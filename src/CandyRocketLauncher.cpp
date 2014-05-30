@@ -5,8 +5,22 @@
 #include "CandyWorld.h"
 
 using namespace Candy;
+
+Body * createRocketBody()
+{
+	Body::ConvexHull hull;
+	hull.addPoint(Vector(30,0));
+	hull.addPoint(Vector(25,5));
+	hull.addPoint(Vector(0,10));
+	hull.addPoint(Vector(-28,10));
+	hull.addPoint(Vector(-30,0));
+	hull.addPoint(Vector(-28,-10));
+	hull.addPoint(Vector(0,-10));
+	hull.addPoint(Vector(25,-5));
+	return new Body(hull); 
+}
 Rocket::Rocket(Team * team, const Vector & position, const Vector & velocity,const Actor * target):
-   	Actor("Rocket",position,new Body(Body::Circle{12}),
+   	Actor("Rocket",position,createRocketBody(),
 			velocity,BULLET_LAYER),
 	mTarget(target),
 	mTimeToLive(7),mDestroyed(false),mTeam(team),

@@ -99,6 +99,7 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 			convex->setFillColor(sf::Color::Transparent);
 			convex->setOutlineColor(sf::Color::Red);
 			convex->setOutlineThickness(1);
+			//convex->setRotation(rotation);
 			dr=convex;
 			break;
 		 default:
@@ -110,12 +111,12 @@ sf::Drawable * Body::getAsDrawable(const Vector & position, const Real & rotatio
 Vector Body::ConvexHull::getFarthestPoint(Vector d) const
 {
 	Vector result;
-	if(!(relativeList.empty()))
+	if(!(pointList.empty()))
 	{
-		result=(*(relativeList.begin()));
+		result=(*(pointList.begin()));
 		Real farthestDistance=dot(result,d);
 		Real tmp;
-		for (auto row:relativeList)
+		for (auto row:pointList)
 		{
 			tmp=dot(row,d);
 			if (tmp>farthestDistance)
@@ -189,7 +190,7 @@ void Body::prepare(Vector position,Real scale, Real angle, Math::AngleMode mode)
 		//calculer la position absolue
 		for (auto row:mHull.relativeList)
 		{
-			Vector vertex = row.rotated(angle,Math::DEGREE)*scale+position;
+			Vector vertex  = row.rotated(angle,Math::DEGREE)*scale+position;
 			mHull.pointList.push_back(vertex);
 		}
 	}

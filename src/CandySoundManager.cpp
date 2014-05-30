@@ -114,7 +114,6 @@ void SoundManager::update(Real timeSinceLastFrame)
 			Real volume = 100;
 			if(!fadeEnd)
 				volume=Math::clamp((100.-it->first->getVolume())*timeSinceLastFrame/remain+it->first->getVolume(),0,100);
-			std::cout<<volume<<std::endl;
 			it->first->setVolume(volume);
 
 		}

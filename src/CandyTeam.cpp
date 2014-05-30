@@ -17,7 +17,6 @@ Team::Team(const Color & _color,const Vector & base,const Vector & dir, const Ke
 void Team::score(const unsigned int & points)
 {
 	mScore+=points;
-	std::cout<<"score : "<<mScore<<std::endl;
 	mShip->onScore(mScore);
 }
 

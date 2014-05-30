@@ -29,7 +29,7 @@ namespace Candy
     sf::Text mFPSText;
     void updateDebug();
 
-	Settings *mSettings;
+	Settings mSettings;
 
     sf::Clock clock;
   protected:

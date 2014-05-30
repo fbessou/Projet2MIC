@@ -22,7 +22,7 @@ namespace Candy
 			KeyBinding mBinding2;
 			// float mVolume;
 			// bool mMute;
-			void saveSettings();
+			void saveSettings(KeyBinding k1, KeyBinding k2);
 			void loadDefault();
 			std::string keyToString(sf::Keyboard::Key k);
 	};

@@ -326,7 +326,7 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 									fini=true;
 									break;
 								case SAVE:
-									mGame->getSettings().saveSettings();
+									mGame->getSettings().saveSettings(mCurrentSettings.mBinding1,mCurrentSettings.mBinding2);
 									fini=true;
 									break;
 								case RESTORE:
@@ -341,6 +341,7 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 									l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
 									l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
 									l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
+									cout<<mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary)<<endl;
 									fini=true;
 									break;
 								default:

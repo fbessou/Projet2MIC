@@ -57,22 +57,24 @@ void Settings::loadDefault()
 
 }
 
-void Settings::saveSettings()
+void Settings::saveSettings(KeyBinding k1,KeyBinding k2)
 {
+	cout<<"Saving..."<<endl;
 	remove("./params.conf");
 	ofstream myParam;
 	myParam.open("./params.conf");
-	myParam<<(int)mBinding1.primary<<endl;
-	myParam<<(int)mBinding1.secondary<<endl;
-	myParam<<(int)mBinding1.left<<endl;
-	myParam<<(int)mBinding1.right<<endl;
-	myParam<<(int)mBinding1.forward<<endl;
-	myParam<<(int)mBinding2.primary<<endl;
-	myParam<<(int)mBinding2.secondary<<endl;
-	myParam<<(int)mBinding2.left<<endl;
-	myParam<<(int)mBinding2.right<<endl;
-	myParam<<(int)mBinding2.forward<<endl;
+	myParam<<(int)k1.primary<<endl;
+	myParam<<(int)k1.secondary<<endl;
+	myParam<<(int)k1.left<<endl;
+	myParam<<(int)k1.right<<endl;
+	myParam<<(int)k1.forward<<endl;
+	myParam<<(int)k2.primary<<endl;
+	myParam<<(int)k2.secondary<<endl;
+	myParam<<(int)k2.left<<endl;
+	myParam<<(int)k2.right<<endl;
+	myParam<<(int)k2.forward<<endl;
 	myParam.close();
+	cout<<"Saved!"<<endl;
 }
 
 string Settings::keyToString(sf::Keyboard::Key k)

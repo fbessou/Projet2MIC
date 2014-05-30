@@ -30,8 +30,8 @@ Play::Play(Game * game, RenderWindow * window):
 	mBackground.setTextureRect(IntRect(0,0,800,600));
 
 	/*On cree chaque equipe*/
-	mTeam1 = new Team(sf::Color(255,0,0,255),Vector(400,70),Vector::UNIT_Y,game->getSettings().mBinding1);
-	mTeam2 = new Team(sf::Color(10,90,250,255),Vector(400,530),-Vector::UNIT_Y,game->getSettings().mBinding2);
+	mTeam1 = new Team(sf::Color(255,27,11,255),Vector(400,70),Vector::UNIT_Y,game->getSettings().mBinding1);
+	mTeam2 = new Team(sf::Color(10,106,255,255),Vector(400,530),-Vector::UNIT_Y,game->getSettings().mBinding2);
 	mTeam1->setOpponent(mTeam2);
 	mTeam2->setOpponent(mTeam1);
 	/*On rajoute les vaisseaux*/

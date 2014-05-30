@@ -65,13 +65,14 @@ void Asteroid::onCollision(Actor * actor)
 		if(actor->getType()=="Bullet")
 		{
 			short rand = Math::IntURNG::randomByte()%7;
-			SoundManager::getInstance().getSound(std::to_string(rand))->play();
+			SoundManager::getInstance().playSound(std::to_string(rand));
 			Bullet * b = static_cast<Bullet*>(actor);
+			setTextureColor(b->getTeam()->color);
 			switch(mBonus)
 			{
 				case Bonus::Life:
 					b->getTeam()->getShip()->addLife(100);
-					SoundManager::getInstance().getSound("LifeUp")->play();
+					SoundManager::getInstance().playSound("LifeUp");
 					break;
 				case Bonus::Rocket:
 					b->getTeam()->getShip()->setSecondaryWeapon(new RocketLauncher(b->getTeam()->getShip()));

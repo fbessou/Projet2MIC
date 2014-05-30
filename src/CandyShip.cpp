@@ -193,6 +193,8 @@ void Ship::onCollision( Actor * actor)
 
 bool Ship::takeDamage(const Real & damages)
 {
+	short soundId = Math::IntURNG::randomByte()%3+1;
+	SoundManager::getInstance().playSound("Damage"+std::to_string(soundId));
 	mRecoveryTime=0.08;
 	setLife(mLife-Math::clamp(damages,0,mLife));
 	if(getLife()==0)

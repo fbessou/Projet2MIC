@@ -52,6 +52,7 @@ Pause::~Pause()
 
 void Pause::enter(){
 	mWindow->setTitle("Candy Saga ~Pause~");
+	SoundManager::getInstance().fadeIn("MenuMusic");
 }
 void Pause::leave(){}
 
@@ -79,6 +80,7 @@ bool Pause::update(const Real & timeSinceLastFrame){
 				case PLAY:
 					mWindow->setTitle(mPreviousTitle);
 					mGame->changeState(mGameSession);
+					SoundManager::getInstance().fadeOut("MenuMusic");
 					break;
 				case SETTINGS:
 					mGame->changeState(new SettingsMenu(mGame, mWindow,this));

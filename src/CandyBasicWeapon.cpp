@@ -3,6 +3,7 @@
 #include "CandyBullet.h"
 #include "CandyWorld.h"
 #include "CandyTextureManager.h"
+#include "CandySoundManager.h"
 #include "CandyRocketLauncher.h"
 #define MAX_WEAPON_LEVEL 5
 using namespace Candy;

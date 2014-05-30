@@ -74,6 +74,7 @@ void Game::update()
 {
 		sf::Event event;
 		
+		mSoundManager->update(mSPF);
 		mCurrentState->update(mSPF);
 
 		while (mWindow->isOpen() && mWindow->pollEvent(event) && !hasExited){
@@ -129,7 +130,10 @@ void Game::initResources()
 	mSoundManager->addSound("5","media/do2.ogg");
 	mSoundManager->addSound("6","media/re2.ogg");
 	mSoundManager->addSound("LifeUp","media/lifeup.ogg");
-	mSoundManager->addSound("LifeDown","media/lifedown.ogg");
+	mSoundManager->addSound("Damage1","media/action1.ogg");
+	mSoundManager->addSound("Damage2","media/action2.ogg");
+	mSoundManager->addSound("Damage3","media/action3.ogg");
+	mSoundManager->addMusic("MenuMusic","media/menu.ogg");
 }
 
 void Game::quit()

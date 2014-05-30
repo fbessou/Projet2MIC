@@ -49,8 +49,8 @@ void Settings::loadDefault()
 				sf::Keyboard::Q,
 				sf::Keyboard::S};
 
-		mBinding2={sf::Keyboard::RShift,
-				sf::Keyboard::LSystem,
+		mBinding2={sf::Keyboard::L,
+				sf::Keyboard::M,
 				sf::Keyboard::Left,
 				sf::Keyboard::Right,
 				sf::Keyboard::Up};

@@ -79,7 +79,7 @@ RocketLauncher::RocketLauncher(Ship * owner):Weapon(owner,2,3),
 {
 	sf::FloatRect rect = mRocketSprite.getLocalBounds();
 	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
-	mRocketSprite.setScale(0.5,0.5);
+	mRocketSprite.setScale(0.7,0.7);
 	mRocketSprite.setOrigin(center);
 	mRocketSprite.setColor(mOwner->getTeam()->color);
 
@@ -95,12 +95,12 @@ void RocketLauncher::draw(sf::RenderTarget & target)
 	Vector pos = -5*mOwner->getDirectionVector();
 	if(mAmmoStock >= 1)
 	{
-		mRocketSprite.setPosition(mOwner->getPosition()+pos+30*mOwner->getDirectionVector().directOrthogonal());
+		mRocketSprite.setPosition(mOwner->getPosition()+pos+20*mOwner->getDirectionVector().directOrthogonal());
 		target.draw(mRocketSprite);
 	}
 	if(mAmmoStock == 2)
 	{
-		mRocketSprite.setPosition(mOwner->getPosition()+pos-30*mOwner->getDirectionVector().directOrthogonal());
+		mRocketSprite.setPosition(mOwner->getPosition()+pos-20*mOwner->getDirectionVector().directOrthogonal());
 		target.draw(mRocketSprite);
 	}
 }

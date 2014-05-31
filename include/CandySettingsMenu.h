@@ -75,6 +75,10 @@ namespace Candy
 	sf::Text dispTxt;
 
     sf::Text returnTxt;
+
+    sf::Text keySelectTxt;
+	sf::RectangleShape menu1Rect;
+	sf::RectangleShape menu2Rect;
   };
 };
 #endif

@@ -6,7 +6,42 @@ using namespace sf;
 using namespace std;
 
 SettingsMenu::SettingsMenu(Game * game, RenderWindow * window, GameState * previousState):
-  GameState(game,window),mCurrentSettings(game->getSettings()),titleTxt("Parameters",game->getFont(),100),keyboardTxt("Keyboard",game->getFont(),40),player1Txt("Player 1 : ",game->getFont(),30),primary1Txt("Primary Weapon",game->getFont(),20),p1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary),game->getFont(),20),secondary1Txt("Secondary Weapon",game->getFont(),20),s1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.secondary),game->getFont(),20),left1Txt("Left",game->getFont(),20),l1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.left),game->getFont(),20),right1Txt("Right",game->getFont(),20),r1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.right),game->getFont(),20),forward1Txt("Up",game->getFont(),20),f1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.forward),game->getFont(),20),player2Txt("Player 2 : ",game->getFont(),30),primary2Txt("Primary Weapon",game->getFont(),20),p2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.primary),game->getFont(),20),secondary2Txt("Secondary Weapon",game->getFont(),20),s2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.secondary),game->getFont(),20),left2Txt("Left",game->getFont(),20),l2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left),game->getFont(),20),right2Txt("Right",game->getFont(),20),r2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.right),game->getFont(),20),forward2Txt("Up",game->getFont(),20),f2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.forward),game->getFont(),20),saveTxt("Save config",game->getFont(),20),restoreTxt("Default",game->getFont(),20),volumeTxt("Volume",game->getFont(),40),volTxt("Not implemented yet",game->getFont(),40),displayTxt("Display",game->getFont(),40),dispTxt("Nor this one",game->getFont(),40),returnTxt("Return",game->getFont(),40)
+  GameState(game,window),
+	mCurrentSettings(game->getSettings()),
+	titleTxt("Parameters",game->getFont(),100),
+	keyboardTxt("Keyboard",game->getFont(),40),
+	player1Txt("Player 1 : ",game->getFont(),30),
+	primary1Txt("Primary Weapon",game->getFont(),20),
+	p1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary),game->getFont(),20),
+	secondary1Txt("Secondary Weapon",game->getFont(),20),
+	s1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.secondary),game->getFont(),20),
+	left1Txt("Left",game->getFont(),20),
+	l1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.left),game->getFont(),20),
+	right1Txt("Right",game->getFont(),20),
+	r1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.right),game->getFont(),20),
+	forward1Txt("Up",game->getFont(),20),
+	f1ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.forward),game->getFont(),20),
+	player2Txt("Player 2 : ",game->getFont(),30),
+	primary2Txt("Primary Weapon",game->getFont(),20),
+	p2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.primary),game->getFont(),20),
+	secondary2Txt("Secondary Weapon",game->getFont(),20),
+	s2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.secondary),game->getFont(),20),
+	left2Txt("Left",game->getFont(),20),
+	l2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left),game->getFont(),20),
+	right2Txt("Right",game->getFont(),20),
+	r2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.right),game->getFont(),20),
+	forward2Txt("Up",game->getFont(),20),
+	f2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.forward),game->getFont(),20),
+	saveTxt("Save config",game->getFont(),20),
+	restoreTxt("Default",game->getFont(),20),
+	volumeTxt("Volume",game->getFont(),40),
+	volTxt("Not implemented yet",game->getFont(),40),
+	displayTxt("Display",game->getFont(),40),
+	dispTxt("Nor this one",game->getFont(),40),
+	returnTxt("Return",game->getFont(),40),
+	keySelectTxt("[...]",game->getFont(),20),
+	menu1Rect(sf::Vector2f(mWindow->getSize().x/3.,mWindow->getSize().y*2./3)),
+	menu2Rect(sf::Vector2f(mWindow->getSize().x*2./3,mWindow->getSize().y*2./3.))
 {
 	sf::FloatRect textRect = titleTxt.getLocalBounds();
 	titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
@@ -15,7 +50,7 @@ SettingsMenu::SettingsMenu(Game * game, RenderWindow * window, GameState * previ
 	textRect = keyboardTxt.getLocalBounds();
 	keyboardTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	keyboardTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f/3.0,mWindow->getSize().y/2.0f*2.0/3.0));
-	
+
 	// menu for player 1 's keyboard
 	textRect = player1Txt.getLocalBounds();
 	player1Txt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
@@ -88,7 +123,7 @@ SettingsMenu::SettingsMenu(Game * game, RenderWindow * window, GameState * previ
 	textRect = l2ValueTxt.getLocalBounds();
 	l2ValueTxt.setOrigin(textRect.left,textRect.top+textRect.height/2.0f);
 	l2ValueTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f*7.0/4.0,mWindow->getSize().y/2.0f*18.0/12.0));
-	
+
 	textRect = right2Txt.getLocalBounds();
 	right2Txt.setOrigin(textRect.left,textRect.top+textRect.height/2.0f);
 	right2Txt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*19.0/12.0));
@@ -133,6 +168,16 @@ SettingsMenu::SettingsMenu(Game * game, RenderWindow * window, GameState * previ
 	returnTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	returnTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f/3.0,mWindow->getSize().y/2.0f*5.0/3.0));
 
+	//Added for a better visibility
+	textRect = keySelectTxt.getLocalBounds();
+	keySelectTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
+	keySelectTxt.setPosition(Vector2f(mWindow->getSize().x/2.,mWindow->getSize().y-15));
+
+	menu1Rect.setPosition(0,mWindow->getSize().y/4.+20);
+	menu2Rect.setPosition(menu1Rect.getSize().x,mWindow->getSize().y/4.+20);
+	menu1Rect.setFillColor(Color(10,10,10,255));
+	menu2Rect.setFillColor(Color(5,5,5,255));
+
 	mActiveColor = Color::White;
 	mInactiveColor = Color(150,150,150);
 
@@ -176,14 +221,15 @@ SettingsMenu::SettingsMenu(Game * game, RenderWindow * window, GameState * previ
 
 	volumeTxt.setColor(mInactiveColor);
 	volTxt.setColor(Color::Green);
-//	setVolumeTxt.setColor(mActiveColor);
-//	setMuteTxt.setColor(mInactiveColor);
-//	SelectedVolume = VOLUME;
+	//	setVolumeTxt.setColor(mActiveColor);
+	//	setMuteTxt.setColor(mInactiveColor);
+	//	SelectedVolume = VOLUME;
 
 	displayTxt.setColor(mInactiveColor);
 	dispTxt.setColor(Color::Green);
 
 	returnTxt.setColor(mInactiveColor);
+	keySelectTxt.setColor(Color::White);
 
 	mpreviousState = previousState;
 
@@ -255,12 +301,16 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 		{
 			if (SelectedMenu==MENU1)
 			{
+				Color tmp = menu1Rect.getFillColor();
+				menu1Rect.setFillColor(menu2Rect.getFillColor());
+				menu2Rect.setFillColor(tmp);
 				SelectedMenu=MENU2;
-			}else if(SelectedKey != RESTORE){
+			}else if(SelectedKey != RESTORE && SelectedKey != SAVE){
 				test=true;
 			}
-			else
+			else if(SelectedKey == RESTORE)
 			{
+				//restore default settings
 				mGame->getSettings().loadDefault();
 				mCurrentSettings= mGame->getSettings();
 				p1ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary));
@@ -273,12 +323,17 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 				l2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.left));
 				r2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.right));
 				f2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.forward));
-				cout<<mCurrentSettings.keyToString(mCurrentSettings.mBinding1.primary)<<endl;
+			}
+			else // SAVE
+			{
+				mGame->getSettings().saveSettings(mCurrentSettings.mBinding1,mCurrentSettings.mBinding2);
 			}
 		}
 
 		if (test)
 		{
+			mWindow->draw(keySelectTxt);
+			mWindow->display();
 			bool fini=false;
 			sf::Event event;
 			while (mWindow->isOpen() && mWindow->pollEvent(event)){}
@@ -341,12 +396,6 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 									f2ValueTxt.setString(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.forward));
 									fini=true;
 									break;
-								case SAVE:
-									mGame->getSettings().saveSettings(mCurrentSettings.mBinding1,mCurrentSettings.mBinding2);
-									fini=true;
-									break;
-								case RESTORE:
-									break;
 								default:
 									fini=true;
 									break;
@@ -361,6 +410,9 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 
 		if (((Keyboard::isKeyPressed(Keyboard::Escape)) || (Keyboard::isKeyPressed(Keyboard::Left))) && (SelectedMenu==MENU2))
 		{
+			Color tmp = menu1Rect.getFillColor();
+			menu1Rect.setFillColor(menu2Rect.getFillColor());
+			menu2Rect.setFillColor(tmp);
 			SelectedMenu=MENU1;
 		}
 	}
@@ -688,6 +740,8 @@ bool SettingsMenu::update(const Real & timeSinceLastFrame){
 
 	mWindow->clear();
 
+	mWindow->draw(menu1Rect);
+	mWindow->draw(menu2Rect);
 	// to change the menu context
 	switch (Selected)
 	{

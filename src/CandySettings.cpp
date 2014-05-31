@@ -13,7 +13,7 @@ Settings::Settings()
 	{
 		int a;
 		// TO DO load from file & save from SettingsMenu ?
-		cout<<"Loading Parameters"<<endl;
+		//cout<<"Loading Parameters"<<endl;
 		myParam>>a;
 		mBinding1.primary=(sf::Keyboard::Key)a;
 		myParam>>a;
@@ -59,7 +59,6 @@ void Settings::loadDefault()
 
 void Settings::saveSettings(KeyBinding k1,KeyBinding k2)
 {
-	cout<<"Saving..."<<endl;
 	remove("./params.conf");
 	ofstream myParam;
 	myParam.open("./params.conf");
@@ -74,7 +73,7 @@ void Settings::saveSettings(KeyBinding k1,KeyBinding k2)
 	myParam<<(int)k2.right<<endl;
 	myParam<<(int)k2.forward<<endl;
 	myParam.close();
-	cout<<"Saved!"<<endl;
+	//cout<<"Saved!"<<endl;
 }
 
 string Settings::keyToString(sf::Keyboard::Key k)

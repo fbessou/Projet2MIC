@@ -38,6 +38,7 @@ namespace Candy
 			virtual ~Weapon();
 			bool tryFiring(const Real &);
 			const Real & getFireRate() const ;
+			virtual void draw(sf::RenderTarget &){};
 
 	};
 };

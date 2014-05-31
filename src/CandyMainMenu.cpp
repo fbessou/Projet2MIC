@@ -8,7 +8,10 @@ using namespace Candy;
 using namespace sf;
 
 MainMenu::MainMenu(Game * game, RenderWindow * window):
-	GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),playTxt("Play the Game",game->getFont(),40), paramTxt("Parameters",game->getFont(),40),quitTxt("Allez voir le dentiste",game->getFont(),40),mWorld(mWindow)
+	GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),
+	playTxt("Nouveau Match",game->getFont(),40), 
+	paramTxt("Configuration",game->getFont(),40),
+	quitTxt("Quitter",game->getFont(),40),mWorld(mWindow)
 {
 	mActiveColor=Color::White;
 	mInactiveColor=Color(150,150,150);

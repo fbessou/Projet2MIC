@@ -203,6 +203,12 @@ void Ship::onCollision( Actor * actor)
 
 }
 
+void Ship::beforeDrawing(sf::RenderTarget & target)
+{
+	if(mSecondaryWeapon != nullptr)
+		mSecondaryWeapon->draw(target);
+}
+
 bool Ship::takeDamage(const Real & damages)
 {
 	short soundId = Math::IntURNG::randomByte()%3+1;

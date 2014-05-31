@@ -63,7 +63,9 @@ void World::render() const
 {
 	for(auto it = mActors.begin(); it!=mActors.end();it++)
 	{
+		(*it)->beforeDrawing(*mRenderTarget);
 		(*it)->draw(*mRenderTarget);
+		(*it)->afterDrawing(*mRenderTarget);
 	}
 }
 

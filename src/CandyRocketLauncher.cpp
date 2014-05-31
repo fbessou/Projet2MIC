@@ -74,14 +74,35 @@ void Rocket::onCollision(Actor * actor)
 
 }
 
-RocketLauncher::RocketLauncher(Ship * owner):Weapon(owner,2,3)
+RocketLauncher::RocketLauncher(Ship * owner):Weapon(owner,2,3),
+	mRocketSprite(TextureManager::getInstance().getTexture("Rocket"))
 {
+	sf::FloatRect rect = mRocketSprite.getLocalBounds();
+	sf::Vector2f center((rect.width-rect.left)/2,(rect.height-rect.top)/2);
+	mRocketSprite.setScale(0.5,0.5);
+	mRocketSprite.setOrigin(center);
+	mRocketSprite.setColor(mOwner->getTeam()->color);
 
 }
 
 RocketLauncher::~RocketLauncher()
 {
 
+}
+void RocketLauncher::draw(sf::RenderTarget & target)
+{
+	mRocketSprite.setRotation(mOwner->getRotation());
+	Vector pos = -5*mOwner->getDirectionVector();
+	if(mAmmoStock >= 1)
+	{
+		mRocketSprite.setPosition(mOwner->getPosition()+pos+30*mOwner->getDirectionVector().directOrthogonal());
+		target.draw(mRocketSprite);
+	}
+	if(mAmmoStock == 2)
+	{
+		mRocketSprite.setPosition(mOwner->getPosition()+pos-30*mOwner->getDirectionVector().directOrthogonal());
+		target.draw(mRocketSprite);
+	}
 }
 
 unsigned int RocketLauncher::fire()

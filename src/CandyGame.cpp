@@ -8,7 +8,7 @@ using namespace Candy;
 
 Game::Game():mCurrentState(nullptr),hasExited(false),mFrameCount(0),mFPSText(),mSettings()
 {
-	assert(mFont.loadFromFile("./font/Transformers_Movie.ttf") && "pad'font");
+	assert(mFont.loadFromFile("./font/Transformers_Movie.ttf") && "bad'font");
 	
 	//make a sf::text showing the current frame per seconds
 	mFPSText.setFont(mFont);
@@ -53,11 +53,13 @@ void Game::start()
 
 	while(!hasExited)
 	{
+		mSPF = mSPF*0.5 + mClock.getElapsedTime().asSeconds()*0.5;
+		mClock.restart();
 		update();
 		updateDebug();
 		mWindow->display();
 	}
-	//mWindow->close();
+	mWindow->close();
 }
 
 sf::Font& Game::getFont()
@@ -101,14 +103,12 @@ void Game::update()
 
 void Game::updateDebug()
 {
-	mSPF = mSPF*0.5 + mClock.getElapsedTime().asSeconds()*0.5;
 
 	if(mFrameCount++%30 == 0)
 	{
 		mFPSText.setString( std::string("FPS : ")+std::to_string(1./mSPF));
 	}
 	mWindow->draw(mFPSText);
-	mClock.restart();
 }
 
 void Game::initResources()

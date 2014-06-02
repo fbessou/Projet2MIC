@@ -54,7 +54,7 @@ void SoundManager::playSound(std::string name, bool interrupt, bool loop)
 	{
 		sf::Sound * s = static_cast<sf::Sound*>(mSoundSources[name]);
 		s->setLoop(loop);
-		startAgain = interrupt || m->getStatus()==sf::SoundSource::Stopped;
+		startAgain = interrupt || s->getStatus()==sf::SoundSource::Stopped;
 		if(startAgain)
 			s->play();
 	}

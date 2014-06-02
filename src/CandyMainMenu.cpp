@@ -11,7 +11,8 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),
 	playTxt("Nouveau Match",game->getFont(),40), 
 	paramTxt("Configuration",game->getFont(),40),
-	quitTxt("Quitter",game->getFont(),40),mWorld(mWindow)
+	quitTxt("Quitter",game->getFont(),40),
+	mWorld(mWindow)
 {
 	mActiveColor=Color::White;
 	mInactiveColor=Color(150,150,150);

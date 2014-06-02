@@ -55,7 +55,6 @@ void Pause::enter(){
 	SoundManager::getInstance().fadeIn("MenuMusic");
 }
 void Pause::leave(){
-	mGameSession->updateSettings();
 }
 
 bool Pause::update(const Real & timeSinceLastFrame){
@@ -83,6 +82,7 @@ bool Pause::update(const Real & timeSinceLastFrame){
 					mWindow->setTitle(mPreviousTitle);
 					mGame->changeState(mGameSession);
 					SoundManager::getInstance().fadeOut("MenuMusic");
+					mGameSession->updateSettings();
 					break;
 				case SETTINGS:
 					mGame->changeState(new SettingsMenu(mGame, mWindow,this));

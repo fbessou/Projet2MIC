@@ -22,6 +22,7 @@ namespace Candy
     GameState * mCurrentState;
     sf::RenderWindow * mWindow;
     bool hasExited;
+    sf::Font mTitleFont;
     sf::Font mFont;
 	TextureManager * mTextureManager;
 	SoundManager * mSoundManager;

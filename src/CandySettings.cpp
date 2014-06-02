@@ -191,6 +191,36 @@ string Settings::keyToString(sf::Keyboard::Key k)
 		case sf::Keyboard::LSystem:
 			return "LSystem";
 			break;
+		case sf::Keyboard::Numpad0:
+			return "0";
+			break;
+		case sf::Keyboard::Numpad1:
+			return "1";
+			break;
+		case sf::Keyboard::Numpad2:
+			return "2";
+			break;
+		case sf::Keyboard::Numpad3:
+			return "3";
+			break;
+		case sf::Keyboard::Numpad4:
+			return "4";
+			break;
+		case sf::Keyboard::Numpad5:
+			return "5";
+			break;
+		case sf::Keyboard::Numpad6:
+			return "6";
+			break;
+		case sf::Keyboard::Numpad7:
+			return "7";
+			break;
+		case sf::Keyboard::Numpad8:
+			return "8";
+			break;
+		case sf::Keyboard::Numpad9:
+			return "9";
+			break;
 		default:
 			return "Unknown";
 			break;

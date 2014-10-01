@@ -33,7 +33,7 @@ SettingsMenu::SettingsMenu(Game * game, RenderWindow * window, GameState * previ
 	forward2Txt("Avant",game->getFont(),20),
 	f2ValueTxt(mCurrentSettings.keyToString(mCurrentSettings.mBinding2.forward),game->getFont(),20),
 	saveTxt("Enregistrer",game->getFont(),20),
-	restoreTxt("Configuration par default",game->getFont(),20),
+	restoreTxt("Configuration par defaut",game->getFont(),20),
 	volumeTxt("Volume",game->getFont(),40),
 	volTxt("Not implemented yet",game->getFont(),40),
 	displayTxt("Affichage",game->getFont(),40),

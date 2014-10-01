@@ -99,6 +99,8 @@ namespace Candy
 			void lookAt(const Vector & position);
 
 			virtual void onCollision(Actor * actor);
+			virtual void beforeDrawing(sf::RenderTarget & ){};
+			virtual void afterDrawing(sf::RenderTarget &){};
 
 			void prepare();
 

@@ -6,7 +6,7 @@ using namespace Candy;
 using namespace sf;
 
 Pause::Pause(Game *game, RenderWindow * window,Play * gameSession):
-	GameState(game,window),titleTxt("Pause",game->getFont(),100),returnTxt("Go back playing",game->getFont(),40),paramTxt("Parameters",game->getFont(),40),exitGameTxt("Retourner au menu principal",game->getFont(),40),quitAppTxt("See you later",game->getFont(),40)
+	GameState(game,window),titleTxt("Pause",game->getFont(),100),returnTxt("Reprendre",game->getFont(),40),paramTxt("Configuration",game->getFont(),40),exitGameTxt("Menu principal",game->getFont(),40),quitAppTxt("Quitter",game->getFont(),40)
 {
 
 	mActiveColor=Color::White;

@@ -31,7 +31,10 @@ namespace Candy
 		public :
 			RocketLauncher(Ship *);
 			~RocketLauncher();
+
+			void draw(sf::RenderTarget & );
 		protected:
+			sf::Sprite mRocketSprite;
 			unsigned int fire() override;
 	};
 };

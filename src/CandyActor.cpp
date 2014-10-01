@@ -33,12 +33,12 @@ bool Actor::update(const Real &  step)
 void Actor::draw(sf::RenderTarget & target)
 {
 	target.draw(*getSprite(),sf::RenderStates::Default);
-	/*if(!isGhost())
+	if(!isGhost() && sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
 	{
-		sf::Drawable * hullShape = getBody()->getAsDrawable(mPosition,getRotation());
+		sf::Drawable * hullShape = getBody()->getAsDrawable(getPosition(),getRotation(Math::DEGREE));
 		target.draw(*hullShape);
 		delete hullShape;
-	}*/
+	}
 }
 
 const Body * Actor::getBody() const {

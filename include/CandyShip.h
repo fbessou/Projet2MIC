@@ -23,6 +23,7 @@ namespace Candy
 			World * getWorld(){return mWorld;}
 			
 			void onCollision(Actor * actor);
+			void beforeDrawing(sf::RenderTarget & ) override ;
 			void onScore(const unsigned int & points);
 			bool takeDamage(const Real & damages);
 			const Team * getTeam()const {return mTeam;}

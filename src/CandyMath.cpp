@@ -48,7 +48,8 @@ Vector::operator std::string() const
 Vector Vector::rotated(Real angle, const Math::AngleMode & mode) const
 {
 	angle=(mode==Math::DEGREE ? angle/180*Math::PI : angle);
-	return Vector(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
+	Vector ret(x*cos(angle)-y*sin(angle),x*sin(angle)+y*cos(angle));
+		return ret;
 }
 
 const Vector & Vector::rotate(Real angle, const Math::AngleMode & mode)

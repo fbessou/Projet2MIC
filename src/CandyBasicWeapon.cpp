@@ -107,7 +107,7 @@ void BasicWeapon::improve()
 	mCurrentLevelScore=mNextLevelScore;
 	mNextLevelScore=2.10*mCurrentLevelScore;
 	mLevel++;
-	std::cout<<mNextLevelScore<<" : "<<mLevel<<std::endl;
+	//std::cout<<mNextLevelScore<<" : "<<mLevel<<std::endl;
 }
 
 

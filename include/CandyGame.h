@@ -44,7 +44,7 @@ namespace Candy
     void changeState(GameState * state);
     void quit();
     sf::Font& getFont();
-	Settings getSettings();
+	Settings  & getSettings();
 	void setSettings(Settings s);
 
     //			World * getWorld();

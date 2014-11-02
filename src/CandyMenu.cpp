@@ -4,43 +4,48 @@ using namespace Candy;
 using namespace std;
 using namespace sf;
 
-CandyMenuItem::CandyMenuItem(string name,Vector2f position,callback_function function):
-	mName(name),mPosition(position),mAction(function)
+MenuItem::MenuItem(string name, Vector2f position, unsigned int charSize, void (*function)()):
+	mName(name),mPosition(position),mCharSize(charSize),mAction(function)
 {
 	mSelected = false;
 }
 
-CandyMenuItem::~CandyMenuItem(){
+MenuItem::~MenuItem(){
 }
 
-string CandyMenuItem::getName()
+string MenuItem::getName()
 {
 	return mName;
 }
 
-Vector2f CandyMenuItem::getPosition()
+Vector2f MenuItem::getPosition()
 {
 	return mPosition;
 }
 
-bool CandyMenuItem::getSelected()
+unsigned int MenuItem::getCharSize()
+{
+	return mCharSize;
+}
+
+bool MenuItem::getSelected()
 {
 	return mSelected;
 }
 
-void CandyMenuItem::setSelected(bool s)
+void MenuItem::setSelected(bool s)
 {
 	mSelected = s;
 }
 
-void CandyMenuItem::executeAction()
+void MenuItem::executeAction()
 {
 	mAction();
 }
 
 
 
-CandyMenu::CandyMenu(sf::RenderWindow * window,Game *game):
+Menu::Menu(sf::RenderWindow * window,Game *game):
 	mWindow(window)
 {
 	mFocused = false;
@@ -52,28 +57,31 @@ CandyMenu::CandyMenu(sf::RenderWindow * window,Game *game):
 	mFont = game->getFont();
 }
 
-CandyMenu::~CandyMenu(){
+Menu::~Menu(){
 }
 
-void CandyMenu::onSelected()
+void Menu::onSelected()
 {
 	if (mFocused)
 		mActual->executeAction();
 }
 
-void CandyMenu::moveUp()
+void Menu::moveUp()
 {
+	mActual->setSelected(false);
 	if (mFocused)
 	{
 		if (mActual == mList.begin())
-			*mActual = mList.back();
+			mActual = mList.end()-1;
 		else
 			mActual--;
 	}
+	mActual->setSelected(true);
 }
 
-void CandyMenu::moveDown()
+void Menu::moveDown()
 {
+	mActual->setSelected(false);
 	if (mFocused)
 	{
 		if (mActual == mList.end()-1)
@@ -81,9 +89,10 @@ void CandyMenu::moveDown()
 		else
 			mActual++;
 	}
+	mActual->setSelected(true);
 }
 
-void CandyMenu::addItem(CandyMenuItem item)
+void Menu::addItem(MenuItem item)
 {
 	mList.push_back(item);
 	// because the array is reallocated, we have to reinitialize the iterator
@@ -91,20 +100,22 @@ void CandyMenu::addItem(CandyMenuItem item)
 	mActual->setSelected(true);
 }
 
-void CandyMenu::setFocused(bool f)
+void Menu::setFocused(bool f)
 {
 	mFocused = f;
 }
 
-void CandyMenu::render()
+void Menu::render()
 {
 	Text displayText;
 	FloatRect textRect;
 	displayText.setFont(mFont);
 
-	for (vector<CandyMenuItem>::iterator it = mList.begin(); it != mList.end(); it++)
+	for (vector<MenuItem>::iterator it = mList.begin(); it != mList.end(); it++)
 	{
 		displayText.setString(it->getName());
+
+		displayText.setCharacterSize(it->getCharSize());
 
 		if (it->getSelected())
 			displayText.setColor(mActiveColor);
@@ -114,6 +125,7 @@ void CandyMenu::render()
 		textRect = displayText.getLocalBounds();
 		displayText.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 		displayText.setPosition(it->getPosition());
+
 		
 		mWindow->draw(displayText);
 	}

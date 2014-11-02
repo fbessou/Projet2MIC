@@ -30,8 +30,8 @@ Body * createShipBody()
 	hull.addPoint(Vector(0,-30));
 	hull.addPoint(Vector(15,-25));
 	//hull.addPoint(Vector(-5,25));
-	hull.addPoint(Vector(0,-32));
-	hull.addPoint(Vector(-32,0));
+	//hull.addPoint(Vector(0,-32));
+	//hull.addPoint(Vector(-32,0));
 	//return new Body(Body::Circle{32}); 
 	return new Body(hull); 
 }

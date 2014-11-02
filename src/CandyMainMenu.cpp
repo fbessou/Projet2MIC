@@ -6,9 +6,10 @@
 
 using namespace Candy;
 using namespace sf;
+using namespace std;
 
 MainMenu::MainMenu(Game * game, RenderWindow * window):
-	GameState(game,window), titleTxt("CANDY SAGA", game->getFont(),100),
+	GameState(game,window),mMenu(window,game), titleTxt("CANDY SAGA", game->getFont(),100),
 	playTxt("Nouveau Match",game->getFont(),40), 
 	paramTxt("Configuration",game->getFont(),40),
 	quitTxt("Quitter",game->getFont(),40),
@@ -18,24 +19,17 @@ MainMenu::MainMenu(Game * game, RenderWindow * window):
 	mInactiveColor=Color(150,150,150);
 	mDisabledColor=Color(90,90,90);
 
+	mMenu.addItem(MenuItem("Nouveau Match",Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f),40,NULL));
+	mMenu.addItem(MenuItem("Configuration",Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*4.0/3.0),40,NULL));
+	mMenu.addItem(MenuItem("Quitter",Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*5.0/3.0),40,NULL));
+	mMenu.setFocused(true);
+
 	sf::FloatRect textRect = playTxt.getLocalBounds();
-	playTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
-	playTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f));
-
-	textRect = paramTxt.getLocalBounds();
-	paramTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
-	paramTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*4.0/3.0));
-
-	textRect = quitTxt.getLocalBounds();
-	quitTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
-	quitTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f*5.0/3.0));
-
 	textRect = titleTxt.getLocalBounds();
 	titleTxt.setOrigin(textRect.left+textRect.width/2.0f,textRect.top+textRect.height/2.0f);
 	titleTxt.setPosition(Vector2f(mWindow->getSize().x/2.0f,mWindow->getSize().y/2.0f/3.0));
 
 	titleTxt.setColor(Color::Red);
-	playTxt.setColor(mActiveColor);
 
 	clock.restart();
 
@@ -61,13 +55,15 @@ bool MainMenu::update(const Real & timeSinceLastFrame){
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
+			mMenu.moveUp();
 			keySelection--;
-				clock.restart();
+			clock.restart();
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
+			mMenu.moveDown();
 			keySelection++;
-				clock.restart();
+			clock.restart();
 		}
 		keySelection = keySelection>=0 ? keySelection%3 : 2;
 
@@ -91,21 +87,12 @@ bool MainMenu::update(const Real & timeSinceLastFrame){
 		switch (keySelection)
 		{
 			case 0:
-				playTxt.setColor(mActiveColor);
-				paramTxt.setColor(mInactiveColor);
-				quitTxt.setColor(mInactiveColor);
 				Selected = PLAY;
 				break;
 			case 1:
-				playTxt.setColor(mInactiveColor);
-				paramTxt.setColor(mActiveColor);
-				quitTxt.setColor(mInactiveColor);
 				Selected = SETTINGS;
 				break;
 			case 2:
-				playTxt.setColor(mInactiveColor);
-				paramTxt.setColor(mInactiveColor);
-				quitTxt.setColor(mActiveColor);
 				Selected = QUIT;
 				break;
 		}
@@ -113,9 +100,10 @@ bool MainMenu::update(const Real & timeSinceLastFrame){
 
 	mWindow->clear();
 	mWindow->draw(titleTxt);
-	mWindow->draw(playTxt);
-	mWindow->draw(paramTxt);
-	mWindow->draw(quitTxt);
+	//mWindow->draw(playTxt);
+	mMenu.render();
+	//mWindow->draw(paramTxt);
+	//mWindow->draw(quitTxt);
 	mWorld.step(timeSinceLastFrame);
 	mWorld.render();
 	return true;

@@ -8,35 +8,37 @@
 
 namespace Candy
 {
-	class CandyMenuItem
+	class MenuItem
 	{
 		private:
 
-			typedef void (*callback_function)(void);
-
 			std::string mName;
 			sf::Vector2f mPosition;
+			unsigned int mCharSize;
+
 			bool mSelected;
 			//each item stores a function that is triggered when ENTER is pressed
-			callback_function mAction;
+			//callback_function mAction;
+			void (*mAction)();
 			
 
 		public:
-			CandyMenuItem(std::string name, sf::Vector2f position, callback_function function);
-			~CandyMenuItem();
+			MenuItem(std::string name, sf::Vector2f position,unsigned int charSize, void (*function)());
+			~MenuItem();
 			std::string getName();
 			sf::Vector2f getPosition();
+			unsigned int getCharSize();
 			bool getSelected();
 			void setSelected(bool s);
 			void executeAction();
 	};
 
-	class CandyMenu
+	class Menu
 	{
 		private:
 			bool mFocused;
-			std::vector<CandyMenuItem> mList;
-			std::vector<CandyMenuItem>::iterator mActual;
+			std::vector<MenuItem> mList;
+			std::vector<MenuItem>::iterator mActual;
 
 			sf::RenderWindow * mWindow;
 			sf::Font mFont;
@@ -46,13 +48,13 @@ namespace Candy
 			sf::Color mDisabledColor;
 
 		public:
-			CandyMenu(sf::RenderWindow * window,Game *game);
-			~CandyMenu();
+			Menu(sf::RenderWindow * window,Game *game);
+			~Menu();
 			//perform function in the MenuItem when ENTER is pressed
 			void onSelected();
 			void moveUp();
 			void moveDown();
-			void addItem(CandyMenuItem item);
+			void addItem(MenuItem item);
 			void setFocused(bool f);
 			void render();
 	};

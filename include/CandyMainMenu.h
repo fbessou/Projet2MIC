@@ -3,6 +3,7 @@
 #include <string>
 #include "CandyGameState.h"
 #include "CandyWorld.h"
+#include "CandyMenu.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -25,6 +26,7 @@ namespace Candy
 
     enum Choice {PLAY, SETTINGS, QUIT};
     
+	Menu mMenu;
 	
 	int keySelection;
     Choice Selected;
@@ -39,6 +41,9 @@ namespace Candy
 	sf::Color mActiveColor;
 	sf::Color mInactiveColor;
 	sf::Color mDisabledColor;
+
+	void playGame();
+
 
 	World mWorld;
   };

@@ -3,6 +3,7 @@
 
 #include "CandyGameState.h"
 #include "CandyPlay.h"
+#include "CandyMenu.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -21,6 +22,8 @@ namespace Candy
     enum Choice {PLAY, SETTINGS, MAINMENU, QUIT};
     int keySelection;
     Choice Selected;
+
+	Menu mMenu;
 
     Play *mGameSession;
 	std::string mPreviousTitle;

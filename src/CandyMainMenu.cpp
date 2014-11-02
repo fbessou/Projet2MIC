@@ -100,10 +100,7 @@ bool MainMenu::update(const Real & timeSinceLastFrame){
 
 	mWindow->clear();
 	mWindow->draw(titleTxt);
-	//mWindow->draw(playTxt);
 	mMenu.render();
-	//mWindow->draw(paramTxt);
-	//mWindow->draw(quitTxt);
 	mWorld.step(timeSinceLastFrame);
 	mWorld.render();
 	return true;

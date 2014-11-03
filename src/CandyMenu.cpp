@@ -18,6 +18,11 @@ string MenuItem::getName()
 	return mName;
 }
 
+void MenuItem::setName(string name)
+{
+	mName = name;
+}
+
 Vector2f MenuItem::getPosition()
 {
 	return mPosition;
@@ -129,4 +134,14 @@ void Menu::render()
 		
 		mWindow->draw(displayText);
 	}
+}
+
+void Menu::changeName(string name)
+{
+	mActual->setName(name);
+}
+
+void Menu::setToFirst()
+{
+	mActual = mList.begin();
 }

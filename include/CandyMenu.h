@@ -26,6 +26,7 @@ namespace Candy
 			MenuItem(std::string name, sf::Vector2f position,unsigned int charSize, void (*function)());
 			~MenuItem();
 			std::string getName();
+			void setName(std::string name);
 			sf::Vector2f getPosition();
 			unsigned int getCharSize();
 			bool getSelected();
@@ -57,6 +58,8 @@ namespace Candy
 			void addItem(MenuItem item);
 			void setFocused(bool f);
 			void render();
+			void changeName(std::string name);
+			void setToFirst();
 	};
 };
 

@@ -3,6 +3,7 @@
 #include <string>
 #include "CandyGameState.h"
 #include "CandySettings.h"
+#include "CandyMenu.h"
 #include <SFML/Graphics.hpp>
 
 namespace Candy
@@ -79,6 +80,8 @@ namespace Candy
     sf::Text keySelectTxt;
 	sf::RectangleShape menu1Rect;
 	sf::RectangleShape menu2Rect;
+
+	Menu mMenu;
   };
 };
 #endif

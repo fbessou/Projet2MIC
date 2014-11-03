@@ -23,23 +23,16 @@ namespace Candy
     int keySelection;
     Choice Selected;
 
-	Menu mMenu;
-
     Play *mGameSession;
 	std::string mPreviousTitle;
     
 	sf::RectangleShape  mTransparentLayer;
 
     sf::Text titleTxt;
-    sf::Text returnTxt;
-    sf::Text paramTxt;
-    sf::Text exitGameTxt;
-    sf::Text quitAppTxt;
-    sf::Color mActiveColor;
-    sf::Color mInactiveColor;
-    sf::Color mDisabledColor;
 
     sf::Clock clock;
+
+	Menu mMenu;
   };
 }
 
